@@ -96,4 +96,162 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
+
+    //work
+    public static void getWork(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //test
+    public static void getTest(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //子任务页面详情
+    public static void getTask(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //任务详情
+    public static void getProject(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //项目页面详情
+    public static void jiekou4(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //新建项目页面
+    public static void jiekou5(String address, String name, String description, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("name", name)
+                .add("description", description)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //新建任务
+    public static void jiekou6(String address, String name, String description,String starttime,String endtime, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("name", name)
+                .add("description", description)
+                .add("starttime",starttime)
+                .add("endtime",endtime)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //统计报表
+    public static void jiekou8(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //我的任务
+    public static void jiekou9(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //修改项目描述
+    public static void jiekou10(String address, String description, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("description", description)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //修改任务负责人
+    public static void jiekou13(String address, String manager_id, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("manager_id", manager_id)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //修改项目状态
+    public static void jiekou15(String address, String state, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("state", state)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //查看项目成员
+    public static void jiekou18(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //404
+    public static void jiekou404(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=hmrb0q53hg3oze4qjivao42ywo6y3ijw;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
 }
