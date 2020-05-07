@@ -37,8 +37,8 @@
                 android:onClick="onClick">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:background="@drawable/back12"
                     android:layout_centerInParent="true">
                 </ImageView>
@@ -153,17 +153,18 @@
             android:textStyle="bold"
             android:paddingBottom="17dip"
             android:paddingLeft="8dip"
-            android:inputType="number"
-            android:digits="0123456789">
+            android:inputType="text"
+            android:digits="0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM">
         </EditText>
 
         <Button
             android:id="@+id/register_get_emailnum"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="43dip"
             android:layout_below="@+id/register_repassword"
-            android:layout_marginRight="30dip"
+            android:layout_marginRight="40dip"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="7dip"
             android:background="@drawable/edittext_shape"
             android:text="  获取邮箱验证码  "
             android:textSize="18dip"

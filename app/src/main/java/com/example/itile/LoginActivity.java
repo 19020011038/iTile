@@ -55,13 +55,20 @@ public class LoginActivity extends AppCompatActivity {
         login_findpassword = findViewById(R.id.login_findpassword);
         login_register = findViewById(R.id.login_register);
 
+        if (check.isLogin()){
+            Intent intent2 = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent2);
+            finish();
+        }
+
         login_finish.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String loginAddress="http://118.190.245.170/worktile/login";
-//                String loginAddress="http://47.102.46.161/user/login";
+                String loginAddress="http://118.190.245.170/worktile/login/";
+//                String loginAddress="http://175.24.47.150:8088/worktile/login/";
                 String loginAccount = login_telephone.getText().toString();
                 String loginPassword = login_password.getText().toString();
+                Log.i("zyr","密码："+loginPassword);
                 if (TextUtils.isEmpty(loginAccount)){
                     Toast.makeText(LoginActivity.this,"请输入手机号", Toast.LENGTH_SHORT).show();
                 }else if (TextUtils.isEmpty(loginPassword)){
@@ -128,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
 //
                 try{
                     JSONObject object = new JSONObject(responseData);
-                    result = object.getString("result");
+                    result = object.getString("warning");
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.i( "zyr", "LLL"+responseData);
@@ -136,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (result.equals("登陆成功")){
+                        if (result.equals("1")){
                             String JSESSIONID=header.substring(0, 43);
                             Log.i("zyr","0");
                             Log.i("zyr","login_jsessionid:"+JSESSIONID);
@@ -148,16 +155,19 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish();
-                        }else if (result.equals("用户名不存在")){
-                            Toast.makeText(LoginActivity.this,"该用户不存在",Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("用户名或者密码错误")){
-                            Toast.makeText(LoginActivity.this,"用户名或者密码错误",Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("该用户已经被冻结")){
-                            Toast.makeText(LoginActivity.this,"该用户尚未完成注册环节或找回密码，处于冻结状态",Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("未提交全部参数")){
-                            Toast.makeText(LoginActivity.this,"用户名或密码为空",Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("未提交POST请求")){
-                            Toast.makeText(LoginActivity.this,"提交请求失败",Toast.LENGTH_SHORT).show();
+//                        }else if (result.equals("用户名不存在")){
+//                            Toast.makeText(LoginActivity.this,"该用户不存在",Toast.LENGTH_SHORT).show();
+//                        }else if (result.equals("用户名或者密码错误")){
+//                            Toast.makeText(LoginActivity.this,"用户名或者密码错误",Toast.LENGTH_SHORT).show();
+//                        }else if (result.equals("该用户已经被冻结")){
+//                            Toast.makeText(LoginActivity.this,"该用户尚未完成注册环节或找回密码，处于冻结状态",Toast.LENGTH_SHORT).show();
+//                        }else if (result.equals("未提交全部参数")){
+//                            Toast.makeText(LoginActivity.this,"用户名或密码为空",Toast.LENGTH_SHORT).show();
+//                        }else if (result.equals("未提交POST请求")){
+//                            Toast.makeText(LoginActivity.this,"提交请求失败",Toast.LENGTH_SHORT).show();
+                        }else if (result!=null){
+                            Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+                            Log.i("zyr", "data信息："+responseData);
                         } else {
                             Toast.makeText(LoginActivity.this,"登录失败，请稍后重试",Toast.LENGTH_SHORT).show();
                         }
