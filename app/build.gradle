@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -17,24 +21,54 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     //okhttp依赖
     implementation 'com.squareup.okhttp3:okhttp:4.4.0'
-    //圆形头像依赖
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
-    //Glide依赖
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    //导航栏依赖
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:1.4.1'
+    //butterknife
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    //   implementation 'com.google.android.material:material:1.2.0-alpha02'
+    implementation 'com.google.android.material:material:1.1.0-beta01'
+    implementation 'androidx.cardview:cardview:1.0.0'
     //照相依赖
+
     implementation 'com.longsh:OptionFrame:1.0.0'
+
+    //富文本解析器依赖
+    implementation 'com.zzhoujay.richtext:richtext:3.0.7'
+    //富文本编辑器
+    implementation 'jp.wasabeef:richeditor-android:1.2.2'
+
+
+    //圆形头像依赖
+//    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //Glide依赖
+//    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    //照相依赖
+//    implementation 'com.longsh:OptionFrame:1.0.0'
     //recyclerView的依赖
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-rc01'
+//    implementation 'androidx.recyclerview:recyclerview:1.1.0-rc01'
 }

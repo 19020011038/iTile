@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         login_register = findViewById(R.id.login_register);
 
         if (check.isLogin()){
-            Intent intent2 = new Intent(LoginActivity.this, HomeActivity.class);
+            Intent intent2 = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent2);
             finish();
         }
@@ -152,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                             check.setLogin(true);  //设置登录状态为已登录
                             check.setAccountId(account);  //添加账户信息
                             Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
 //                        }else if (result.equals("用户名不存在")){
