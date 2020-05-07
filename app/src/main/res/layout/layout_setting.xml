@@ -1,7 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity"
+    android:orientation="vertical"
+    android:background="#ffffff">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/setting_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <TextView
+                android:id="@+id/setting_bar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="14dp"
+                android:text="设置"
+                android:textSize="20sp"
+                android:textColor="#0f0000">
+            </TextView>
+
+            <RelativeLayout
+                android:id="@+id/setting_back"
+                android:layout_width="54dp"
+                android:layout_height="57dp"
+                android:onClick="onClick">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/back12"
+                    android:layout_centerInParent="true">
+                </ImageView>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/login_saw_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f0f0f0"
+            android:layout_below="@+id/setting_bar">
+        </ImageView>
+
+        <RelativeLayout
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/setting_bar">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/setting_icon"
+                android:layout_width="90sp"
+                android:layout_height="90dp"
+                android:layout_gravity="center"
+                android:onClick="onClick"
+                android:src="@drawable/icon2"
+                android:layout_marginTop="50dip"
+                android:layout_centerHorizontal="true">
+            </de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
+
+        <!--<androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="300dp"
+            android:id="@+id/layout3"
+            android:layout_marginTop="60dip"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_below="@+id/icon"
+            android:background="#ffffff"
+            app:cardCornerRadius="10px">
+-->
+            <RelativeLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon"
+                android:layout_marginTop="60dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:background="@drawable/setting_shadow1">
+                <!--</RelativeLayout>-->
+
+                <RelativeLayout
+                    android:id="@+id/setting_change_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dip"
+                        android:background="#ffffff">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/tv_change_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dip"
+                        android:layout_marginLeft="15dip"
+                        android:text="修改昵称"
+                        android:textSize="46px"
+                        >
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="3px"
+                        android:background="#c7c7c7"
+                        android:layout_below="@+id/tv_change_nickname"
+                        android:layout_marginTop="18dip"
+                        android:layout_marginLeft="13dip"
+                        android:layout_marginRight="13dip">
+                    </TextView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/setting_change_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/setting_change_nickname"
+
+                    android:onClick="onClick">
+
+                    <TextView
+                        android:id="@+id/tv_change_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dip"
+                        android:layout_marginLeft="15dip"
+                        android:text="修改密码"
+                        android:textSize="46px"
+                        >
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dip"
+                        android:background="#ffffff"
+                        android:layout_below="@+id/tv_change_password"
+                        android:layout_marginTop="18dip"
+                        android:layout_marginLeft="12dip">
+                    </TextView>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+<!--
+        </androidx.cardview.widget.CardView>
+-->
+
+        <!--<androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="40dp"
+            android:id="@+id/layout2"
+            android:layout_marginTop="45dip"
+            android:layout_marginLeft="100dip"
+            android:layout_marginRight="100dip"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_below="@+id/layout1"
+            android:background="#ffffff"
+            app:cardCornerRadius="10px">-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout2"
+                android:layout_marginTop="45dip"
+                android:layout_marginLeft="90dip"
+                android:layout_marginRight="90dip"
+                android:layout_below="@+id/layout1"
+                android:background="#ffffff">
+
+                <Button
+                    android:id="@+id/setting_signout"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip"
+                    android:background="@drawable/shadow_red"
+                    android:text="退出登录"
+                    android:textSize="50px"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold">
+                </Button>
+            </RelativeLayout>
+
+<!--
+        </androidx.cardview.widget.CardView>
+-->
+    </RelativeLayout>
 </LinearLayout>

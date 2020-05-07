@@ -6,7 +6,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,6 +59,26 @@ public class FindPasswordActivity extends AppCompatActivity {
         find_finish = findViewById(R.id.find_finish);
         find_back = findViewById(R.id.find_back);
 
+        setEditTextInputSpace(find_telephone);
+        setEditTextInputSpace(find_email_num);
+        setEditTextInputSpace(find_newpassword);
+        setEditTextInputSpace(find_repassword);
+
+        //控制最大长度
+        int maxLengthPassword = 15;
+        int maxLengthEmailNum = 4;
+        int maxLengthTelephone = 11;
+        InputFilter[] fArray =new InputFilter[1];
+        fArray[0]=new  InputFilter.LengthFilter(maxLengthPassword);
+        find_newpassword.setFilters(fArray);
+        find_repassword.setFilters(fArray);
+        InputFilter[] fArray1 =new InputFilter[1];
+        fArray1[0]=new  InputFilter.LengthFilter(maxLengthEmailNum);
+        find_email_num.setFilters(fArray1);
+        InputFilter[] fArray2 =new InputFilter[1];
+        fArray2[0]=new  InputFilter.LengthFilter(maxLengthTelephone);
+        find_telephone.setFilters(fArray2);
+
         find_back.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -66,8 +89,8 @@ public class FindPasswordActivity extends AppCompatActivity {
         find_get_emailnum.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                String registerAddress="http://118.190.245.170/worktile/register";
-                String registerAddress="http://175.24.47.150:8088/worktile/findback";
+                String registerAddress="http://118.190.245.170/worktile/findback/";
+//                String registerAddress="http://175.24.47.150:8088/worktile/findback/";
                 String registerTelephone = find_telephone.getText().toString();
                 if (TextUtils.isEmpty(registerTelephone)){
                     Toast.makeText(FindPasswordActivity.this,"请输入手机号", Toast.LENGTH_SHORT).show();
@@ -84,16 +107,68 @@ public class FindPasswordActivity extends AppCompatActivity {
             }
         });
 
-
+        find_finish.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String registerAddress="http://118.190.245.170/worktile/findback/";
+//                String registerAddress="http://175.24.47.150:8088/worktile/findback/";
+//                String registerAccount = register_nickname.getText().toString();
+//                String registerEmail = register_email.getText().toString();
+                String registerPassword = find_newpassword.getText().toString();
+                String registerRepassword = find_repassword.getText().toString();
+                String registerTelephone = find_telephone.getText().toString();
+                String registerEmailNum = find_email_num.getText().toString();
+//                if (TextUtils.isEmpty(registerAccount)){
+//                    Toast.makeText(RegisterActivity.this,"请输入昵称", Toast.LENGTH_SHORT).show();
+//                }else if (TextUtils.isEmpty(registerEmail)){
+//                    Toast.makeText(RegisterActivity.this, "请输入邮箱", Toast.LENGTH_SHORT).show();
+//                }else
+                if (TextUtils.isEmpty(registerPassword)){
+                    Toast.makeText(FindPasswordActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(registerRepassword)){
+                    Toast.makeText(FindPasswordActivity.this, "请确认密码", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(registerTelephone)){
+                    Toast.makeText(FindPasswordActivity.this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                }else if (!(registerTelephone.length()==11)){
+                    Toast.makeText(FindPasswordActivity.this, "手机号应为11位", Toast.LENGTH_SHORT).show();
+//                }else if (!(isEmail(registerEmail))){
+//                    Toast.makeText(FindPasswordActivity.this, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(registerEmailNum)){
+                    Toast.makeText(FindPasswordActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!registerPassword.equals(registerRepassword)){
+                        Toast.makeText(FindPasswordActivity.this,"密码与确认密码不相符", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (registerPassword.length() < 6) {
+                            Toast.makeText(FindPasswordActivity.this, "密码长度不能小于6位", Toast.LENGTH_SHORT).show();
+                        } else {
+                            findPasswordWithOkHttp2(registerAddress, registerTelephone, registerPassword, registerRepassword, registerEmailNum);
+                            progressDialog = new ProgressDialog(FindPasswordActivity.this);
+                            progressDialog.setTitle("加载中");
+                            progressDialog.setMessage("正在加载中......");
+                            progressDialog.setCancelable(true);
+                            progressDialog.show();
+                        }
+                    }
+                }
+            }
+        });
     }
 
-    //忘记密码
+    //忘记密码1
     public void findPasswordWithOkHttp1(String address, String telephone){
         HttpUtil.findPasswordWithOkHttp1(address, telephone, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 //在这里对异常情况进行处理
                 Log.i("zyr","regiser.error");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                        Toast.makeText(FindPasswordActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
@@ -101,39 +176,115 @@ public class FindPasswordActivity extends AppCompatActivity {
                 header = response.header("set-cookie");
                 try{
                     JSONObject object = new JSONObject(responseData);
-                    result = object.getString("result");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.i( "zyr", "find.error2okhttp:"+responseData);
-                }
+                    result = object.getString("warning");
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (result.equals("1")) {
+                        progressDialog.dismiss();
+                        if (result.equals("验证码已发送")) {
                             String JSESSIONID = header.substring(0, 43);
                             Log.i("zyr", "0");
                             Log.i("zyr", "register_jsessionid:" + JSESSIONID);
                             check.setCookie(true);//设置已获得cookie
                             check.saveCookie(JSESSIONID);//保存获得的cookie
                             Toast.makeText(FindPasswordActivity.this, "验证码发送成功", Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("该用户已经被冻结")) {
-                            Toast.makeText(FindPasswordActivity.this, "该用户已经被冻结", Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("两次密码不一致'")) {
-                            Toast.makeText(FindPasswordActivity.this, "两次密码不一致'", Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("新密码格式不正确")) {
-                            Toast.makeText(FindPasswordActivity.this, "新密码格式不正确", Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("用户名与邮箱不匹配")) {
-                            Toast.makeText(FindPasswordActivity.this, "用户名与邮箱不匹配", Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("用户名不存在")) {
-                            Toast.makeText(FindPasswordActivity.this, "用户名不存在", Toast.LENGTH_SHORT).show();
-                            Log.i("zyr","register.error:"+result);
-                        }else if (result.equals("未提交全部参数")) {
-                            Toast.makeText(FindPasswordActivity.this, "未提交全部参数", Toast.LENGTH_SHORT).show();
-                        }else if (result.equals("未提交POST请求")) {
-                            Toast.makeText(FindPasswordActivity.this, "提交请求失败", Toast.LENGTH_SHORT).show();
+                        }else if (result!=null){
+                            Toast.makeText(FindPasswordActivity.this, result, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(FindPasswordActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i( "zyr", "find.error2okhttp:"+responseData);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                            Toast.makeText(FindPasswordActivity.this, "1服务器连接失败", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    //忘记密码2
+    public void findPasswordWithOkHttp2(String address, String telephone, String password, String repassword, String email_num){
+        HttpUtil.findPasswordWithOkHttp2(address, telephone,password, repassword, email_num, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //在这里对异常情况进行处理
+                Log.i("zyr","regiser.error");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                        Toast.makeText(FindPasswordActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String responseData = response.body().string();
+                try{
+                    JSONObject object = new JSONObject(responseData);
+                    result = object.getString("warning");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                            if (result.equals("1")) {
+                                Toast.makeText(FindPasswordActivity.this, "密码修改成功", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(FindPasswordActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else if (result!=null){
+                                Toast.makeText(FindPasswordActivity.this, result, Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(FindPasswordActivity.this, "发送失败", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i( "zyr", "find.error2okhttp:"+responseData);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                            Toast.makeText(FindPasswordActivity.this, "2服务器连接失败", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    //防止空格回车
+    public static void setEditTextInputSpace(final EditText editText) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().contains(" ")) {
+                    String[] str = s.toString().split(" ");
+                    String str1 = "";
+                    for (int i = 0; i < str.length; i++) {
+                        str1 += str[i];
+                    }
+                    editText.setText(str1);
+                    editText.setSelection(start);
+                }
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
     }

@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.itread"
+        applicationId "com.example.itile"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
@@ -29,7 +29,6 @@ android {
         abortOnError false
     }
 }
-
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -64,5 +63,12 @@ dependencies {
     implementation 'jp.wasabeef:richeditor-android:1.2.2'
 
 
-
+    //圆形头像依赖
+//    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //Glide依赖
+//    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    //照相依赖
+//    implementation 'com.longsh:OptionFrame:1.0.0'
+    //recyclerView的依赖
+//    implementation 'androidx.recyclerview:recyclerview:1.1.0-rc01'
 }

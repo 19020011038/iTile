@@ -1,6 +1,11 @@
 package com.example.itile.Util;
 
+import java.io.File;
+
+import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -93,6 +98,69 @@ public class HttpUtil {
         Request request = new Request.Builder()
                 .url(address)
                 .header("Cookie",SharedPreferencesUtil.getCookie())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //上传头像获得url   POST
+    public static void userIconWithOkHttp(String address, File file, okhttp3.Callback callback)
+    {
+        OkHttpClient client = new OkHttpClient();
+        MultipartBody multipartBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("newavatar", file.getName(), RequestBody.create(MediaType.parse("image/jpeg"), file))
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(multipartBody)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //找回密码1
+    public static void signoutWithOkhttp(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("quit","1")
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //修改密码post请求
+    public static void ChangePasswordWithOkHttp(String address, String old_password, String new_password, String renew_password, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("password", old_password)
+                .add("password1", new_password)
+                .add("password2", renew_password)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+//        client.newCall(request).enqueue(callback);
+        Call call = client.newCall(request);
+        //5.请求加入调度,重写回调方法
+        call.enqueue(callback);
+    }
+
+    //修改昵称
+    public static void nicknameWithOkHttp(String address, String new_nickname, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("newname",new_nickname)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
                 .build();
         client.newCall(request).enqueue(callback);
     }
