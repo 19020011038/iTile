@@ -29,6 +29,7 @@
                 android:background="@drawable/bottom"/>
         </RelativeLayout>
 
+
         <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -36,7 +37,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="18dp"
-            android:id="@+id/setting"/>
+            android:id="@+id/home_setting"/>
 
 
     </RelativeLayout>
@@ -45,58 +46,151 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="150px">
+        android:layout_marginBottom="150px"
+        android:layout_marginTop="8dip">
+
+        <RelativeLayout
+            android:id="@+id/home1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home_logo2"
+            android:layout_marginTop="1dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:background="#f5f5f5">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/home_icon"
+                android:layout_width="80sp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon2"
+                android:layout_marginTop="26dip"
+                android:layout_marginLeft="20dip">
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dip"
+                android:layout_below="@+id/home_icon">
+            </TextView>
+
+            <TextView
+                android:id="@+id/home_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="昵称"
+                android:textSize="43px"
+                android:textColor="#808080"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/home_icon"
+                android:layout_marginTop="26dip"
+                android:layout_marginLeft="20dip"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:ellipsize="end">
+            </TextView>
+
+            <TextView
+                android:id="@+id/home_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_nickname"
+                android:text="Tel: "
+                android:textSize="40px"
+                android:textColor="#808080"
+                android:layout_toRightOf="@+id/home_icon"
+                android:layout_marginTop="10dip"
+                android:layout_marginLeft="20dip"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:ellipsize="end">
+            </TextView>
+
+            <TextView
+                android:id="@+id/home_telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_nickname"
+                android:text="12345678901"
+                android:textSize="40px"
+                android:textColor="#808080"
+                android:layout_toRightOf="@+id/home_tv1"
+                android:layout_marginTop="10dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="10dip"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:ellipsize="end">
+            </TextView>
+
+            <TextView
+                android:id="@+id/home_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_tv1"
+                android:text="E-mail: "
+                android:textSize="40px"
+                android:textColor="#808080"
+                android:layout_toRightOf="@+id/home_icon"
+                android:layout_marginTop="10dip"
+                android:layout_marginLeft="20dip"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:ellipsize="end">
+            </TextView>
+
+            <TextView
+                android:id="@+id/home_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_telephone"
+                android:text="aaaaa@qq.com"
+                android:textSize="40px"
+                android:textColor="#808080"
+                android:layout_toRightOf="@+id/home_tv2"
+                android:layout_marginTop="10dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginRight="5dip"
+                android:maxLines="2"
+                android:ellipsize="end">
+            </TextView>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/home2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日日程"
+            android:textSize="60px"
+            android:textColor="#454545"
+            android:textStyle="bold"
+            android:layout_below="@+id/home1"
+            android:layout_marginTop="30dip"
+            android:layout_marginLeft="30dip">
+        </TextView>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/re1"
-            android:background="#f2f2f2">
-            <com.example.itile.Util.RoundPicture
-                android:layout_width="202px"
-                android:layout_height="202px"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
-                android:id="@+id/head_image"
-                android:src="@drawable/logo_task"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/home2"
+            android:layout_marginTop="30dip"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip">
 
-            <RelativeLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myhome_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/head_image"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/text1"
-                    android:text="张三"
-                    android:textSize="48px"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/text2"
-                    android:layout_below="@id/text1"
-                    android:text="Tel:19912345678"
-                    android:textSize="48px"
-                    android:textColor="#808080"
-                    android:layout_marginTop="20px"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/text3"
-                    android:layout_below="@id/text2"
-                    android:text="E-mail:itbalbal"
-                    android:textSize="48px"
-                    android:textColor="#808080"
-                    android:layout_marginTop="17px"/>
-
-            </RelativeLayout>
-
-
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
 
         </RelativeLayout>
-        <RelativeLayout
+
+<!--
+        </RelativeLayout>
+-->
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_below="@+id/re1"
@@ -120,7 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </RelativeLayout>
-
+-->
     </RelativeLayout>
 
 </LinearLayout>

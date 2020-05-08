@@ -102,8 +102,8 @@ public class RegisterActivity extends AppCompatActivity {
         register_get_emailnum.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                String registerAddress="https://118.190.245.170/worktile/register";
-                String registerAddress="http://175.24.47.150:8088/worktile/register/";
+                String registerAddress="http://118.190.245.170/worktile/register/";
+//                String registerAddress="http://175.24.47.150:8088/worktile/register/";
                 String registerAccount = register_nickname.getText().toString();
                 String registerEmail = register_email.getText().toString();
                 String registerPassword = register_password.getText().toString();
@@ -146,8 +146,8 @@ public class RegisterActivity extends AppCompatActivity {
         register_finish.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                String registerAddress="https://118.190.245.170/worktile/register";
-                String registerAddress="http://175.24.47.150:8088/worktile/register/";
+                String registerAddress="http://118.190.245.170/worktile/register/";
+//                String registerAddress="http://175.24.47.150:8088/worktile/register/";
                 String registerAccount = register_nickname.getText().toString();
                 String registerEmail = register_email.getText().toString();
                 String registerPassword = register_password.getText().toString();
@@ -211,12 +211,14 @@ public class RegisterActivity extends AppCompatActivity {
                 header = response.header("set-cookie");
                 try{
                     JSONObject object = new JSONObject(responseData);
-                    result = object.getString("result");
+//                    result = object.getString("result");
+                    result = object.getString("warning");
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (result.equals("1")) {
+//                            if (result.equals("1")) {
+                            if (result.equals("验证码已发送")) {
                                 String JSESSIONID = header.substring(0, 43);
                                 Log.i("zyr", "0");
                                 Log.i("zyr", "register_jsessionid:" + JSESSIONID);
@@ -249,7 +251,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                            }else if (result.equals("邮箱发送失败")) {
 //                                progressDialog.dismiss();
 //                                Toast.makeText(RegisterActivity.this, "邮箱发送失败", Toast.LENGTH_SHORT).show();
-                            }else if (result.length()!=0){
+                            }else if (result!=null){
                                 progressDialog.dismiss();
                                 Toast.makeText(RegisterActivity.this, result, Toast.LENGTH_SHORT).show();
                             }else {
@@ -267,7 +269,7 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             progressDialog.dismiss();
-                            Toast.makeText(RegisterActivity.this, "服务器连接失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "1服务器连接失败", Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -297,7 +299,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                header = response.header("set-cookie");
                 try{
                     JSONObject object = new JSONObject(responseData);
-                    result = object.getString("result");
+                    result = object.getString("warning");
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -324,7 +326,7 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             progressDialog.dismiss();
-                            Toast.makeText(RegisterActivity.this, "服务器连接失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "2服务器连接失败", Toast.LENGTH_SHORT).show();
 
                         }
                     });
