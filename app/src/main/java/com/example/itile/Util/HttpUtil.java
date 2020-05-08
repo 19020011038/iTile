@@ -254,4 +254,142 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
+    //日历页GET
+    public static void getCalendar(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //日历页POST
+    public static void postCalendar(String address, String time, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("time", time)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //日程详情页GET
+    public static void getScheduleDetail(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //日程详情POST
+    public static void postScheduleDetail(String address, String state, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("state", state)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //新建日程POST
+    public static void postNewSchedule(String address, String description,String starttime,String endtime, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("description", description)
+                .add("starttime",starttime)
+                .add("endtime",endtime)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //日程助手GET
+    public static void getScheduleHelper(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //项目助手GET
+    public static void getProjectHelper(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //项目助手POST
+    public static void postProjectHelper(String address, String choice, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("choice", choice)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //项目一键已读POST
+    public static void postProjectHelperAll(String address, String read, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("read", read)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //任务助手GET
+    public static void getTaskHelper(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //任务助手POST
+    public static void postTaskHelper(String address, String choice, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("choice", choice)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //任务一键已读POST
+    public static void postTakHelperAll(String address, String read, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("read", read)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie","sessionid=2a583rgdc93pu6k8l3xogqq6zw3aj1zb;")
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
 }

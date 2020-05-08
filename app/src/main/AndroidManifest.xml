@@ -18,7 +18,15 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".TaskActivity"/>
+        <activity android:name=".FormActivity"/>
+        <activity android:name=".SearchActivity"/>
+        <activity android:name=".AddressActivity"/>
+         <activity android:name=".SettingActivity"/>
+        <activity android:name=".NewProjectActivity"/>
+
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
