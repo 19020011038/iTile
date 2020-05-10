@@ -218,4 +218,41 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
+    //消息页GET
+    public static void getHelper(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //日历页POST
+    public static void postCalendar(String address, String time, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("time",time)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //新建日程post
+    public static void postNewSchedule(String address, String starttime,String endtime,String description, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("starttime",starttime)
+                .add("endtime",endtime)
+                .add("description",description)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
 }

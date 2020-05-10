@@ -3,6 +3,7 @@ package com.example.itile.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,7 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PersonInfoActivity.class);
                     intent.putExtra("friend_id", friend_id);
+                    Log.i("zyr", "通讯录跳转的时候："+friend_id);
                     context.startActivity(intent);
                 }
             });

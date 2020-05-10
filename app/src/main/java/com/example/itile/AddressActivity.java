@@ -47,6 +47,37 @@ public class AddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_address);
 
+//        imageView = findViewById(R.id.add_friend);
+//        back = findViewById(R.id.back);
+//        recyclerView = findViewById(R.id.frind_recyclerView);
+//
+//        homeNameOkHttp("http://118.190.245.170/worktile/friends");
+////        homeNameOkHttp("http://175.24.47.150:8088/worktile/friendinfo/7/");
+//
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(AddressActivity.this, FindFriendActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+//
+//        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        recyclerView.setLayoutManager(manager);
+//        mAdapter = new FriendAddressAdapter(AddressActivity.this);
+//        recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         imageView = findViewById(R.id.add_friend);
         back = findViewById(R.id.back);
         recyclerView = findViewById(R.id.frind_recyclerView);
@@ -74,7 +105,7 @@ public class AddressActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
     }
 
-        //获得头像昵称
+    //获得头像昵称
     public void homeNameOkHttp(String address) {
         HttpUtil.homeNameOkHttp(address, new Callback() {
             @Override

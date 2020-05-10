@@ -2,78 +2,89 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:id="@+id/a_schedule">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#ffffff"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="3dip"
-            android:layout_height="50dip"
-            android:background="#c5c5c5">
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/point"
-            android:layout_width="17dip"
-            android:layout_height="17dip"
-            android:background="@drawable/point2"
-            android:layout_marginRight="10dip"
-            android:layout_marginLeft="15dip"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:id="@+id/work_point"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/point1">
         </ImageView>
 
         <TextView
-            android:id="@+id/time1"
+            android:id="@+id/work_time1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="08:00"
+            android:text="08:00:00"
             android:textColor="#808080"
             android:textSize="44px"
-            android:layout_toRightOf="@+id/point"
+            android:layout_toRightOf="@+id/work_point"
             android:layout_centerVertical="true">
         </TextView>
 
         <TextView
-            android:id="@+id/item_home2"
+            android:id="@+id/work_item_home2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="~"
             android:textSize="44px"
             android:textColor="#808080"
-            android:layout_toRightOf="@+id/time1"
+            android:layout_toRightOf="@+id/work_time1"
             android:layout_centerVertical="true"
             android:layout_marginLeft="1dip">
         </TextView>
 
         <TextView
-            android:id="@+id/time2"
+            android:id="@+id/work_time2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="11:30"
+            android:text="11:30:30"
             android:textColor="#808080"
             android:textSize="44px"
-            android:layout_toRightOf="@+id/item_home2"
+            android:layout_toRightOf="@+id/work_item_home2"
             android:layout_centerVertical="true"
             android:layout_marginLeft="1dip">
         </TextView>
 
         <TextView
-            android:id="@+id/d"
+            android:id="@+id/work_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="日程介绍日程介绍日程介绍介绍介绍介绍"
             android:textSize="54px"
             android:textColor="#454545"
+            android:maxLength="10"
             android:maxLines="1"
             android:ellipsize="end"
-            android:layout_toRightOf="@+id/time2"
+            android:layout_toRightOf="@+id/work_time2"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dip"
             android:layout_marginRight="3dip">
         </TextView>
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#ffffff"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#000000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:background="#ffffff"/>
 
     <!--<TextView
         android:id="@+id/state"

@@ -50,8 +50,9 @@ public class PersonInfoActivity extends AppCompatActivity {
         personinfo_email = findViewById(R.id.personinfo_email);
         personinfo_back = findViewById(R.id.personinfo_back);
 
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         person_id = intent.getStringExtra("friend_id");
+        Log.i("zyr", "个人页接受personid="+person_id);
 
         personinfo_back.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -157,8 +158,8 @@ public class PersonInfoActivity extends AppCompatActivity {
                             if(is_friend.equals("1")){
                                 personinfo_add_frind.setVisibility(View.GONE);
                             }
-                            Glide.with(PersonInfoActivity.this).load("http://175.24.47.150:8088/worktile/static/"+icon).into(personinfo_icon);
-//                            Glide.with(PersonInfoActivity.this).load("http://118.190.245.170/worktile/static/"+icon).into(personinfo_icon);
+//                            Glide.with(PersonInfoActivity.this).load("http://175.24.47.150:8088/worktile/static/"+icon).into(personinfo_icon);
+                            Glide.with(PersonInfoActivity.this).load("http://118.190.245.170/worktile/static/"+icon).into(personinfo_icon);
                         }
                     });
                 } catch (JSONException e) {
