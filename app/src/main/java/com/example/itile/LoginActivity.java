@@ -136,25 +136,22 @@ public class LoginActivity extends AppCompatActivity {
                 try{
                     JSONObject object = new JSONObject(responseData);
                     result = object.getString("warning");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.i( "zyr", "LLL"+responseData);
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (result.equals("1")){
-                            String JSESSIONID=header.substring(0, 43);
-                            Log.i("zyr","0");
-                            Log.i("zyr","login_jsessionid:"+JSESSIONID);
-                            check.setCookie(true);//设置已获得cookie
-                            check.saveCookie(JSESSIONID);//保存获得的cookie
-                            check.setLogin(true);  //设置登录状态为已登录
-                            check.setAccountId(account);  //添加账户信息
-                            Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (result.equals("1")) {
+                                String JSESSIONID = header.substring(0, 43);
+                                Log.i("zyr", "0");
+                                Log.i("zyr", "login_jsessionid:" + JSESSIONID);
+                                check.setCookie(true);//设置已获得cookie
+                                check.saveCookie(JSESSIONID);//保存获得的cookie
+                                check.setLogin(true);  //设置登录状态为已登录
+                                check.setAccountId(account);  //添加账户信息
+                                Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
 //                        }else if (result.equals("用户名不存在")){
 //                            Toast.makeText(LoginActivity.this,"该用户不存在",Toast.LENGTH_SHORT).show();
 //                        }else if (result.equals("用户名或者密码错误")){
@@ -165,14 +162,24 @@ public class LoginActivity extends AppCompatActivity {
 //                            Toast.makeText(LoginActivity.this,"用户名或密码为空",Toast.LENGTH_SHORT).show();
 //                        }else if (result.equals("未提交POST请求")){
 //                            Toast.makeText(LoginActivity.this,"提交请求失败",Toast.LENGTH_SHORT).show();
-                        }else if (result!=null){
-                            Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
-                            Log.i("zyr", "data信息："+responseData);
-                        } else {
-                            Toast.makeText(LoginActivity.this,"登录失败，请稍后重试",Toast.LENGTH_SHORT).show();
+                            } else if (result != null) {
+                                Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+                                Log.i("zyr", "data信息：" + responseData);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "登录失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i( "zyr", "LLL"+responseData);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(LoginActivity.this, "无法连接到服务器", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }//标签页
         });
     }

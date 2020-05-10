@@ -11,16 +11,17 @@
         android:layout_marginTop="10dp">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            >
+            android:layout_width="158px"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true">
+
             <ImageView
                 android:layout_width="65px"
                 android:layout_height="65px"
                 android:src="@drawable/back"
-                android:id="@+id/back"/>
+                android:id="@+id/back"
+                android:layout_centerInParent="true">
+            </ImageView>
         </RelativeLayout>
 
         <TextView

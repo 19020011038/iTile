@@ -1,9 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PersonInfoActivity">
+    tools:context=".PersonInfoActivity"
+    android:orientation="vertical"
+    android:background="#f0f0f0">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="158px"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:id="@+id/personinfo_back"
+            android:layout_width="158px"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="65px"
+                android:layout_height="65px"
+                android:src="@drawable/back"
+                android:id="@+id/back"
+                android:layout_centerInParent="true">
+            </ImageView>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人信息"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="12dip">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/personinfo_icon"
+            android:layout_width="170px"
+            android:layout_height="170px"
+            android:layout_gravity="center"
+            android:src="#ffdb5c"
+            android:layout_marginTop="25dip"
+            android:layout_marginLeft="30dip"
+            android:layout_marginBottom="25dip">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:id="@+id/personinfo_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/personinfo_icon"
+            android:layout_centerVertical="true"
+            android:shadowColor="#f0f0f0"
+            android:text="朋友昵称"
+            android:textSize="60px"
+            android:textColor="#454545"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="12dip"
+            android:maxLines="1"
+            android:ellipsize="end">
+        </TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/person_tv1"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:background="#e0e0e0">
+        </TextView>
+
+        <TextView
+            android:id="@+id/person_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dip"
+            android:layout_marginTop="22dip"
+            android:layout_marginBottom="22dip"
+            android:text="Tel"
+            android:textColor="#454545"
+            android:textSize="48px"
+            android:textStyle="bold">
+        </TextView>
+
+        <TextView
+            android:id="@+id/personinfo_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/person_tv2"
+            android:layout_marginTop="22dip"
+            android:layout_marginBottom="22dip"
+            android:text="123456"
+            android:textSize="48px"
+            android:layout_marginLeft="12dip"
+            android:textColor="#808080"
+            android:layout_marginRight="15dip"
+            android:ellipsize="end"
+            android:maxLines="1">
+        </TextView>
+
+        <TextView
+            android:id="@+id/person_tv3"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:background="#e0e0e0"
+            android:layout_below="@+id/personinfo_tel">
+        </TextView>
+
+        <TextView
+            android:id="@+id/person_tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dip"
+            android:layout_marginTop="22dip"
+            android:layout_marginBottom="22dip"
+            android:text="E-mail"
+            android:textColor="#454545"
+            android:textSize="48px"
+            android:textStyle="bold"
+            android:layout_below="@+id/person_tv3">
+        </TextView>
+
+        <TextView
+            android:id="@+id/personinfo_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/person_tv3"
+            android:layout_toRightOf="@+id/person_tv4"
+            android:layout_marginTop="22dip"
+            android:layout_marginBottom="22dip"
+            android:text="123456@qq.com"
+            android:textSize="48px"
+            android:layout_marginLeft="12dip"
+            android:textColor="#808080"
+            android:layout_marginRight="15dip"
+            android:maxLines="1"
+            android:ellipsize="end">
+        </TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/personinfo_add_friend"
+            android:layout_width="match_parent"
+            android:layout_height="55dip"
+            android:background="@drawable/edittext_shape"
+            android:layout_marginTop="50dip"
+            android:layout_marginLeft="34dip"
+            android:layout_marginRight="34dip"
+            android:text="添加好友"
+            android:textColor="#ffffff"
+            android:textSize="60px">
+        </Button>
+    </RelativeLayout>
+</LinearLayout>

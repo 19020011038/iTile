@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AddFriendByTelAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Map<String, Object>> list = new ArrayList<>();
     private Context context;
@@ -31,11 +30,10 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
     private Handler mHandler_f;
     public static final int ONE_ITEM = 1;
     public static final int TWO_ITEM = 2;
-    public static final int THREE_ITEM = 3;
-    public static final int FOUR_ITEM = 4;
 
-    public FriendAddressAdapter(Context context) {
+    public AddFriendByTelAdapter(Context context) {
         this.context = context;
+
     }
 
     public void setData(List<Map<String, Object>> list) {
@@ -47,11 +45,7 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (list.size() == 0) {
             return TWO_ITEM;
         } else {
-            String is_address = list.get(0).get("is_address").toString();
-            if (is_address.equals("0"))
-                return THREE_ITEM;
-            else
-                return ONE_ITEM;
+            return ONE_ITEM;
         }
     }
 
@@ -62,7 +56,7 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
             View view = LayoutInflater.from(context).inflate(R.layout.item_addfriend_white, parent, false);
             return new HomeWhiteViewHolder(view);
         } else {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_friend_address, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_addfriend_tel, parent, false);
             return new RecyclerViewHolder(view);
         }
     }
@@ -74,7 +68,8 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
             recyclerViewHolder.name.setText(list.get(position).get("username").toString());
             final String icon = list.get(position).get("avatar").toString();
             Glide.with(context).load("http://118.190.245.170/worktile/static/"+icon).into(recyclerViewHolder.icon);
-            final String friend_id = list.get(position).get("friend").toString();
+            final String friend_id = list.get(position).get("id").toString();
+            recyclerViewHolder.tel.setText(list.get(position).get("tel_or_email").toString());
             recyclerViewHolder.all.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -96,10 +91,10 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-//            tel = itemView.findViewById(R.id.friend_tel);
-            name = itemView.findViewById(R.id.friend_name);
-            icon = itemView.findViewById(R.id.friend_icon);
-            all = itemView.findViewById(R.id.friend_all);
+            tel = itemView.findViewById(R.id.addby_tel);
+            name = itemView.findViewById(R.id.addby_tel_name);
+            icon = itemView.findViewById(R.id.addby_tel_icon);
+            all = itemView.findViewById(R.id.addby_tel_all);
         }
     }
 
