@@ -42,13 +42,16 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
+    <CalendarView
+        android:id="@+id/calendarview"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="#f0f0f0"
-        >
-
-    </RelativeLayout>
+        android:firstDayOfWeek="1"
+        android:focusedMonthDateColor="#f00"
+        android:selectedWeekBackgroundColor="#aff"
+        android:shownWeekCount="6"
+        android:unfocusedMonthDateColor="#f9f"
+        android:weekSeparatorLineColor="#ff0" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,10 +59,16 @@
         android:layout_marginBottom="150px"
         android:layout_marginTop="15dp">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerView_work"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/new_project"
+            android:id="@+id/work_new_schedule"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="150dp"/>
     </RelativeLayout>
 
 </LinearLayout>

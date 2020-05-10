@@ -29,6 +29,8 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".AddressActivity" />
         <activity android:name=".NewProjectActivity" />
+        <activity android:name=".NewScheduleActivity"/>
+        <activity android:name=".ScheduleDetailActivity"/>
         <activity android:name=".ProjectActivity"/>
         <activity android:name=".WelcomeActivity">
             <intent-filter>

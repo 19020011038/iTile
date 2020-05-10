@@ -14,20 +14,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import com.example.itile.Fragment.Guide.HomeFragment;
 import com.example.itile.Fragment.Guide.PersonFragment;
 import com.example.itile.Fragment.Guide.ProjectFragment;
 import com.example.itile.Fragment.Guide.WorkFragment;
+import com.example.itile.Util.HttpUtil;
 import com.example.itile.Util.SharedPreferencesUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     //定义Fragment
@@ -62,6 +72,34 @@ public class MainActivity extends AppCompatActivity {
 //        disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
+//    public void jk8(String address,String choice) {
+//        HttpUtil.jk8(address,choice,new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//
+//            }
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                //得到服务器返回的具体内容
+//                String responseData = response.body().string();
+//                Log.d("这是返回的内容",responseData);
+//                try {
+//                    JSONObject jsonObject = new JSONObject(responseData);
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                        }
+//                    });
+//                } catch (JSONException e) {
+//
+//                    e.printStackTrace();
+//
+//                }
+//            }
+//        });
+//    }
 
     public void initFragment(Bundle savedInstanceState) {
         //判断activity是否重建，如果不是，则不需要重新建立fragment.

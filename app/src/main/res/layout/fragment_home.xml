@@ -61,6 +61,7 @@
                 android:id="@+id/pic1"/>
 
             <RelativeLayout
+                android:id="@+id/rl1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/pic1"
@@ -84,7 +85,14 @@
                     android:id="@+id/schedule_content"/>
 
             </RelativeLayout>
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hongdian"
+                android:layout_toRightOf="@id/rl1"
+                android:id="@+id/hongdian1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"/>
 
 
 
@@ -103,6 +111,7 @@
                 android:id="@+id/pic2"/>
 
             <RelativeLayout
+                android:id="@+id/rl2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/pic2"
@@ -126,6 +135,14 @@
                     android:id="@+id/project_content"/>
 
             </RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hongdian"
+                android:layout_toRightOf="@id/rl2"
+                android:id="@+id/hongdian2"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"/>
 
         </RelativeLayout>
         <RelativeLayout
@@ -142,6 +159,7 @@
                 android:id="@+id/pic3"/>
 
             <RelativeLayout
+                android:id="@+id/rl3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/pic3"
@@ -165,6 +183,14 @@
                     android:id="@+id/task_content"/>
 
             </RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hongdian"
+                android:layout_toRightOf="@id/rl3"
+                android:id="@+id/hongdian3"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"/>
 
         </RelativeLayout>
 
