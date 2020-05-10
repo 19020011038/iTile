@@ -12,6 +12,42 @@ import okhttp3.RequestBody;
 
 public class HttpUtil {
 
+    //所有任务
+    public static void ShowAllTaskWithOkHttp(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+
+    //新建项目
+    public static void newProjectWithOkHttp(String address, String name, String description, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("name",name)
+                .add("description",description)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //项目页面 所有项目
+    public static void ShowAllProjectWithOkHttp(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+
     //登录
     public static void loginWithOkHttp(String address, String account, String password, okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient();

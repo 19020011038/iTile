@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:padding="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/side_dark">
+
+
+
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:background="@drawable/task_back_finish"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="13dp"
+            android:id="@+id/re1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已完成"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务名称"
+            android:textSize="25dp"
+            android:layout_below="@+id/re1"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/task_name"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

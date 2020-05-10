@@ -39,70 +39,93 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="18dp"
-            android:id="@+id/add_friend"/>
+            android:clickable="true"
+            android:textColor="@color/selector_text_press_color"
+            android:id="@+id/finish"/>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150px"
+        android:layout_height="180px"
         android:background="#ffffff"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:padding="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="项目名称"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:textSize="50px"
-            android:textColor="#808080"/>
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:paddingLeft="10dp"
+            android:hint="项目名称(最多30个字)"
+            android:background="@drawable/side_dark2"
+            android:maxLength="30"
+            android:singleLine="true"
+        />
+
+
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#aaaaaa"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="15dp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:background="#ffffff">
+        android:layout_height="320px"
+        android:background="#ffffff"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="描述"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:textSize="50px"
-            android:textColor="#808080"/>
+        android:padding="5dp">
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:background="#ffffff">
+        <EditText
+            android:id="@+id/tip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:paddingLeft="10dp"
+            android:hint="项目描述(最多100字)"
+            android:background="@drawable/side_dark2"
+            android:maxLength="100"
+            android:maxLines="4"
+            />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="项目状态"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:textSize="50px"
-            android:textColor="#808080"/>
+
 
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:background="#ffffff">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150px"-->
+<!--        android:background="#ffffff">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="参与成员"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:textSize="50px"
-            android:textColor="#808080"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="项目状态"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:textSize="50px"-->
+<!--            android:textColor="#808080"/>-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150px"-->
+<!--        android:background="#ffffff">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="参与成员"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:textSize="50px"-->
+<!--            android:textColor="#808080"/>-->
+
+<!--    </RelativeLayout>-->
 
 </LinearLayout>

@@ -89,7 +89,6 @@ public class ChangeNicknameActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 //得到服务器返回的具体内容
                 final String responseData = response.body().string();
-//
                 try{
                     JSONObject object = new JSONObject(responseData);
                     result = object.getString("warning");
