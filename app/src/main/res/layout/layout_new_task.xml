@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#f0f0f0"
     android:orientation="vertical">
 
@@ -94,7 +94,122 @@
             android:maxLines="4"
             />
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="#ffffff">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始时间"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:textSize="50px"
+            android:textColor="#808080"/>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#aaaaaa"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="#ffffff">
+        <Spinner
+            android:layout_toRightOf="@+id/xzrq"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_nian1"
+            tools:ignore="MissingConstraints"></Spinner>
+        <Spinner
+            android:layout_toRightOf="@+id/spinner_nian1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_yue1"
+            tools:ignore="MissingConstraints"></Spinner>
+        <Spinner
+            android:layout_toRightOf="@+id/spinner_yue1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_ri1"
+            tools:ignore="MissingConstraints"></Spinner>
+        <Spinner
+            android:layout_toRightOf="@+id/spinner_ri1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_HH1"
+            tools:ignore="MissingConstraints"></Spinner>
+        <Spinner
+            android:layout_toRightOf="@+id/spinner_HH1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_mm1"
+            tools:ignore="MissingConstraints"></Spinner>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="结束时间"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:textSize="50px"
+            android:textColor="#808080"/>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#aaaaaa"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="#ffffff">
+
+        <Spinner
+            android:layout_toRightOf="@+id/xzrq"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_nian2"
+            tools:ignore="MissingConstraints"></Spinner>
+        <Spinner
+            android:layout_toRightOf="@+id/spinner_nian2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_yue2"
+            tools:ignore="MissingConstraints"></Spinner>
+        <Spinner
+            android:layout_toRightOf="@+id/spinner_yue2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_ri2"
+            tools:ignore="MissingConstraints"></Spinner>
+        <Spinner
+            android:layout_toRightOf="@+id/spinner_ri2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_HH2"
+            tools:ignore="MissingConstraints"></Spinner>
+        <Spinner
+            android:layout_toRightOf="@+id/spinner_HH2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner_mm2"
+            tools:ignore="MissingConstraints"></Spinner>
 
     </RelativeLayout>
     <!--    <RelativeLayout-->
