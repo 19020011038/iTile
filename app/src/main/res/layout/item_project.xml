@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="160px"
+    android:id="@+id/re">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_project"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="25dp"
+        android:id="@+id/icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/icon"
+        android:layout_marginLeft="18dp"
+        android:layout_centerVertical="true"
+        android:text="示例项目"
+        android:id="@+id/name"/>
+
+
+
+</RelativeLayout>
