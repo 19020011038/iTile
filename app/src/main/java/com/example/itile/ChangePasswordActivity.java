@@ -135,7 +135,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(ChangePasswordActivity.this, "发送失败2", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChangePasswordActivity.this, "无法连接到服务器", Toast.LENGTH_SHORT).show();
 
                         }
                     });

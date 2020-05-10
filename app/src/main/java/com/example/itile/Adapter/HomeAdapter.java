@@ -76,7 +76,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //            recyclerViewHolder.state.setText(list.get(position).get("state").toString());
             final String state = list.get(position).get("state").toString(); //这个非常重要
             if (state.equals("0")) {
-                recyclerViewHolder.point.setBackgroundResource(R.drawable.point3forhome);
+                recyclerViewHolder.point.setBackgroundResource(R.drawable.point1);
             }
 //            recyclerViewHolder.mybook_comment_name.setText(list.get(position).get("还没给的书评名字").toString());
 //            final String score = list.get(position).get("score").toString(); //这个非常重要
