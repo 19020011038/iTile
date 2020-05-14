@@ -47,11 +47,43 @@ public class AddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_address);
 
+//        imageView = findViewById(R.id.add_friend);
+//        back = findViewById(R.id.back);
+//        recyclerView = findViewById(R.id.frind_recyclerView);
+//
+//        homeNameOkHttp("http://118.190.245.170/worktile/friends");
+////        homeNameOkHttp("http://175.24.47.150:8088/worktile/friendinfo/7/");
+//
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(AddressActivity.this, FindFriendActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+//
+//        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        recyclerView.setLayoutManager(manager);
+//        mAdapter = new FriendAddressAdapter(AddressActivity.this);
+//        recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         imageView = findViewById(R.id.add_friend);
         back = findViewById(R.id.back);
         recyclerView = findViewById(R.id.frind_recyclerView);
 
         homeNameOkHttp("http://118.190.245.170/worktile/friends");
+//        homeNameOkHttp("http://175.24.47.150:8088/worktile/friendinfo/7/");
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,13 +105,19 @@ public class AddressActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
     }
 
-        //获得头像昵称
+    //获得头像昵称
     public void homeNameOkHttp(String address) {
         HttpUtil.homeNameOkHttp(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 //在这里对异常情况进行处理
                 Log.i("zyr", " name : error");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(AddressActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -104,13 +142,15 @@ public class AddressActivity extends AppCompatActivity {
                         Log.i("zyr",jsonArray.toString());
                         String name = jsonObject1.getString("username");  //头像
                         String icon = jsonObject1.getString("avatar");
-//                        String id = jsonObject1.getString("friend_id");
+                        String id = jsonObject1.getString("friend");
+                        String is_address = "1";
 
                         map = new HashMap();
 
                         map.put("username", name);
                         map.put("avatar", icon);
-                        map.put("friend_id", "1");
+                        map.put("friend", id);
+                        map.put("is_address", is_address);
 
                         list.add(map);
                         Log.i("zyr", "shortcomment:list.size1111:" + list.size());

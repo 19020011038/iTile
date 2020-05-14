@@ -108,6 +108,12 @@ public class PersonFragment extends Fragment {
             public void onFailure(Call call, IOException e) {
                 //在这里对异常情况进行处理
                 Log.i( "zyr", " name : error");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),"网络出现了问题...",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {

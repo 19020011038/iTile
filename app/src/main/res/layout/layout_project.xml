@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f0f0"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="158px"
+        android:background="#ffffff"
+        android:layout_marginTop="25dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            >
+            <ImageView
+                android:layout_width="65px"
+                android:layout_height="65px"
+                android:src="@drawable/back"
+                android:id="@+id/back"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="项目详情"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"/>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180px"
+        android:background="#ffffff"
+        android:layout_marginTop="25dp"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="项目名称"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:textSize="50px"
+            android:textColor="#808080"/>
+
+
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#aaaaaa"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="320px"
+        android:background="#ffffff"
+
+        android:padding="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="项目进度"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:textSize="50px"
+            android:textColor="#808080"/>
+
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#aaaaaa"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="15dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150px"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="项目进度"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:textSize="50px"
+                android:textColor="#808080"/>
+
+        </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#aaaaaa"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="15dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150px"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="参与成员"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:textSize="50px"
+                android:textColor="#808080"/>
+
+        </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#aaaaaa"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="15dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="#ffffff"
+        android:id="@+id/all_task">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所有任务"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:textSize="50px"
+            android:textColor="#808080"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

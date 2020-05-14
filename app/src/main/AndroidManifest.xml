@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PersonInfoActivity"></activity>
+        <activity android:name=".AddFriendByEmailActivity"></activity>
+        <activity android:name=".AddFriendByNicknameActivity" />
+        <activity android:name=".AddFriendByTelActivity" />
+        <activity android:name=".PersonInfoActivity" />
         <activity android:name=".FindFriendActivity" />
         <activity android:name=".ChangeNicknameActivity" />
         <activity android:name=".ChangePasswordActivity" />
@@ -31,6 +34,9 @@
         <activity android:name=".NewProjectActivity" />
         <activity android:name=".NewScheduleActivity"/>
         <activity android:name=".ScheduleDetailActivity"/>
+        <activity android:name=".ProjectActivity"/>
+        <activity android:name=".NewTaskActivity"/>
+        <activity android:name=".TaskInProjectActivity"/>
         <activity android:name=".ScheduleHelperActivity"/>
         <activity android:name=".ProjectHelperActivity"/>
         <activity android:name=".TaskHelperActivity"/>
