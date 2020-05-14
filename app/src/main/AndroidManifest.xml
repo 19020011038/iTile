@@ -31,6 +31,9 @@
         <activity android:name=".NewProjectActivity" />
         <activity android:name=".NewScheduleActivity"/>
         <activity android:name=".ScheduleDetailActivity"/>
+        <activity android:name=".ScheduleHelperActivity"/>
+        <activity android:name=".ProjectHelperActivity"/>
+        <activity android:name=".TaskHelperActivity"/>
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
