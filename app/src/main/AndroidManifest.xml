@@ -14,7 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddFriendByEmailActivity"></activity>
+        <activity android:name=".ChangeSonTaskMemberActivity"></activity>
+        <activity android:name=".SeeSonTaskMemberActivity" />
+        <activity android:name=".ChangeTaskMemberActivity" />
+        <activity android:name=".SeeTaskMemberActivity" />
+        <activity android:name=".ChangeTaskOwnerActivity" />
+        <activity android:name=".ChangeProjectMemberActivity" />
+        <activity android:name=".SeeProjectMemberActivity" />
+        <activity android:name=".AddFriendByEmailActivity" />
         <activity android:name=".AddFriendByNicknameActivity" />
         <activity android:name=".AddFriendByTelActivity" />
         <activity android:name=".PersonInfoActivity" />
@@ -32,11 +39,11 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".AddressActivity" />
         <activity android:name=".NewProjectActivity" />
-        <activity android:name=".NewScheduleActivity"/>
-        <activity android:name=".ScheduleDetailActivity"/>
-        <activity android:name=".ProjectActivity"/>
-        <activity android:name=".NewTaskActivity"/>
-        <activity android:name=".TaskInProjectActivity"/>
+        <activity android:name=".NewScheduleActivity" />
+        <activity android:name=".ScheduleDetailActivity" />
+        <activity android:name=".ProjectActivity" />
+        <activity android:name=".NewTaskActivity" />
+        <activity android:name=".TaskInProjectActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
