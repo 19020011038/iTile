@@ -27,6 +27,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="修改"
+            android:textSize="17dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"
+            android:clickable="true"
+            android:textColor="@color/selector_text_press_color"
+            android:id="@+id/change"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="项目详情"
             android:layout_centerInParent="true"
             android:textSize="20dp"/>
@@ -140,7 +152,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150px"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:id="@+id/re">
 
             <TextView
                 android:layout_width="wrap_content"

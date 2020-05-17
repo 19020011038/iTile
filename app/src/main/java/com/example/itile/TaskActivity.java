@@ -48,6 +48,9 @@ public class TaskActivity extends AppCompatActivity {
     private TextView Anumber;
     private TextView Aproject;
 
+    private RelativeLayout relativeLayout1;
+
+    private TextView change;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +84,38 @@ public class TaskActivity extends AppCompatActivity {
         });
 
 
+        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
+
+        relativeLayout1 = findViewById(R.id.re);
+
+        relativeLayout1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+//                Intent intent = new Intent(TaskActivity.this,      .class);
+//                intent.putExtra("project_id",project_id);
+//                intent.putExtra("task_id",task_id);
+//                startActivity(intent);
+
+
+            }
+        });
+
+                change = findViewById(R.id.new_task);
+        change.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+//                Intent intent = new Intent(TaskActivity.this,.class);
+//                intent.putExtra("project_id",project_id);
+//                intent.putExtra("task_id",task_id);
+//                intent.putExtra("state",state);
+//                startActivity(intent);
+
+
+            }
+        });
+
 
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +126,7 @@ public class TaskActivity extends AppCompatActivity {
         });
 
 
-        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
+
 
     }
     public void DetailWithOkHttp(String address) {
