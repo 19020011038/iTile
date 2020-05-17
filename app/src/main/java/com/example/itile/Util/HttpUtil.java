@@ -12,11 +12,88 @@ import okhttp3.RequestBody;
 
 public class HttpUtil {
 
+    //各种详情
+    public static void DetailWithOkHttp(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //报表
+    public static void FormWithOkHttp(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //新建子任务
+    public static void newSubTaskWithOkHttp(String address, String name, String description,String starttime,String endtime ,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("name",name)
+                .add("description",description)
+                .add("starttime",starttime)
+                .add("endtime",endtime)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+
+    //子任务
+    public static void SubTaskWithOkHttp(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //项目中的任务
+    public static void TaskInProjectWithOkHttp(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+
+    //新建任务
+    public static void newTaskWithOkHttp(String address, String name, String description,String starttime,String endtime ,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("name",name)
+                .add("description",description)
+                .add("starttime",starttime)
+                .add("endtime",endtime)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
     //所有任务
     public static void ShowAllTaskWithOkHttp(String address,okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
                 .build();
         client.newCall(request).enqueue(callback);
     }
@@ -422,6 +499,19 @@ public class HttpUtil {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("read",read)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //搜索POST
+    public static void postSearch(String address, String search, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("search",search)
                 .build();
         Request request = new Request.Builder()
                 .url(address)

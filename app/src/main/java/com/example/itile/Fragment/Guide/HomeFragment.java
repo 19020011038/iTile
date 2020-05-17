@@ -17,9 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.itile.Adapter.HomeAdapter;
+import com.example.itile.LoginActivity;
 import com.example.itile.ProjectHelperActivity;
 import com.example.itile.R;
 import com.example.itile.ScheduleHelperActivity;
+import com.example.itile.SearchActivity;
 import com.example.itile.SettingActivity;
 import com.example.itile.TaskHelperActivity;
 import com.example.itile.Util.HttpUtil;
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment {
     private View re1;
     private View re2;
     private View re3;
+    private ImageView search;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +73,14 @@ public class HomeFragment extends Fragment {
         re1 = getActivity().findViewById(R.id.re1);
         re2 = getActivity().findViewById(R.id.re2);
         re3 = getActivity().findViewById(R.id.re3);
-
+        search = getActivity().findViewById(R.id.home_search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
         re1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +113,12 @@ public class HomeFragment extends Fragment {
         HttpUtil.getHelper(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
             @Override
             public void onResponse(Call call, Response response) throws IOException {

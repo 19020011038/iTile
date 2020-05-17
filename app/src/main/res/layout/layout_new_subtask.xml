@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="新建任务"
+            android:text="新建子任务"
             android:layout_centerInParent="true"
             android:textSize="20dp"/>
         <TextView

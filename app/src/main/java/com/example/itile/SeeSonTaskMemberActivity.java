@@ -47,7 +47,7 @@ public class SeeSonTaskMemberActivity extends AppCompatActivity {
         setContentView(R.layout.layout_see_son_task_member);
 
         Intent intent = getIntent();
-        son_id = intent.getStringExtra("son_id");
+        son_id = intent.getStringExtra("subtask_id");
         task_id = intent.getStringExtra("task_id");
     }
 

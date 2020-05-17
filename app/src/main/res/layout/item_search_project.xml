@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="170dp">
+
+    <LinearLayout
+        android:id="@+id/a_search_project"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="horizontal"
+        android:background="#f0f0f0">
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logo_project"
+            android:layout_weight="0.7"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#ffffff"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/xiaotiaotiao"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:textSize="24dp"
+                        android:text="项目名称"
+                        android:gravity="left|center"
+                        android:id="@+id/search_project_name"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="已完成"
+                        android:textSize="14dp"
+                        android:id="@+id/search_project_state"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/search_project_description"
+                    android:background="#ffdb5c"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="top|left"
+                    android:maxLength="100"
+                    android:text="马上来完成项目吧>>"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="14dp"
+                    android:textColor="#000000"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

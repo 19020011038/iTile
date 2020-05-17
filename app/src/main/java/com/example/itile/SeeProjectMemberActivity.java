@@ -46,7 +46,7 @@ public class SeeProjectMemberActivity extends AppCompatActivity {
         setContentView(R.layout.layout_see_project_member);
 
         Intent intent = getIntent();
-        project_id = intent.getStringExtra("id");
+        project_id = intent.getStringExtra("project_id");
     }
 
     @Override

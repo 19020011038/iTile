@@ -1,6 +1,5 @@
 package com.example.itile;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -103,7 +102,7 @@ public class NewProjectActivity extends AppCompatActivity {
 
 
     }
-    //修改昵称
+
     public void newProjectWithOkHttp(String address,String name, String description){
         HttpUtil.newProjectWithOkHttp(address, name,description, new Callback() {
             @Override

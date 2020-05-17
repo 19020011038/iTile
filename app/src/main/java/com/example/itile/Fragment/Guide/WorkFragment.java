@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.itile.Adapter.WorkAdapter;
 import com.example.itile.AddressActivity;
 import com.example.itile.FormActivity;
+import com.example.itile.LoginActivity;
 import com.example.itile.NewScheduleActivity;
 import com.example.itile.R;
 import com.example.itile.TaskActivity;
@@ -134,6 +135,12 @@ public class WorkFragment extends Fragment {
         HttpUtil.postCalendar(address,time, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
 
