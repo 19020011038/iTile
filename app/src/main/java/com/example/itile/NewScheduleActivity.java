@@ -118,7 +118,7 @@ public class NewScheduleActivity extends AppCompatActivity {
                     yyyy = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-                    Toast.makeText(NewScheduleActivity.this,yyyy,Toast.LENGTH_SHORT).show();
+
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -151,7 +151,7 @@ public class NewScheduleActivity extends AppCompatActivity {
                     MM = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-                    Toast.makeText(NewScheduleActivity.this,MM,Toast.LENGTH_SHORT).show();
+
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -184,7 +184,7 @@ public class NewScheduleActivity extends AppCompatActivity {
                     dd = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-                    Toast.makeText(NewScheduleActivity.this,dd,Toast.LENGTH_SHORT).show();
+
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -197,7 +197,7 @@ public class NewScheduleActivity extends AppCompatActivity {
 
 
         //选择开始时
-        String[] shi1 = new String[]{"时", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
+        String[] shi1 = new String[]{"时","00", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
         //创建一个数组适配器
         adapter_shi1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, shi1);
         adapter_shi1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
@@ -218,7 +218,7 @@ public class NewScheduleActivity extends AppCompatActivity {
                     HH1 = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-                    Toast.makeText(NewScheduleActivity.this,HH1,Toast.LENGTH_SHORT).show();
+
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -230,7 +230,7 @@ public class NewScheduleActivity extends AppCompatActivity {
         });
 
         //选择开始分
-        String[] fen1 = new String[]{"分", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"};
+        String[] fen1 = new String[]{"分", "00","01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"};
         //创建一个数组适配器
         adapter_fen1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, fen1);
         adapter_fen1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
@@ -251,7 +251,7 @@ public class NewScheduleActivity extends AppCompatActivity {
                     mm1 = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-                    Toast.makeText(NewScheduleActivity.this,mm1,Toast.LENGTH_SHORT).show();
+
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -263,7 +263,7 @@ public class NewScheduleActivity extends AppCompatActivity {
         });
 
         //选择结束时
-        String[] shi2 = new String[]{"时", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
+        String[] shi2 = new String[]{"时", "00","01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
         //创建一个数组适配器
         adapter_shi2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, shi2);
         adapter_shi2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
@@ -284,7 +284,7 @@ public class NewScheduleActivity extends AppCompatActivity {
                     HH2 = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-                    Toast.makeText(NewScheduleActivity.this,HH2,Toast.LENGTH_SHORT).show();
+
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -296,7 +296,7 @@ public class NewScheduleActivity extends AppCompatActivity {
         });
 
         //选择开始分
-        String[] fen2 = new String[]{"分", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"};
+        String[] fen2 = new String[]{"分", "00","01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"};
         //创建一个数组适配器
         adapter_fen2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, fen2);
         adapter_fen2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
@@ -317,7 +317,7 @@ public class NewScheduleActivity extends AppCompatActivity {
                     mm2 = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-                    Toast.makeText(NewScheduleActivity.this,mm2,Toast.LENGTH_SHORT).show();
+
                 }
                 parent.setVisibility(View.VISIBLE);
             }

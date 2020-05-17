@@ -19,7 +19,7 @@
             android:id="@+id/work_point"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/point1">
+            >
         </ImageView>
 
         <TextView

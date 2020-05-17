@@ -81,7 +81,7 @@ public class ChangeTaskOwnerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             String name = list.get(position).get("name").toString();
             String icon = list.get(position).get("icon").toString();
             recyclerViewHolder.nickname.setText(name);
-            Glide.with(context).load("http://118.190.245.170/worktile/static/"+icon).into(recyclerViewHolder.icon);
+            Glide.with(context).load("http://118.190.245.170/worktile/media/"+icon).into(recyclerViewHolder.icon);
             recyclerViewHolder.radio.setTag(new Integer(id)); //上tag是区分不同radio的关键
             if(favorList.contains(recyclerViewHolder.radio.getTag())) {
                 recyclerViewHolder.radio.setChecked(true);

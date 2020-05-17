@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChangeSonTaskMemberActivity"></activity>
+        <activity android:name=".ChangeSonTaskInfoActivity"></activity>
+        <activity android:name=".ChangeTaskInfoActivity" />
+        <activity android:name=".ChangeProjectInfoActivity" />
+        <activity android:name=".ChangeSonTaskMemberActivity" />
         <activity android:name=".SeeSonTaskMemberActivity" />
         <activity android:name=".ChangeTaskMemberActivity" />
         <activity android:name=".SeeTaskMemberActivity" />
@@ -44,6 +47,9 @@
         <activity android:name=".ProjectActivity" />
         <activity android:name=".NewTaskActivity" />
         <activity android:name=".TaskInProjectActivity" />
+        <activity android:name=".ScheduleHelperActivity" />
+        <activity android:name=".ProjectHelperActivity" />
+        <activity android:name=".TaskHelperActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

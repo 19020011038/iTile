@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeSonTaskInfoActivity"
+    android:orientation="vertical"
+    android:background="#f0f0f0">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="158px"
+        android:background="#ffffff"
+        android:layout_marginTop="0dp">
+
+        <RelativeLayout
+            android:id="@+id/back"
+            android:layout_width="158px"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="65px"
+                android:layout_height="65px"
+                android:src="@drawable/back"
+                android:layout_centerInParent="true">
+            </ImageView>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改子任务信息"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff">
+
+        <RelativeLayout
+            android:id="@+id/change_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="修改状态"
+                android:textSize="18sp"
+                android:textColor="#434343">
+            </TextView>
+
+            <TextView
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="已完成"
+                android:textSize="18dp">
+            </TextView>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_below="@+id/change_state"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#c5c5c5">
+        </TextView>
+
+        <RelativeLayout
+            android:id="@+id/change_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv2">
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:text="修改简介："
+                android:textSize="18dp"
+                android:textColor="#434343">
+            </TextView>
+
+            <TextView
+                android:id="@+id/finish_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:text="确定"
+                android:textSize="18dp"
+                android:textColor="#ffdb5c">
+            </TextView>
+
+            <EditText
+                android:id="@+id/info"
+                android:layout_width="match_parent"
+                android:layout_height="450px"
+                android:layout_below="@+id/finish_info"
+                android:layout_marginTop="15dp"
+                android:background="#f0f0f0"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:hint="请输入简介，最多100字"
+                android:textSize="16sp"
+                android:gravity="top"
+                android:minLines="3"
+                android:maxLines="6"
+                android:paddingTop="0dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="0dp">
+            </EditText>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

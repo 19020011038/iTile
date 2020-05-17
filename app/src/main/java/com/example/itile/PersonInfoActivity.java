@@ -159,7 +159,7 @@ public class PersonInfoActivity extends AppCompatActivity {
                                 personinfo_add_frind.setVisibility(View.GONE);
                             }
 //                            Glide.with(PersonInfoActivity.this).load("http://175.24.47.150:8088/worktile/static/"+icon).into(personinfo_icon);
-                            Glide.with(PersonInfoActivity.this).load("http://118.190.245.170/worktile/static/"+icon).into(personinfo_icon);
+                            Glide.with(PersonInfoActivity.this).load("http://118.190.245.170/worktile/media/"+icon).into(personinfo_icon);
                         }
                     });
                 } catch (JSONException e) {

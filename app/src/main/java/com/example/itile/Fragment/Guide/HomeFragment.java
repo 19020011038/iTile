@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.itile.Adapter.HomeAdapter;
+import com.example.itile.ProjectHelperActivity;
 import com.example.itile.R;
+import com.example.itile.ScheduleHelperActivity;
 import com.example.itile.SettingActivity;
+import com.example.itile.TaskHelperActivity;
 import com.example.itile.Util.HttpUtil;
 import com.google.android.material.tabs.TabLayout;
 
@@ -40,6 +44,9 @@ public class HomeFragment extends Fragment {
     private String flag_schedule;
     private String flag_project;
     private String flag_task;
+    private View re1;
+    private View re2;
+    private View re3;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +67,36 @@ public class HomeFragment extends Fragment {
         hongdian1 = getActivity().findViewById(R.id.hongdian1);
         hongdian2 = getActivity().findViewById(R.id.hongdian2);
         hongdian3 = getActivity().findViewById(R.id.hongdian3);
+        re1 = getActivity().findViewById(R.id.re1);
+        re2 = getActivity().findViewById(R.id.re2);
+        re3 = getActivity().findViewById(R.id.re3);
 
+        re1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入日程助手
+                Intent intent = new Intent(getActivity(), ScheduleHelperActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        re2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入项目助手
+                Intent intent = new Intent(getActivity(), ProjectHelperActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        re3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入任务助手
+                Intent intent = new Intent(getActivity(), TaskHelperActivity.class);
+                startActivity(intent);
+            }
+        });
         getHelper("http://175.24.47.150:8088/worktile/helper/");
     }
     public void getHelper(String address) {
