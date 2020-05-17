@@ -1,6 +1,5 @@
 package com.example.itile.Adapter;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -16,29 +15,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.itile.R;
 import com.example.itile.ScheduleDetailActivity;
+import com.example.itile.ScheduleHelperActivity;
 
 import java.util.List;
 import java.util.Map;
 
-public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder>{
-
+public class ScheduleHelperAdapter extends RecyclerView.Adapter<ScheduleHelperAdapter.ViewHolder>{
     private List<Map<String, Object>> list;
     private Context context;
 
-    public WorkAdapter(Context context, List<Map<String, Object>> list) {
+    public ScheduleHelperAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public WorkAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ScheduleHelperAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_schedule, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WorkAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ScheduleHelperAdapter.ViewHolder holder, final int position) {
         if(list.get(position).get("state").toString().equals("1")){
             holder.point.setImageResource(R.drawable.point2);
             holder.point.invalidate();
@@ -52,7 +51,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder>{
         holder.a_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WorkAdapter.this.context, ScheduleDetailActivity.class);
+                Intent intent = new Intent(ScheduleHelperAdapter.this.context, ScheduleDetailActivity.class);
                 intent.putExtra("pk",list.get(position).get("pk").toString());
                 context.startActivity(intent);
             }

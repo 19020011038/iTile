@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddFriendByTelActivity"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="158px"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:id="@+id/addby_tel_back"
+            android:layout_width="158px"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="65px"
+                android:layout_height="65px"
+                android:src="@drawable/back"
+                android:id="@+id/back"
+                android:layout_centerInParent="true">
+            </ImageView>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机查找"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="10dip">
+
+        <ImageView
+            android:id="@+id/tel_image"
+            android:layout_width="120px"
+            android:layout_height="120px"
+            android:background="@drawable/addtelephone"
+            android:layout_marginTop="15dip"
+            android:layout_marginBottom="15dip"
+            android:layout_marginLeft="15dip">
+        </ImageView>
+
+        <EditText
+            android:id="@+id/addby_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tel_image"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="52dip"
+            android:hint="请输入手机号码"
+            android:paddingLeft="8dip"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:inputType="phone"
+            android:maxLength="11">
+        </EditText>
+
+        <RelativeLayout
+            android:id="@+id/tel_r1"
+            android:layout_width="110px"
+            android:layout_height="150px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dip">
+
+            <ImageButton
+                android:id="@+id/addby_tel_find"
+                android:layout_width="25dip"
+                android:layout_height="25dip"
+                android:background="@drawable/find"
+                android:layout_centerInParent="true">
+            </ImageButton>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#e0e0e0">
+    </TextView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/findby_tel_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,16 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#f0f0f0"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:text="详情页还没写，马上就写"
-        android:layout_gravity="center"
-        android:textSize="54dp"/>
-    <ImageView
+        android:layout_height="158px"
+        android:background="#ffffff"
+        android:layout_marginTop="25dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            >
+            <ImageView
+                android:layout_width="65px"
+                android:layout_height="65px"
+                android:src="@drawable/back"
+                android:id="@+id/back_from_schedule_detail"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日程详情"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"/>
+
+
+    </RelativeLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/haha"/>
+        android:layout_height="150px"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="完成状态"
+            android:layout_marginLeft="20dp"
+            android:textSize="50px"
+            android:layout_gravity="center"
+            android:textColor="#808080"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="已完成"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textSize="50px"
+            android:id="@+id/schedule_detail_show_status"/>
+        <TextView
+            android:id="@+id/schedule_detail_change"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:text=">"
+            android:textSize="34dp"
+            android:layout_marginRight="30px"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#000000"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/rcxq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日程详情"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:textSize="50px"
+            android:textColor="#808080"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:background="#ffffff"/>
+        <TextView
+            android:maxLength="200"
+            android:id="@+id/schedule_detail_show_detail"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#ffffff"
+            android:text="日程详情"
+            android:gravity="top"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#000000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/d_kssj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始时间"
+            android:layout_marginLeft="20dp"
+            android:textSize="50px"
+            android:layout_gravity="center"
+            android:textColor="#808080"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="50px"
+            android:text="5月12日 19:00"
+            android:layout_marginLeft="50px"
+            android:id="@+id/schedule_detail_show_starttime"
+            android:textColor="#808080"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#000000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/d_jssj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="截止时间"
+            android:layout_marginLeft="20dp"
+            android:textSize="50px"
+            android:layout_gravity="center"
+            android:textColor="#808080"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="50px"
+            android:text="5月12日 19:00"
+            android:layout_marginLeft="50px"
+            android:id="@+id/schedule_detail_show_endtime"
+            android:textColor="#808080"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#000000"/>
+
 
 </LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无搜索结果"
+            android:textSize="25sp"
+            android:layout_centerInParent="true">
+        </TextView>
+    </RelativeLayout>
+
+    <!--<RelativeLayout
+        android:id="@+id/friend_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/addby_tel_icon"
+            android:layout_width="55sp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:src="#ffdb5c"
+            android:layout_marginTop="20dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginBottom="20dip">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:id="@+id/addby_tel_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/addby_tel_icon"
+            android:text="昵称昵称昵称"
+            android:textSize="48px"
+            android:textColor="#000f00"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginTop="27dip"
+            android:maxLines="1"
+            android:ellipsize="end">
+        </TextView>
+
+        <TextView
+            android:id="@+id/addby_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/addby_tel_icon"
+            android:layout_below="@+id/addby_tel_name"
+            android:layout_marginTop="5dip"
+            android:layout_marginLeft="16dip"
+            android:text="12345678@qq.com"
+            android:layout_marginRight="15dip"
+            android:maxLines="1"
+            android:ellipsize="end">
+        </TextView>
+    </RelativeLayout>
+-->
+</LinearLayout>

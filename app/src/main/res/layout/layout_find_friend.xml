@@ -1,9 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FindFriendActivity">
+    tools:context=".FindFriendActivity"
+    android:orientation="vertical"
+    android:background="#f0f0f0">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="158px"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:id="@+id/findfriend_back"
+            android:layout_width="158px"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="65px"
+                android:layout_height="65px"
+                android:src="@drawable/back"
+                android:id="@+id/back"
+                android:layout_centerInParent="true">
+            </ImageView>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加好友"
+            android:layout_centerInParent="true"
+            android:textSize="20dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/findfriend_tel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="10dip">
+
+        <ImageView
+            android:id="@+id/tel_image"
+            android:layout_width="130px"
+            android:layout_height="130px"
+            android:background="@drawable/addtelephone"
+            android:layout_marginTop="12dip"
+            android:layout_marginBottom="12dip"
+            android:layout_marginLeft="15dip">
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tel_image"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dip"
+            android:text="手机查找"
+            android:textSize="56px"
+            android:textColor="#434343">
+        </TextView>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/findfriend_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="12dip">
+
+        <ImageView
+            android:id="@+id/nickname_image"
+            android:layout_width="135px"
+            android:layout_height="135px"
+            android:background="@drawable/addnickname"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="15dip">
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/nickname_image"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dip"
+            android:text="昵称搜索"
+            android:textSize="56px"
+            android:textColor="#434343">
+        </TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/findfriend_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="12dip">
+
+        <ImageView
+            android:id="@+id/email_image"
+            android:layout_width="130px"
+            android:layout_height="130px"
+            android:background="@drawable/addemail"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="15dip">
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/email_image"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dip"
+            android:text="邮箱添加"
+            android:textSize="56px"
+            android:textColor="#434343">
+        </TextView>
+    </RelativeLayout>
+
+</LinearLayout>
