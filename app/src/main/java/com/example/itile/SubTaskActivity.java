@@ -1,34 +1,34 @@
 
 package com.example.itile;
 
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.ImageView;
-        import android.widget.RelativeLayout;
-        import android.widget.TextView;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import com.example.itile.Util.HttpUtil;
+import com.example.itile.Util.HttpUtil;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.io.IOException;
+import java.io.IOException;
 
-        import okhttp3.Call;
-        import okhttp3.Callback;
-        import okhttp3.Response;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
-public class TaskActivity extends AppCompatActivity {
+public class SubTaskActivity extends AppCompatActivity {
 
     private ImageView back;
     private String task_id;
     private String project_id;
     private RelativeLayout relativeLayout;
-    private String name;
+    private String subtaskname;
     private String description;
     private String starttime;
     private String endtime;
@@ -39,6 +39,9 @@ public class TaskActivity extends AppCompatActivity {
     private String right;
     private String project_id_belong;
     private String project_name;
+    private String task_id_belong;
+    private String task_name;
+    private String subtask_id;
 
     private TextView Aname;
     private TextView Adescription;
@@ -51,14 +54,14 @@ public class TaskActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_task);
+        setContentView(R.layout.layout_subtask);
 
         Intent intent = getIntent();
         task_id = intent.getStringExtra("task_id");
         project_id = intent.getStringExtra("project_id");
+        subtask_id = intent.getStringExtra("subtask_id");
 
 
-        relativeLayout = findViewById(R.id.all_task);
         Aname = findViewById(R.id.name);
         Astarttime = findViewById(R.id.time1);
         Aendtime = findViewById(R.id.time2);
@@ -66,22 +69,6 @@ public class TaskActivity extends AppCompatActivity {
         Amanager = findViewById(R.id.manager);
         Anumber = findViewById(R.id.number);
         Aproject = findViewById(R.id.project);
-
-        relativeLayout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(TaskActivity.this, ListSubTaskActivity.class);
-                intent.putExtra("project_id",project_id);
-                intent.putExtra("task_id",task_id);
-                startActivity(intent);
-
-
-            }
-        });
-
-
-
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +78,7 @@ public class TaskActivity extends AppCompatActivity {
         });
 
 
-        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
+        DetailWithOkHttp("http://118.190.245.170/worktile/task/"+task_id+"/subtask/"+subtask_id);
 
     }
     public void DetailWithOkHttp(String address) {
@@ -111,18 +98,19 @@ public class TaskActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(responseData);
                     JSONObject jsonObject1 = jsonObject.getJSONObject("data");
 
-                        name = jsonObject1.getString("task_name");
+
                         state = jsonObject1.getString("state");
                         description = jsonObject1.getString("description");
                         starttime = jsonObject1.getString("starttime");
                         endtime = jsonObject1.getString("endtime");
                         manager_id = jsonObject1.getString("manager_id");
                         manager_name = jsonObject1.getString("manager_name");
-                        right = jsonObject1.getString("right");
-                        project_id_belong = jsonObject1.getString("project_id");
+                        task_id_belong = jsonObject1.getString("task_id");
+                        task_name = jsonObject1.getString("task_name");
+                        task_id = jsonObject1.getString("task_id");
+                        project_id = jsonObject1.getString("project_id");
                         project_name = jsonObject1.getString("project_name");
-                        subtask_num = jsonObject1.getString("subtask_num");
-
+                   subtaskname = jsonObject1.getString("name");
                     String time1 = starttime.replace("T", " ");
                     String time2 = endtime.replace("T", " ");
 
@@ -130,13 +118,12 @@ public class TaskActivity extends AppCompatActivity {
                         @Override
                         public void run() {
 
-                            Aname.setText(name);
+                            Aname.setText(subtaskname);
                             Adescription.setText(description);
                             Astarttime.setText(time1);
                             Aendtime.setText(time2);
                             Amanager.setText(manager_name);
-                            Anumber.setText(subtask_num);
-                            Aproject.setText(project_name);
+                            Aproject.setText(task_name);
 
                         }
                     });

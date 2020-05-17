@@ -31,13 +31,13 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class NewTaskActivity extends AppCompatActivity {
+public class NewSubTaskActivity extends AppCompatActivity {
 
     private EditText name;
     private EditText tip;
     private SharedPreferencesUtil check;
 
-    private String project_id;
+    private String id;
     private Spinner mspinner_nian1;
     private Spinner mspinner_nian2;
     private ArrayAdapter<String> adapter_nian;
@@ -57,6 +57,9 @@ public class NewTaskActivity extends AppCompatActivity {
     private String endtime;
 
     private TextView finish;
+
+    private String task_id;
+    private String project_id;
 
     private Spinner mspinner_yue1;
     private ArrayAdapter<String> adapter_yue1;
@@ -79,9 +82,10 @@ public class NewTaskActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_new_task);
+        setContentView(R.layout.layout_new_subtask);
 
         Intent intent = getIntent();
+        task_id = intent.getStringExtra("task_id");
         project_id = intent.getStringExtra("project_id");
 
         check = SharedPreferencesUtil.getInstance(getApplicationContext());
@@ -123,20 +127,18 @@ public class NewTaskActivity extends AppCompatActivity {
                 String tip1 = tip.getText().toString();
                 if (TextUtils.isEmpty(name1))
                 {
-                    Toast.makeText(NewTaskActivity.this, "任务名称不能为空！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this, "任务名称不能为空！", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if (TextUtils.isEmpty(tip1))
                 {
-                    Toast.makeText(NewTaskActivity.this, "任务描述不能为空！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this, "任务描述不能为空！", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else {
 
-                    newTaskWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/new-task",name1,tip1,starttime,endtime);
-                    Log.d("time",starttime);
-                    Log.d("time",endtime);
-                    Toast.makeText(NewTaskActivity.this, "开始"+starttime+"\n"+"结束"+endtime, Toast.LENGTH_SHORT).show();
+                    newSubTaskWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id+"/new-subtask", name1, tip1,starttime,endtime);
+//                    Toast.makeText(NewTaskActivity.this, "开始"+starttime+"\n"+"结束"+endtime, Toast.LENGTH_SHORT).show();
                     finish();
 
                 }
@@ -164,7 +166,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     yyyy1 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,yyyy1,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,yyyy1,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -189,7 +191,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     yyyy2 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,yyyy2,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,yyyy2,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -223,7 +225,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     MM1 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,MM1,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,MM1,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -252,7 +254,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     MM2 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,MM2,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,MM2,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -284,7 +286,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     dd1 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,dd1,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,dd1,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -314,7 +316,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     dd2 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,dd2,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,dd2,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -347,7 +349,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     HH1 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,HH1,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,HH1,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -382,7 +384,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     HH2 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,HH2,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,HH2,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -393,7 +395,7 @@ public class NewTaskActivity extends AppCompatActivity {
             }
         });
 
-         //选择开始分
+        //选择开始分
         String[] fen1 = new String[]{"分", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"};
         //创建一个数组适配器
         adapter_fen1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, fen1);
@@ -414,7 +416,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     mm1 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,mm1,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,mm1,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -447,7 +449,7 @@ public class NewTaskActivity extends AppCompatActivity {
                 }else{
                     mm2 = positions;
 
-                    Toast.makeText(NewTaskActivity.this,mm2,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewSubTaskActivity.this,mm2,Toast.LENGTH_SHORT).show();
                 }
                 parent.setVisibility(View.VISIBLE);
             }
@@ -458,40 +460,40 @@ public class NewTaskActivity extends AppCompatActivity {
             }
         });
     }
-    public void newTaskWithOkHttp(String address, String name, String description,String starttime,String endtime){
+    public void newSubTaskWithOkHttp(String address, String name, String description,String starttime,String endtime){
         HttpUtil.newTaskWithOkHttp(address, name,description, starttime,endtime,new Callback() {
 
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        //在这里对异常情况进行处理
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //在这里对异常情况进行处理
 
-                        Log.d("hhh","111");
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        Log.d("hhh","222");
-
-                        //得到服务器返回的具体内容
-                        final String responseData = response.body().string();
-                        Log.d("qqqq",responseData);
-
-                        try {
-                            JSONObject jsonObject = new JSONObject(responseData);
-                            String result = jsonObject.getString("warning");
-
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(NewTaskActivity.this, result, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+                Log.d("hhh","111");
             }
 
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d("hhh","222");
+
+                //得到服务器返回的具体内容
+                final String responseData = response.body().string();
+                Log.d("qqqq",responseData);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(responseData);
+                    String result = jsonObject.getString("warning");
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(NewSubTaskActivity.this, result, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
+
+}
 

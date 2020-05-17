@@ -1,27 +1,20 @@
 package com.example.itile.Fragment.Task;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.itile.Adapter.AllProjectAdapter;
-import com.example.itile.FormActivity;
-import com.example.itile.NewProjectActivity;
+import com.example.itile.Adapter.DoingAllTaskAdapter;
 import com.example.itile.R;
-import com.example.itile.TaskActivity;
 import com.example.itile.Util.HttpUtil;
 
 import org.json.JSONArray;
@@ -39,7 +32,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class DoingFragment extends Fragment {
-    private List<Map<String, Object>> list = new ArrayList<>();
+    private List<Map<String, Object>> list2 = new ArrayList<>();
     private RelativeLayout task;
     private RelativeLayout form;
     private ImageView imageView;
@@ -70,7 +63,6 @@ public class DoingFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_task_doing, container, false);
-
         return root;
 
     }
@@ -81,7 +73,7 @@ public class DoingFragment extends Fragment {
 
         recyclerView = getActivity().findViewById(R.id.recyclerView);
 
-
+        list2.clear();
         ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
 
 
@@ -109,50 +101,41 @@ public class DoingFragment extends Fragment {
 
                     JSONArray jsonArray = jsonObject2.getJSONArray("notstart");
 
-                    JSONObject jsonObject3 = jsonObject.getJSONObject("notstart");
-
-                    JSONArray jsonArray1 = jsonObject3.getJSONArray("fields");
-
-
+                    Log.d("22222",responseData);
 
                     for (int i = 0; i < jsonArray.length(); i++) {
 
-                        JSONObject jsonObject_1 = jsonArray.getJSONObject(i);
-                        JSONObject jsonObject_2 = jsonArray1.getJSONObject(i);
+                        JSONObject schedule = jsonArray.getJSONObject(i);
+                        String model = schedule.getString("model");
+                        String id = schedule.getString("pk");
+                        JSONObject fields = schedule.getJSONObject("fields");
 
-                        model_name = jsonObject_1.getString("model");
-                        task_id = jsonObject_1.getString("id");
-
-                        name = jsonObject_2.getString("name");
-                        state = jsonObject_2.getString("state");
-                        ifread = jsonObject_2.getString("ifread");
-                        description = jsonObject_2.getString("description");
-                        project = jsonObject_2.getString("project");
-
-                        starttime = jsonObject_2.getString("starttime");
-                        endtime = jsonObject_2.getString("endtime");
-                        manager = jsonObject_2.getString("manager");
-                        user = jsonObject_2.getString("user");
+                        name = fields.getString("name");
+                        state = fields.getString("state");
+                        ifread = fields.getString("ifread");
+                        description = fields.getString("description");
+                        project = fields.getString("project");
+                        starttime = fields.getString("starttime");
+                        endtime = fields.getString("endtime");
+                        manager = fields.getString("manager");
+                        user = fields.getString("user");
 
 
 
                         Map map = new HashMap();
 
-                        map.put("name", model_name);
-                        map.put("id",task_id);
-
+                        map.put("model", model);
+                        map.put("id",id);
                         map.put("name",name);
                         map.put("state",state);
                         map.put("ifread",ifread);
                         map.put("description",description);
-
                         map.put("project",project);
                         map.put("starttime",starttime);
                         map.put("endtime",endtime);
                         map.put("manager",manager);
                         map.put("user",user);
-                        list.add(map);
-
+                        list2.add(map);
                     }
 
                     if (!getActivity().equals(null))
@@ -161,7 +144,8 @@ public class DoingFragment extends Fragment {
                             public void run() {
 
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
-                                recyclerView.setAdapter(new AllProjectAdapter(getActivity(), list));//绑定适配器
+                                recyclerView.setAdapter(new DoingAllTaskAdapter(getActivity(), list2));//绑定适配器
+
 
 
                             }

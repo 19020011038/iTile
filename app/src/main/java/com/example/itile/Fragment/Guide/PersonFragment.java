@@ -17,11 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.itile.Adapter.HomeAdapter;
-import com.example.itile.FormActivity;
-import com.example.itile.HomeActivity;
 import com.example.itile.R;
 import com.example.itile.SettingActivity;
-import com.example.itile.TaskActivity;
 import com.example.itile.Util.HttpUtil;
 
 import org.json.JSONArray;
