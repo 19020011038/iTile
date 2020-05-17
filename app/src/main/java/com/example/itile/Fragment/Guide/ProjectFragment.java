@@ -19,7 +19,7 @@ import com.example.itile.Adapter.AllProjectAdapter;
 import com.example.itile.FormActivity;
 import com.example.itile.NewProjectActivity;
 import com.example.itile.R;
-import com.example.itile.TaskActivity;
+import com.example.itile.AllTaskActivity;
 import com.example.itile.Util.HttpUtil;
 
 import org.json.JSONArray;
@@ -48,14 +48,7 @@ public class ProjectFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
         View root = inflater.inflate(R.layout.fragment_project, container, false);
-
-
-
-
-
-
 
         return root;
 
@@ -74,7 +67,7 @@ public class ProjectFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), TaskActivity.class); //从前者跳到后者，特别注意的是，在fragment中，用getActivity()来获取当前的activity
+                intent.setClass(getActivity(), AllTaskActivity.class); //从前者跳到后者，特别注意的是，在fragment中，用getActivity()来获取当前的activity
                 getActivity().startActivity(intent);
             }
         });
@@ -129,7 +122,7 @@ public class ProjectFragment extends Fragment {
                         Map map = new HashMap();
 
                         map.put("name", name);
-                        map.put("id",project_id);
+                        map.put("project_id",project_id);
                         list.add(map);
                     }
 

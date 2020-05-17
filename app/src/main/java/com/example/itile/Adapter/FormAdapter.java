@@ -21,34 +21,44 @@ import com.example.itile.R;
 import java.util.List;
 import java.util.Map;
 
-public class AllProjectAdapter extends RecyclerView.Adapter<AllProjectAdapter.ViewHolder>{
+public class FormAdapter extends RecyclerView.Adapter<FormAdapter.ViewHolder>{
 
     private List<Map<String, Object>> list;
     private Context context;
 
-    public AllProjectAdapter(Context context, List<Map<String, Object>> list) {
+    public FormAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public AllProjectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_project, parent, false);
-        return new AllProjectAdapter.ViewHolder(view);
+    public FormAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_form, parent, false);
+        return new FormAdapter.ViewHolder(view);
     }
     @Override
-    public void onBindViewHolder(@NonNull AllProjectAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull FormAdapter.ViewHolder holder, final int position) {
         String name = list.get(position).get("name").toString();
-        String projcet_id = list.get(position).get("project_id").toString();
+        String id = list.get(position).get("id").toString();
+        String rate = list.get(position).get("rate").toString();
+        String alltask = list.get(position).get("alltask").toString();
+        String notstart = list.get(position).get("notstart").toString();
+        String isgoing = list.get(position).get("isgoing").toString();
+        String ended = list.get(position).get("ended").toString();
+
 
         holder.mName.setText(name);
+        holder.textView1.setText(notstart);
+        holder.textView2.setText(isgoing);
+        holder.textView3.setText(ended);
+        holder.rate.setText(rate);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ProjectActivity.class);
-                intent.putExtra("project_id",projcet_id);
+                intent.putExtra("project_id",id);
                 context.startActivity(intent);
             }
         });
@@ -62,13 +72,19 @@ public class AllProjectAdapter extends RecyclerView.Adapter<AllProjectAdapter.Vi
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mName;
         private RelativeLayout relativeLayout;
+        private TextView textView1;
+        private TextView textView2;
+        private TextView textView3;
+        private TextView rate;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             mName = itemView.findViewById(R.id.name);
+            textView1 = itemView.findViewById(R.id.text1);
+            textView2 = itemView.findViewById(R.id.text2);
+            textView3 = itemView.findViewById(R.id.text3);
+            rate = itemView.findViewById(R.id.rate);
             relativeLayout = itemView.findViewById(R.id.re);
-
-
 
 
         }
