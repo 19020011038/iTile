@@ -51,6 +51,8 @@ public class SubTaskActivity extends AppCompatActivity {
     private TextView Anumber;
     private TextView Aproject;
 
+    private RelativeLayout relativeLayout1;
+    private TextView change;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +79,35 @@ public class SubTaskActivity extends AppCompatActivity {
             }
         });
 
+        relativeLayout1 = findViewById(R.id.re);
+
+        relativeLayout1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+//                Intent intent = new Intent(SubTaskActivity.this,      .class);
+//                intent.putExtra("subtask_id",subtask_id);
+//                intent.putExtra("task_id",task_id);
+//                startActivity(intent);
+
+
+            }
+        });
+
+                change = findViewById(R.id.new_task);
+        change.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+//                Intent intent = new Intent(SubTaskActivity.this,.class);
+//                intent.putExtra("subtask_id",subtask_id);
+//                intent.putExtra("task_id",task_id);
+//                intent.putExtra("state",state);
+//                startActivity(intent);
+
+
+            }
+        });
 
         DetailWithOkHttp("http://118.190.245.170/worktile/task/"+task_id+"/subtask/"+subtask_id);
 

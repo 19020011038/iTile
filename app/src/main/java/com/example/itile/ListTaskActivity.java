@@ -44,7 +44,7 @@ private ImageView back;
         Intent intent = getIntent();
         project_id = intent.getStringExtra("project_id");
 
-        new_task = findViewById(R.id.new_task);
+
         recyclerView =findViewById(R.id.recyclerView);
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +53,8 @@ private ImageView back;
                 finish();
             }
         });
+
+        new_task = findViewById(R.id.new_task);
         new_task.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

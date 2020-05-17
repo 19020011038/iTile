@@ -43,6 +43,8 @@ public class ProjectActivity extends AppCompatActivity {
     private ImageView back;
     private String message;
 
+    private RelativeLayout relativeLayout1;
+    private TextView change;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_project);
@@ -55,6 +57,11 @@ public class ProjectActivity extends AppCompatActivity {
         Aname = findViewById(R.id.name);
         Adescription = findViewById(R.id.description);
 
+
+
+        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id);
+
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,13 +72,42 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ProjectActivity.this, ListTaskActivity.class);
-                intent.putExtra("project_id",project_id);
-                startActivity(intent);
+//                Intent intent = new Intent(ProjectActivity.this, .class);
+//                intent.putExtra("project_id",project_id);
+//                startActivity(intent);
 
             }
         });
-        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id);
+
+        change = findViewById(R.id.new_task);
+        change.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+//                Intent intent = new Intent(ProjectActivity.this,.class);
+//                intent.putExtra("project_id",project_id);
+//                intent.putExtra("state",state);
+//                startActivity(intent);
+
+
+            }
+        });
+
+
+        relativeLayout1 = findViewById(R.id.re);
+
+        relativeLayout1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+//                Intent intent = new Intent(SubTaskActivity.this,      .class);
+//                intent.putExtra("project_id",project_id);
+//                startActivity(intent);
+
+
+            }
+        });
+
     }
 
 
