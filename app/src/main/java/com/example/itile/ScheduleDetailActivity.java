@@ -154,6 +154,12 @@ public class ScheduleDetailActivity extends AppCompatActivity {
         HttpUtil.postScheduleDetail(address,s,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ScheduleDetailActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
 

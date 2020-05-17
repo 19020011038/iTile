@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,6 +62,12 @@ public class ScheduleHelperActivity extends AppCompatActivity {
         HttpUtil.getScheduleHelper(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ScheduleHelperActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
 

@@ -374,4 +374,17 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
+    //搜索POST
+    public static void postSearch(String address, String search, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("search",search)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
 }

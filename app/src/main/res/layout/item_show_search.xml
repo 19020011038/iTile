@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="45dp">
+
+    <TextView
+        android:layout_marginBottom="20dp"
+        android:id="@+id/search_title"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="#f0f0f0"
+        android:text="-为您展示以下结果-"
+        android:gravity="center"/>
+
+</LinearLayout>

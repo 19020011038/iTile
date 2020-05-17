@@ -107,6 +107,12 @@ public class TaskHelperActivity extends AppCompatActivity {
         HttpUtil.postTaskHelper(address, choice,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(TaskHelperActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
 
@@ -149,6 +155,12 @@ public class TaskHelperActivity extends AppCompatActivity {
         HttpUtil.postTaskHelper2(address, read,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(TaskHelperActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
 

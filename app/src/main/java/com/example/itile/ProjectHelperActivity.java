@@ -106,6 +106,12 @@ public class ProjectHelperActivity extends AppCompatActivity {
         HttpUtil.postProjectHelper(address, choice,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ProjectHelperActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
 
@@ -148,6 +154,12 @@ public class ProjectHelperActivity extends AppCompatActivity {
         HttpUtil.postProjectHelper2(address, read,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ProjectHelperActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
 
