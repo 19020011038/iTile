@@ -38,9 +38,12 @@
         <activity android:name=".NewTaskActivity"/>
         <activity android:name=".ListTaskActivity"/>
         <activity android:name=".TaskActivity"/>
+        <activity android:name=".ProjectHelperActivity"/>
         <activity android:name=".ListSubTaskActivity"/>
         <activity android:name=".NewSubTaskActivity"/>
         <activity android:name=".SubTaskActivity"/>
+        <activity android:name=".TaskHelperActivity"/>
+        <activity android:name=".ScheduleHelperActivity"/>
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

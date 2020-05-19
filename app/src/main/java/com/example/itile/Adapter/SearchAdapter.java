@@ -31,6 +31,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public final int Task_View = 2;
     public final int Project_View = 1;
     public final int Title_View = 0;
+    public final int KongBai_View = 3;
 
 
     public SearchAdapter(Context context, List<Map<String, Object>> list) {
@@ -53,9 +54,12 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else if(viewType == Task_View){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_task, parent, false);
             return new SearchTaskViewHolder(view);
-        }else {
+        }else if(viewType == Title_View){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_show_search, parent, false);
             return new TitleViewHolder(view);
+        }else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_kongbai, parent, false);
+            return new KongBaiViewHolder(view);
         }
     }
 
@@ -104,8 +108,10 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 viewHolder.t_state.setText("已完成");
                 viewHolder.t_state.setTextColor(GREEN);
             }
-        }else {
+        }else if(holder instanceof TitleViewHolder){
             TitleViewHolder viewHolder = (TitleViewHolder) holder;
+        }else {
+            KongBaiViewHolder viewHolder = (KongBaiViewHolder)holder;
         }
     }
 
@@ -156,6 +162,14 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             t_state = itemView.findViewById(R.id.search_task_state);
         }
 
+    }
+
+    class KongBaiViewHolder extends RecyclerView.ViewHolder {
+
+        KongBaiViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+        }
     }
 
 

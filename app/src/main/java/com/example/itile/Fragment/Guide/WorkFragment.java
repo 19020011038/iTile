@@ -80,6 +80,7 @@ public class WorkFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        CalendarView calendarView = getActivity().findViewById(R.id.calendarview);
         list.clear();
         //新建日程
         jump_new_schedule = getActivity().findViewById(R.id.work_new_schedule);
@@ -87,6 +88,11 @@ public class WorkFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), NewScheduleActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("year",yyyy);
+                bundle.putString("month",mm);
+                bundle.putString("day",dd);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -103,7 +109,6 @@ public class WorkFragment extends Fragment {
         });
 
         //日历的点击操作
-        CalendarView calendarView = getActivity().findViewById(R.id.calendarview);
         Log.d("getDate", String.valueOf(calendarView.getDate()));
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 

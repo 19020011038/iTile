@@ -123,17 +123,25 @@ public class ProjectHelperActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(responseData);
                     JSONArray jsonArray = jsonObject.getJSONArray("project");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject schedule = jsonArray.getJSONObject(i);
-                        String pk = schedule.getString("pk");
-                        JSONObject fields = schedule.getJSONObject("fields");
-                        String name = fields.getString("name");
+                    if(!String.valueOf(jsonArray).equals("[]")){
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject schedule = jsonArray.getJSONObject(i);
+                            String pk = schedule.getString("pk");
+                            JSONObject fields = schedule.getJSONObject("fields");
+                            String name = fields.getString("name");
 
-                        Map map = new HashMap();
-                        map.put("pk", pk);
-                        map.put("name", name);
+                            Map map = new HashMap();
+                            map.put("pk", pk);
+                            map.put("name", name);
+                            map.put("type",1);
 
-                        list.add(map);
+                            list.add(map);
+                        }
+                    }else {
+                        Map map1 = new HashMap();
+                        map1.put("type",2);
+                        list.add(map1);
+                        Log.d("hahahahahhaha",String.valueOf(jsonArray));
                     }
                     runOnUiThread(new Runnable() {
                         @Override

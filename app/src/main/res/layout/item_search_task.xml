@@ -61,7 +61,6 @@
                     android:gravity="center"/>
                 <TextView
                     android:id="@+id/search_task_description"
-                    android:background="#ffdb5c"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
