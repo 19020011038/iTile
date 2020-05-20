@@ -15,10 +15,12 @@ import com.example.itile.Fragment.Task.FinishFragment;
 import com.example.itile.Fragment.Task.UpcomingFragment;
 import com.example.itile.R;
 
+import static com.example.itile.R.string.tab_text_2;
+
 
 public class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, tab_text_2, R.string.tab_text_3};
 
     private final Context mContext;
 //    private BooklistFragment1 booklistFragment1;

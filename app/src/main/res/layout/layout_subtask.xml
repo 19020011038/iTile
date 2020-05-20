@@ -177,6 +177,7 @@
 
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/owner"
         android:layout_width="match_parent"
@@ -186,11 +187,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="负责人"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:textSize="50px"
-            android:textColor="#808080"/>
+            android:text="负责人"
+            android:textColor="#808080"
+            android:textSize="50px" />
+
         <TextView
             android:id="@+id/manager"
             android:layout_width="wrap_content"
@@ -199,10 +201,19 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text="名"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
+        <com.example.itile.Util.RoundPicture
+            android:id="@+id/manager_pic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@+id/manager"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/glide"/>
 
 
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
