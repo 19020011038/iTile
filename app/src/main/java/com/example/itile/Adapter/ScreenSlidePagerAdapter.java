@@ -55,7 +55,7 @@ public class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
                 return DoingFragment.newInstance(position);
             default:
                 String p4 = position+"";
-                Log.d("qsh5",p4);
+                Log.d("qsh3",p4);
                 return FinishFragment.newInstance(position);
         }
 
