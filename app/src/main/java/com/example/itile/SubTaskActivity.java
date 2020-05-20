@@ -50,6 +50,7 @@ public class SubTaskActivity extends AppCompatActivity {
     private TextView Amanager;
     private TextView Anumber;
     private TextView Aproject;
+    private RelativeLayout owner;
 
     private RelativeLayout relativeLayout1;
     private TextView change;
@@ -71,6 +72,7 @@ public class SubTaskActivity extends AppCompatActivity {
         Amanager = findViewById(R.id.manager);
         Anumber = findViewById(R.id.number);
         Aproject = findViewById(R.id.project);
+        owner = findViewById(R.id.owner);
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,25 +87,39 @@ public class SubTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(SubTaskActivity.this,      .class);
-//                intent.putExtra("subtask_id",subtask_id);
-//                intent.putExtra("task_id",task_id);
-//                startActivity(intent);
+                Intent intent = new Intent(SubTaskActivity.this,SeeSonTaskMemberActivity.class);
+                intent.putExtra("subtask_id",subtask_id);
+                intent.putExtra("task_id",task_id);
+                startActivity(intent);
 
 
             }
         });
 
-                change = findViewById(R.id.new_task);
+        owner.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(SubTaskActivity.this,ChangeSonTaskOwnerActivity.class);
+                intent.putExtra("subtask_id",subtask_id);
+                intent.putExtra("task_id",task_id);
+                intent.putExtra("owner_id", manager_id);
+                startActivity(intent);
+
+
+            }
+        });
+
+                change = findViewById(R.id.change);
         change.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(SubTaskActivity.this,.class);
-//                intent.putExtra("subtask_id",subtask_id);
-//                intent.putExtra("task_id",task_id);
-//                intent.putExtra("state",state);
-//                startActivity(intent);
+                Intent intent = new Intent(SubTaskActivity.this,ChangeSonTaskInfoActivity.class);
+                intent.putExtra("subtask_id",subtask_id);
+                intent.putExtra("task_id",task_id);
+                intent.putExtra("state",state);
+                startActivity(intent);
 
 
             }

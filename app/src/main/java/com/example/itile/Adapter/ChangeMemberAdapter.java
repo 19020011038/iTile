@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ChangeMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Map<String, Object>> list = new ArrayList<>();
     private Context context;
@@ -34,13 +36,16 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
     public static final int TWO_ITEM = 2;
     public static final int THREE_ITEM = 3;
     public static final int FOUR_ITEM = 4;
+    //解决holder复用问题
+    private List<Integer> favorList=new ArrayList<>(); //用法：favorList.add(123);
 
-    public FriendAddressAdapter(Context context) {
+    public ChangeMemberAdapter(Context context) {
         this.context = context;
     }
 
-    public void setData(List<Map<String, Object>> list) {
+    public void setData(List<Map<String, Object>> list, List<Integer> favorList) {
         this.list = list;
+        this.favorList = favorList;
     }
 
     @Override
@@ -48,11 +53,7 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (list.size() == 0) {
             return TWO_ITEM;
         } else {
-            String is_address = list.get(0).get("is_address").toString();
-            if (is_address.equals("0"))
-                return THREE_ITEM;
-            else
-                return ONE_ITEM;
+            return ONE_ITEM;
         }
     }
 
@@ -60,10 +61,10 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TWO_ITEM) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_addfriend_white, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_nofriend, parent, false);
             return new HomeWhiteViewHolder(view);
         } else {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_friend_address, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_change_member, parent, false);
             return new RecyclerViewHolder(view);
         }
     }
@@ -75,16 +76,46 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
             recyclerViewHolder.name.setText(list.get(position).get("username").toString());
             final String icon = list.get(position).get("avatar").toString();
             Glide.with(context).load("http://118.190.245.170/worktile/media/"+icon).into(recyclerViewHolder.icon);
-            final String friend_id = list.get(position).get("friend").toString();
+            final String friend_id = list.get(position).get("friend_id").toString();
+            recyclerViewHolder.cbox.setTag(new Integer(friend_id));
+            if(favorList.contains(recyclerViewHolder.cbox.getTag()))
+                recyclerViewHolder.cbox.setChecked(true);
+            else
+                recyclerViewHolder.cbox.setChecked(false);
+
             recyclerViewHolder.all.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, PersonInfoActivity.class);
-                    intent.putExtra("friend_id", friend_id);
-                    Log.i("zyr", "通讯录跳转的时候："+friend_id);
-                    context.startActivity(intent);
+                    if(favorList.contains(recyclerViewHolder.cbox.getTag())) {
+                        recyclerViewHolder.cbox.setChecked(false);
+                        favorList.remove(new Integer(friend_id));
+                        Log.i("zyr", "新减少了："+friend_id);
+                    }
+                    else {
+                        recyclerViewHolder.cbox.setChecked(true);
+                        favorList.add(new Integer(friend_id));
+                        Log.i("zyr", "新增加了："+friend_id);
+                    }
                 }
             });
+
+//            recyclerViewHolder.cbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                    if (isChecked){
+//                        if(favorList.contains(recyclerViewHolder.cbox.getTag())) {
+//                            recyclerViewHolder.cbox.setChecked(false);
+//                            favorList.remove(new Integer(friend_id));
+//                            Log.i("zyr", "新减少了："+friend_id);
+//                        }
+//                        else {
+//                            recyclerViewHolder.cbox.setChecked(true);
+//                            favorList.add(new Integer(friend_id));
+//                            Log.i("zyr", "新增加了："+friend_id);
+//                        }
+//                    }
+//                }
+//            });
         } else if (holder instanceof HomeWhiteViewHolder) {
             HomeWhiteViewHolder homeWhiteViewHolder = (HomeWhiteViewHolder) holder;
         }
@@ -95,6 +126,7 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
         private TextView name;
         private ImageView icon;
         private RelativeLayout all;
+        private CheckBox cbox;
 
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -102,6 +134,8 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
             name = itemView.findViewById(R.id.friend_name);
             icon = itemView.findViewById(R.id.friend_icon);
             all = itemView.findViewById(R.id.friend_all);
+            cbox = itemView.findViewById(R.id.change_cbox);
+
         }
     }
 
@@ -123,5 +157,7 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-
+    public List<Integer> getList(){
+        return favorList;
+    }
 }

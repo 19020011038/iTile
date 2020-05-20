@@ -1,5 +1,9 @@
 package com.example.itile;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,13 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.example.itile.Adapter.FriendAddressAdapter;
-import com.example.itile.Adapter.HomeAdapter;
 import com.example.itile.Util.HttpUtil;
 
 import org.json.JSONArray;
@@ -31,65 +29,45 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class AddressActivity extends AppCompatActivity {
+public class SeeSonTaskMemberActivity extends AppCompatActivity {
 
-    private ImageView imageView;
+    private RelativeLayout change_member;
     private RelativeLayout back;
     private RecyclerView recyclerView;
     private Map map;
     private FriendAddressAdapter mAdapter;
-    private String friend_name;
-    private String friend_icon;
-    private String friend_id;
+    private String son_id;
+    private String task_id;
 
     List<Map<String, Object>> list = new ArrayList<>();
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_address);
+        setContentView(R.layout.layout_see_son_task_member);
 
-//        imageView = findViewById(R.id.add_friend);
-//        back = findViewById(R.id.back);
-//        recyclerView = findViewById(R.id.frind_recyclerView);
-//
-//        homeNameOkHttp("http://118.190.245.170/worktile/friends");
-////        homeNameOkHttp("http://175.24.47.150:8088/worktile/friendinfo/7/");
-//
-//        imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(AddressActivity.this, FindFriendActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
-//
-//        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        recyclerView.setLayoutManager(manager);
-//        mAdapter = new FriendAddressAdapter(AddressActivity.this);
-//        recyclerView.setAdapter(mAdapter);
+        Intent intent = getIntent();
+        son_id = intent.getStringExtra("subtask_id");
+        task_id = intent.getStringExtra("task_id");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        imageView = findViewById(R.id.add_friend);
+        change_member = findViewById(R.id.change_member);
         back = findViewById(R.id.back);
-        recyclerView = findViewById(R.id.frind_recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
 
-        homeNameOkHttp("http://118.190.245.170/worktile/friends");
+        homeNameOkHttp("http://118.190.245.170/worktile/task/"+task_id+"/subtask/"+son_id+"/members"); ///worktile/project/{project_id}/task/{task_id}/members
 //        homeNameOkHttp("http://175.24.47.150:8088/worktile/friendinfo/7/");
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        change_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddressActivity.this, FindFriendActivity.class);
+                Intent intent = new Intent(SeeSonTaskMemberActivity.this, ChangeSonTaskMemberActivity.class);
+                intent.putExtra("son_id", son_id);
+                intent.putExtra("task_id", task_id);
                 startActivity(intent);
             }
         });
@@ -102,7 +80,7 @@ public class AddressActivity extends AppCompatActivity {
 
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
-        mAdapter = new FriendAddressAdapter(AddressActivity.this);
+        mAdapter = new FriendAddressAdapter(SeeSonTaskMemberActivity.this);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -116,7 +94,7 @@ public class AddressActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(AddressActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SeeSonTaskMemberActivity.this, "网络访问失败", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -127,23 +105,13 @@ public class AddressActivity extends AppCompatActivity {
                 final String responseData = response.body().string();
                 try {
                     list.clear();
-                    Log.i("zyr", "通讯录列表：" + responseData);
                     JSONObject object = new JSONObject(responseData);
-//                    JSONObject object1 = object.getJSONObject("friends_list");
-//                    friend_name = object1.getString("username");
-//                    friend_icon = object1.getString("avatar");
-//                    friend_id = object1.getString("friend_id");
-//                    Log.i("zyr", "AddressActivity.icon_url:" + friend_icon);
-                    JSONArray jsonArray = object.getJSONArray("friends_list");
+                    JSONArray jsonArray = object.getJSONArray("members");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-//                        JSONObject object3 = jsonObject1.getJSONObject("fields");
-//                int news_id = jsonObject1.getInt("news_id");
-//                        String status = jsonObject1.getString("status");
-                        Log.i("zyr",jsonArray.toString());
                         String name = jsonObject1.getString("username");  //头像
                         String icon = jsonObject1.getString("avatar");
-                        String id = jsonObject1.getString("friend");
+                        String id = jsonObject1.getString("id");
                         String is_address = "1";
 
                         map = new HashMap();
@@ -154,13 +122,11 @@ public class AddressActivity extends AppCompatActivity {
                         map.put("is_address", is_address);
 
                         list.add(map);
-                        Log.i("zyr", "shortcomment:list.size1111:" + list.size());
+//                        Log.i("zyr", "shortcomment:list.size1111:" + list.size());
                     }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-//                            recyclerView.setLayoutManager(new LinearLayoutManager(MyShortCommentsActivity.this));//纵向
-////                            recyclerView.setAdapter(new MyShortCommentsAdapter(MyShortCommentsActivity.this, list));
                             mAdapter.setData(list);
                             mAdapter.notifyDataSetChanged();
 //                            recyclerView.setNestedScrollingEnabled(false);
@@ -173,7 +139,7 @@ public class AddressActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(AddressActivity.this, "服务器访问失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SeeSonTaskMemberActivity.this, "服务器访问失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

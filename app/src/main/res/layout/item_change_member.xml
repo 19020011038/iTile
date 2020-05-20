@@ -30,25 +30,32 @@
             android:textSize="48px"
             android:textColor="#000f00"
             android:layout_marginLeft="18dip"
-            android:layout_marginRight="15dip"
+            android:layout_marginRight="65dip"
             android:layout_centerVertical="true"
             android:maxLines="1"
             android:ellipsize="end">
         </TextView>
 
-        <!--<TextView
-            android:id="@+id/friend_tel"
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/change_cbox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/friend_icon"
-            android:layout_below="@+id/friend_name"
-            android:layout_marginTop="5dip"
-            android:layout_marginLeft="15dip"
-            android:text="123456@qq.com/12345678"
-            android:layout_marginRight="15dip"
-            android:maxLines="1"
-            android:ellipsize="end">
-        </TextView>-->
-    </RelativeLayout>
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dip"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            >
+        </CheckBox>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.1px"
+            android:layout_below="@+id/friend_icon"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:background="#f0f0f0">
+        </TextView>
+    </RelativeLayout>
 </LinearLayout>

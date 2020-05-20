@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ChangeProjectMemberActivity"
     android:background="#f0f0f0"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="158px"
@@ -28,29 +31,40 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="通讯录"
+            android:text="修改成员"
             android:layout_centerInParent="true"
             android:textSize="20dp"/>
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/add_friend"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dp"
-            android:id="@+id/add_friend"/>
 
+        <RelativeLayout
+            android:id="@+id/change_member"
+            android:layout_width="170px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="确定"
+                android:textSize="20dip"
+                android:textColor="#ffdb5c"
+                android:textStyle="bold">
+            </TextView>
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:descendantFocusability="blocksDescendants">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/frind_recyclerView"
+            android:id="@+id/change_projectmember_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </RelativeLayout>
+
 
 </LinearLayout>
