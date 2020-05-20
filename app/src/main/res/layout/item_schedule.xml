@@ -9,12 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:background="#ffffff"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:background="#ffffff"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
+            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:id="@+id/work_point"
             android:layout_width="20dp"
@@ -23,6 +28,7 @@
         </ImageView>
 
         <TextView
+            android:layout_marginLeft="10dp"
             android:id="@+id/work_time1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,6 +40,7 @@
         </TextView>
 
         <TextView
+
             android:id="@+id/work_item_home2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,13 +84,10 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:background="#ffffff"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#000000"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="18dp"
+        android:layout_height="9dp"
         android:background="#ffffff"/>
 
     <!--<TextView

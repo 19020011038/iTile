@@ -82,44 +82,50 @@ public class SearchActivity extends AppCompatActivity {
                     list.add(map1);
                     JSONObject jsonObject = new JSONObject(responseData);
                     JSONArray jsonArray = jsonObject.getJSONArray("project");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject schedule = jsonArray.getJSONObject(i);
-                        String pk = schedule.getString("pk");
-                        JSONObject fields = schedule.getJSONObject("fields");
-                        String p_name = fields.getString("name");
-                        String description = fields.getString("description");
-                        String s_state = fields.getString("state");
-
-                        Map map = new HashMap();
-                        map.put("pk", pk);
-                        map.put("name", p_name);
-                        map.put("description",description);
-                        map.put("state",s_state);
-                        map.put("type",1);
-
-                        list.add(map);
-                    }
                     JSONArray jsonArray2 = jsonObject.getJSONArray("task");
-                    for (int i = 0; i < jsonArray2.length(); i++) {
-                        JSONObject schedule = jsonArray.getJSONObject(i);
-                        String pk = schedule.getString("pk");
-                        JSONObject fields = schedule.getJSONObject("fields");
-                        String starttime = fields.getString("starttime");
-                        String endtime = fields.getString("endtime");
-                        String p_name = fields.getString("name");
-                        String description = fields.getString("description");
-                        String s_state = fields.getString("state");
+                    if(String.valueOf(jsonArray).equals("[]") && String.valueOf(jsonArray2).equals("[]")){
+                        Map map9 = new HashMap();
+                        map9.put("type",3);
+                        list.add(map9);
+                    }else {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject schedule = jsonArray.getJSONObject(i);
+                            String pk = schedule.getString("pk");
+                            JSONObject fields = schedule.getJSONObject("fields");
+                            String p_name = fields.getString("name");
+                            String description = fields.getString("description");
+                            String s_state = fields.getString("state");
 
-                        Map map = new HashMap();
-                        map.put("pk", pk);
-                        map.put("starttime", starttime);
-                        map.put("endtime", endtime);
-                        map.put("name", p_name);
-                        map.put("description",description);
-                        map.put("state",s_state);
-                        map.put("type",2);
+                            Map map = new HashMap();
+                            map.put("pk", pk);
+                            map.put("name", p_name);
+                            map.put("description",description);
+                            map.put("state",s_state);
+                            map.put("type",1);
 
-                        list.add(map);
+                            list.add(map);
+                        }
+                        for (int i = 0; i < jsonArray2.length(); i++) {
+                            JSONObject schedule = jsonArray.getJSONObject(i);
+                            String pk = schedule.getString("pk");
+                            JSONObject fields = schedule.getJSONObject("fields");
+                            String starttime = fields.getString("starttime");
+                            String endtime = fields.getString("endtime");
+                            String p_name = fields.getString("name");
+                            String description = fields.getString("description");
+                            String s_state = fields.getString("state");
+
+                            Map map = new HashMap();
+                            map.put("pk", pk);
+                            map.put("starttime", starttime);
+                            map.put("endtime", endtime);
+                            map.put("name", p_name);
+                            map.put("description",description);
+                            map.put("state",s_state);
+                            map.put("type",2);
+
+                            list.add(map);
+                        }
                     }
                     runOnUiThread(new Runnable() {
                         @Override

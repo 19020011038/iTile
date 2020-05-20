@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.itile.ProjectActivity;
 import com.example.itile.R;
 import com.example.itile.ScheduleDetailActivity;
 import com.example.itile.ScheduleHelperActivity;
@@ -20,50 +21,76 @@ import com.example.itile.ScheduleHelperActivity;
 import java.util.List;
 import java.util.Map;
 
-public class TaskHelperAdapter extends RecyclerView.Adapter<TaskHelperAdapter.ViewHolder>{
+public class TaskHelperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private List<Map<String, Object>> list;
     private Context context;
+    public final int KongBai_View = 2;
+    public final int Item_View = 1;
 
     public TaskHelperAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
         this.list = list;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return Integer.valueOf(list.get(position).get("type").toString());
+    }
+
     @NonNull
     @Override
-    public TaskHelperAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_task_helper, parent, false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
+        if (viewType == KongBai_View) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_kongbai, parent, false);
+            return new TaskHelperAdapter.KongBaiViewHolder(view);
+        } else  {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task_helper, parent, false);
+            return new TaskHelperAdapter.ItemViewHolder(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskHelperAdapter.ViewHolder holder, final int position) {
-        holder.task_name.setText(list.get(position).get("name").toString());
-        holder.a_task.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(ProjectHelperAdapter.this.context,任务详情页.this);
-//                intent.putExtra("这里写你用的字段名",list.get(position).get("pk").toString());
-//                context.startActivity(intent);
-//                在这里写跳转，我已经写了一部分了
-            }
-        });
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+        if(holder instanceof TaskHelperAdapter.KongBaiViewHolder){
+            TaskHelperAdapter.KongBaiViewHolder viewHolder = (TaskHelperAdapter.KongBaiViewHolder) holder;
+
+        }else {
+            TaskHelperAdapter.ItemViewHolder viewHolder = (TaskHelperAdapter.ItemViewHolder) holder;
+            viewHolder.t_name.setText(list.get(position).get("name").toString());
+            viewHolder.a_task.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(TaskHelperAdapter.this.context, TaskHelperAdapter.class);
+                    intent.putExtra("task_id",list.get(position).get("pk").toString());
+                    intent.putExtra("project_id",list.get(position).get("project").toString());
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
+
 
     @Override
     public int getItemCount() {
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private  TextView task_name;
-        private View a_task;
+    class KongBaiViewHolder extends RecyclerView.ViewHolder {
 
-
-        ViewHolder(@NonNull View itemView) {
+        KongBaiViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            task_name = itemView.findViewById(R.id.task_helper_name);
+        }
+    }
+
+    class ItemViewHolder extends RecyclerView.ViewHolder {
+        public TextView t_name;
+        public View a_task;
+
+        ItemViewHolder(@NonNull View itemView) {
+            super(itemView);
+            t_name = itemView.findViewById(R.id.task_helper_name);
             a_task = itemView.findViewById(R.id.a_task);
         }
     }

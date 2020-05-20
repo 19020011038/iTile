@@ -5,24 +5,31 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.itile.R;
 import com.example.itile.ScheduleDetailActivity;
-import com.example.itile.ScheduleHelperActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ScheduleHelperAdapter extends RecyclerView.Adapter<ScheduleHelperAdapter.ViewHolder>{
-    private List<Map<String, Object>> list;
+    List<Map<String, Object>> list = new ArrayList<>();
     private Context context;
+
+    public List<Map<String, Object>> getData() {
+        return list;
+    }
+
+    public void setData(List<Map<String, Object>> list) {
+        this.list = list;
+    }
+
 
     public ScheduleHelperAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;

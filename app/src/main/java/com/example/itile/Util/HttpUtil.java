@@ -446,12 +446,16 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
-    //日程助手页GET
-    public static void getScheduleHelper(String address,okhttp3.Callback callback){
+    //日程助手页POST
+    public static void postScheduleHelper(String address, String page, okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("page",page)
+                .build();
         Request request = new Request.Builder()
                 .url(address)
                 .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
                 .build();
         client.newCall(request).enqueue(callback);
     }
