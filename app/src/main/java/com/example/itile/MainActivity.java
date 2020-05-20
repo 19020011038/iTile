@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     // 定时触发器
     private static Timer tExit = null;
 
-
     //记录当前正在使用的fragment
     private Fragment isFragment;
     private BottomNavigationView bottomNavigationView;
@@ -130,27 +129,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                     switchContent(isFragment, secondFragment);
                     return true;
-
                 case R.id.work:
                     if (thirdFragment == null) {
                         thirdFragment = new WorkFragment();
                     }
                     switchContent(isFragment, thirdFragment);
                     return true;
-
                 case R.id.person:
                     if (fourthFragment == null) {
                         fourthFragment = new PersonFragment();
                     }
                     switchContent(isFragment, fourthFragment);
                     return true;
-
             }
             return false;
         }
 
     };
-
 
     public void switchContent(Fragment from, Fragment to) {
         if (isFragment != to) {

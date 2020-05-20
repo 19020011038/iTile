@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.itile.Adapter.DoingAllTaskAdapter;
+import com.example.itile.Adapter.UpcomingAllTaskAdapter;
 import com.example.itile.R;
 import com.example.itile.Util.HttpUtil;
 
@@ -63,6 +64,12 @@ public class DoingFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_task_doing, container, false);
+        recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
+
+        list2.clear();
+        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
+
+
         return root;
 
     }
@@ -71,10 +78,7 @@ public class DoingFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        recyclerView = getActivity().findViewById(R.id.recyclerView);
 
-        list2.clear();
-        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
 
 
     }
@@ -99,7 +103,7 @@ public class DoingFragment extends Fragment {
 
                     JSONObject jsonObject2 = jsonObject.getJSONObject("data");
 
-                    JSONArray jsonArray = jsonObject2.getJSONArray("notstart");
+                    JSONArray jsonArray = jsonObject2.getJSONArray("isgoing");
 
                     Log.d("22222",responseData);
 
@@ -138,15 +142,12 @@ public class DoingFragment extends Fragment {
                         list2.add(map);
                     }
 
-                    if (!getActivity().equals(null))
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
 
                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
                                 recyclerView.setAdapter(new DoingAllTaskAdapter(getActivity(), list2));//绑定适配器
-
-
 
                             }
                         });

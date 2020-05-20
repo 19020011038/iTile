@@ -41,17 +41,17 @@ public class NewSubTaskActivity extends AppCompatActivity {
     private Spinner mspinner_nian1;
     private Spinner mspinner_nian2;
     private ArrayAdapter<String> adapter_nian;
-    private String yyyy1="2020";
-    private String MM1="05";
-    private String dd1="09";
-    private String HH1="23";
-    private String mm1="29";
+    private String yyyy1="a";
+    private String MM1="a";
+    private String dd1="a";
+    private String HH1="a";
+    private String mm1="a";
 
-    private String yyyy2="2020";
-    private String MM2="05";
-    private String dd2="09";
-    private String HH2="23";
-    private String mm2="59";
+    private String yyyy2="a";
+    private String MM2="a";
+    private String dd2="a";
+    private String HH2="a";
+    private String mm2="a";
     private String description;
     private String starttime;
     private String endtime;
@@ -135,6 +135,10 @@ public class NewSubTaskActivity extends AppCompatActivity {
                     Toast.makeText(NewSubTaskActivity.this, "任务描述不能为空！", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                else if(yyyy1=="a" || MM1=="a" ||dd1=="a" ||HH1=="a" ||mm1=="a" )
+                    Toast.makeText(NewSubTaskActivity.this,"请选择开始时间",Toast.LENGTH_SHORT).show();
+                else if(yyyy2=="a" ||MM2=="a" ||dd2=="a" ||HH2=="a" ||mm2=="a" )
+                    Toast.makeText(NewSubTaskActivity.this,"请选择结束时间",Toast.LENGTH_SHORT).show();
                 else {
 
                     newSubTaskWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id+"/new-subtask", name1, tip1,starttime,endtime);

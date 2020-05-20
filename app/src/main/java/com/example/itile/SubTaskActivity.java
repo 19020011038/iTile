@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.itile.Util.HttpUtil;
 
 import org.json.JSONArray;
@@ -54,7 +57,9 @@ public class SubTaskActivity extends AppCompatActivity {
 
     private RelativeLayout relativeLayout1;
     private TextView change;
-
+    private String manager_pic;
+    private ImageView head;
+    private TextView show_state;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_subtask);
@@ -64,7 +69,8 @@ public class SubTaskActivity extends AppCompatActivity {
         project_id = intent.getStringExtra("project_id");
         subtask_id = intent.getStringExtra("subtask_id");
 
-
+        show_state = findViewById(R.id.state);
+        head = findViewById(R.id.manager_pic);
         Aname = findViewById(R.id.name);
         Astarttime = findViewById(R.id.time1);
         Aendtime = findViewById(R.id.time2);
@@ -128,6 +134,26 @@ public class SubTaskActivity extends AppCompatActivity {
         DetailWithOkHttp("http://118.190.245.170/worktile/task/"+task_id+"/subtask/"+subtask_id);
 
     }
+    private void GlideWithPictureUrl(String image,ImageView imageView){
+        String picture_1 = image.replace("\\","");
+        String picture_2 = picture_1.replace("\"","");
+        String picture_3 = picture_2.replace("[","");
+        String picture_4 = picture_3.replace("]","");
+
+
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.glide)
+                .error(R.drawable.glide)
+                .diskCacheStrategy(DiskCacheStrategy.NONE);
+        Glide.with(SubTaskActivity.this)
+                .load(picture_4)
+                .apply(options)
+                .into(imageView);
+
+
+
+    }
+
     public void DetailWithOkHttp(String address) {
         HttpUtil.ShowAllProjectWithOkHttp(address, new Callback() {
 
@@ -158,6 +184,7 @@ public class SubTaskActivity extends AppCompatActivity {
                         project_id = jsonObject1.getString("project_id");
                         project_name = jsonObject1.getString("project_name");
                    subtaskname = jsonObject1.getString("name");
+                    manager_pic = jsonObject1.getString("manager_pic");
                     String time1 = starttime.replace("T", " ");
                     String time2 = endtime.replace("T", " ");
 
@@ -172,6 +199,16 @@ public class SubTaskActivity extends AppCompatActivity {
                             Amanager.setText(manager_name);
                             Aproject.setText(task_name);
 
+                            GlideWithPictureUrl("http://118.190.245.170/worktile/media/"+manager_pic,head);
+                            if (state=="0"){
+                                show_state.setText("未开始");
+                            }
+                            else if (state=="1")
+                            {
+                                show_state.setText("进行中");
+                            }
+                            else
+                                show_state.setText("已完成");
                         }
                     });
 
