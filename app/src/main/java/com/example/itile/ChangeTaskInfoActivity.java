@@ -32,7 +32,7 @@ import okhttp3.Response;
 
 public class ChangeTaskInfoActivity extends AppCompatActivity {
 
-    private String[] areas = new String[]{"未完成","进行中", "已完成"};
+    private String[] areas = new String[]{"未开始","进行中", "已完成"};
     private RadioOnClick radioOnClick = new RadioOnClick(1);
     private ListView areaRadioListView;
     private Button radioButton;
@@ -186,7 +186,6 @@ public class ChangeTaskInfoActivity extends AppCompatActivity {
                                 else
                                     state.setText("已完成");
                                 Toast.makeText(ChangeTaskInfoActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                                finish();
                             }else {
                                 Toast.makeText(ChangeTaskInfoActivity.this, "修改失败，请稍后重试", Toast.LENGTH_SHORT).show();
                             }
@@ -232,7 +231,6 @@ public class ChangeTaskInfoActivity extends AppCompatActivity {
                         public void run() {
                             if (result2.equals("POST成功")) {
                                 Toast.makeText(ChangeTaskInfoActivity.this, "简介修改成功", Toast.LENGTH_SHORT).show();
-                                finish();
                             } else {
                                 Toast.makeText(ChangeTaskInfoActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
                             }

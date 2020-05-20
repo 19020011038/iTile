@@ -88,7 +88,7 @@ public class TaskActivity extends AppCompatActivity {
         });
 
 
-        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
+//        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
 
         relativeLayout1 = findViewById(R.id.re);
 
@@ -145,6 +145,14 @@ public class TaskActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
+    }
+
     public void DetailWithOkHttp(String address) {
         HttpUtil.ShowAllProjectWithOkHttp(address, new Callback() {
 

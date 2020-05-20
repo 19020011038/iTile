@@ -18,7 +18,8 @@
             android:id="@+id/back"
             android:layout_width="158px"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:descendantFocusability="blocksDescendants">
 
             <ImageView
                 android:layout_width="65px"

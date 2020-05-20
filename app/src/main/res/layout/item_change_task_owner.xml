@@ -15,7 +15,10 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="12dp">
+            android:layout_marginLeft="12dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false">
         </RadioButton>
 
         <de.hdodenhof.circleimageview.CircleImageView

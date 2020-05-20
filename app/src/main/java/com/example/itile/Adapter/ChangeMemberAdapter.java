@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -97,6 +98,24 @@ public class ChangeMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 }
             });
+
+//            recyclerViewHolder.cbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                    if (isChecked){
+//                        if(favorList.contains(recyclerViewHolder.cbox.getTag())) {
+//                            recyclerViewHolder.cbox.setChecked(false);
+//                            favorList.remove(new Integer(friend_id));
+//                            Log.i("zyr", "新减少了："+friend_id);
+//                        }
+//                        else {
+//                            recyclerViewHolder.cbox.setChecked(true);
+//                            favorList.add(new Integer(friend_id));
+//                            Log.i("zyr", "新增加了："+friend_id);
+//                        }
+//                    }
+//                }
+//            });
         } else if (holder instanceof HomeWhiteViewHolder) {
             HomeWhiteViewHolder homeWhiteViewHolder = (HomeWhiteViewHolder) holder;
         }

@@ -180,7 +180,6 @@ public class ChangeProjectInfoActivity extends AppCompatActivity {
                                 else
                                     state.setText("已完成");
                                 Toast.makeText(ChangeProjectInfoActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                                finish();
                             }else {
                                 Toast.makeText(ChangeProjectInfoActivity.this, "修改失败，请稍后重试", Toast.LENGTH_SHORT).show();
                             }
@@ -226,7 +225,6 @@ public class ChangeProjectInfoActivity extends AppCompatActivity {
                         public void run() {
                             if (result2.equals("POST成功")) {
                                 Toast.makeText(ChangeProjectInfoActivity.this, "简介修改成功", Toast.LENGTH_SHORT).show();
-                                finish();
                             } else {
                                 Toast.makeText(ChangeProjectInfoActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
                             }

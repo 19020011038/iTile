@@ -104,8 +104,8 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
                 android:text="确定"
-                android:textSize="18dp"
-                android:textColor="#ffdb5c">
+                android:textSize="17dp"
+                android:textColor="@color/selector_text_press_color">
             </TextView>
 
             <EditText
@@ -118,6 +118,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:hint="请输入简介，最多100字"
+                android:textColor="#434343"
                 android:textSize="16sp"
                 android:gravity="top"
                 android:minLines="3"
