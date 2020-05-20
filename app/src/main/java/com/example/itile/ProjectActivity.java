@@ -79,7 +79,7 @@ public class ProjectActivity extends AppCompatActivity {
             }
         });
 
-        change = findViewById(R.id.new_task);
+        change = findViewById(R.id.change);
         change.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

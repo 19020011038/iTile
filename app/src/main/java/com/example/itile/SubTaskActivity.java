@@ -94,7 +94,8 @@ public class SubTaskActivity extends AppCompatActivity {
             }
         });
 
-                change = findViewById(R.id.new_task);
+
+                change = findViewById(R.id.change);
         change.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -102,7 +103,7 @@ public class SubTaskActivity extends AppCompatActivity {
 //                Intent intent = new Intent(SubTaskActivity.this,.class);
 //                intent.putExtra("subtask_id",subtask_id);
 //                intent.putExtra("task_id",task_id);
-//                intent.putExtra("state",state);
+                intent.putExtra("state",state);
 //                startActivity(intent);
 
 
