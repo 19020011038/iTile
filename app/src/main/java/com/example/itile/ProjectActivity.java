@@ -72,9 +72,9 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(ProjectActivity.this, .class);
-//                intent.putExtra("project_id",project_id);
-//                startActivity(intent);
+                Intent intent = new Intent(ProjectActivity.this, ListTaskActivity.class);
+                intent.putExtra("project_id",project_id);
+                startActivity(intent);
 
             }
         });
@@ -84,25 +84,25 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(ProjectActivity.this,.class);
-//                intent.putExtra("project_id",project_id);
-//                intent.putExtra("state",state);
-//                startActivity(intent);
-
+                Intent intent = new Intent(ProjectActivity.this,ChangeProjectInfoActivity.class);
+                intent.putExtra("project_id",project_id);
+                intent.putExtra("state",state);
+                startActivity(intent);
 
             }
         });
 
 
-        relativeLayout1 = findViewById(R.id.re);
+        relativeLayout1 = findViewById(R.id.member);
 
         relativeLayout1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(SubTaskActivity.this,      .class);
-//                intent.putExtra("project_id",project_id);
-//                startActivity(intent);
+                Intent intent = new Intent(ProjectActivity.this, SeeProjectMemberActivity.class);
+                intent.putExtra("project_id",project_id);
+                startActivity(intent);
+
 
 
             }

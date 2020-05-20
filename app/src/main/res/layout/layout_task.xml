@@ -178,6 +178,7 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/owner"
         android:layout_width="match_parent"
         android:layout_height="150px"
         android:background="#ffffff">
@@ -222,7 +223,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150px"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:id="@+id/re">
 
         <TextView
             android:layout_width="wrap_content"
@@ -251,7 +253,7 @@
         android:layout_width="match_parent"
         android:layout_height="150px"
         android:background="#ffffff"
-        android:id="@+id/re">
+        >
 
         <TextView
             android:layout_width="wrap_content"

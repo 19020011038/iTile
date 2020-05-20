@@ -52,7 +52,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TWO_ITEM) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_home_today, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_home_white, parent, false);
             return new HomeWhiteViewHolder(view);
         } else {
             View view = LayoutInflater.from(context).inflate(R.layout.item_home_today, parent, false);

@@ -74,7 +74,7 @@ public class FriendAddressAdapter extends RecyclerView.Adapter<RecyclerView.View
             RecyclerViewHolder recyclerViewHolder = (RecyclerViewHolder) holder;
             recyclerViewHolder.name.setText(list.get(position).get("username").toString());
             final String icon = list.get(position).get("avatar").toString();
-            Glide.with(context).load("http://118.190.245.170/worktile/static/"+icon).into(recyclerViewHolder.icon);
+            Glide.with(context).load("http://118.190.245.170/worktile/media/"+icon).into(recyclerViewHolder.icon);
             final String friend_id = list.get(position).get("friend").toString();
             recyclerViewHolder.all.setOnClickListener(new View.OnClickListener() {
                 @Override

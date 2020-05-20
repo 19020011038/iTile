@@ -47,6 +47,8 @@ public class TaskActivity extends AppCompatActivity {
     private TextView Amanager;
     private TextView Anumber;
     private TextView Aproject;
+    private TextView tvstate;
+    private RelativeLayout owner;
 
     private RelativeLayout relativeLayout1;
 
@@ -69,6 +71,8 @@ public class TaskActivity extends AppCompatActivity {
         Amanager = findViewById(R.id.manager);
         Anumber = findViewById(R.id.number);
         Aproject = findViewById(R.id.project);
+        owner = findViewById(R.id.owner);
+        tvstate = findViewById(R.id.state);
 
         relativeLayout.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -84,7 +88,7 @@ public class TaskActivity extends AppCompatActivity {
         });
 
 
-        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
+//        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
 
         relativeLayout1 = findViewById(R.id.re);
 
@@ -92,10 +96,24 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(TaskActivity.this,      .class);
-//                intent.putExtra("project_id",project_id);
-//                intent.putExtra("task_id",task_id);
-//                startActivity(intent);
+                Intent intent = new Intent(TaskActivity.this,SeeTaskMemberActivity.class);
+                intent.putExtra("project_id",project_id);
+                intent.putExtra("task_id",task_id);
+                startActivity(intent);
+
+
+            }
+        });
+
+        owner.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(TaskActivity.this,ChangeTaskOwnerActivity.class);
+                intent.putExtra("project_id",project_id);
+                intent.putExtra("task_id",task_id);
+                intent.putExtra("owner_id", manager_id);
+                startActivity(intent);
 
 
             }
@@ -106,13 +124,11 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(TaskActivity.this,.class);
-//                intent.putExtra("project_id",project_id);
-//                intent.putExtra("task_id",task_id);
-//                intent.putExtra("state",state);
-//                startActivity(intent);
-
-
+                Intent intent = new Intent(TaskActivity.this,ChangeTaskInfoActivity.class);
+                intent.putExtra("project_id",project_id);
+                intent.putExtra("task_id",task_id);
+                intent.putExtra("state",state);
+                startActivity(intent);
             }
         });
 
@@ -129,6 +145,14 @@ public class TaskActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
+    }
+
     public void DetailWithOkHttp(String address) {
         HttpUtil.ShowAllProjectWithOkHttp(address, new Callback() {
 
@@ -172,6 +196,7 @@ public class TaskActivity extends AppCompatActivity {
                             Amanager.setText(manager_name);
                             Anumber.setText(subtask_num);
                             Aproject.setText(project_name);
+//                            tvstate.setText(state);
 
                         }
                     });

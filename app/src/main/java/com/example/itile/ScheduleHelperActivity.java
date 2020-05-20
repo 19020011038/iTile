@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.itile.Adapter.ScheduleHelperAdapter;
 import com.example.itile.Adapter.WorkAdapter;
 import com.example.itile.Util.HttpUtil;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +37,12 @@ public class ScheduleHelperActivity extends AppCompatActivity {
     private ImageView back;
     private RecyclerView recyclerView;
     List<Map<String, Object>> list = new ArrayList<>();
+    private RefreshLayout refreshLayout;
+    private int page = 1;
+    private ScheduleHelperAdapter mAdapter;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +52,14 @@ public class ScheduleHelperActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+
+        refreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout_schedule_helper);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_schedule_helper);
+        LinearLayoutManager manager = new LinearLayoutManager(ScheduleHelperActivity.this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
+        mAdapter = new ScheduleHelperAdapter(ScheduleHelperActivity.this,list);
+        recyclerView.setAdapter(mAdapter);
+
         back = (ImageView) findViewById(R.id.back_from_schedule_helper);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,16 +67,33 @@ public class ScheduleHelperActivity extends AppCompatActivity {
                 finish();
             }
         });
+        postScheduleHelper("http://118.190.245.170/worktile/schedulehelper/", String.valueOf(page));
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getScheduleHelper("http://118.190.245.170/worktile/schedulehelper/");
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                page++;
+                postScheduleHelper("http://118.190.245.170/worktile/schedulehelper/", String.valueOf(page));
+            }
+        });
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                refreshLayout.finishRefresh(2000);
+                page = 1;
+                list.clear();
+                postScheduleHelper("http://118.190.245.170/worktile/schedulehelper/", String.valueOf(page));
+            }
+        });
     }
 
-    public void getScheduleHelper(String address) {
-        HttpUtil.getScheduleHelper(address, new Callback() {
+    public void postScheduleHelper(String address, String page) {
+        HttpUtil.postScheduleHelper(address, page, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
@@ -73,35 +107,49 @@ public class ScheduleHelperActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                boolean flag;
                 //得到服务器返回的具体内容
                 String responseData = response.body().string();
-                Log.d("日程助手页get", responseData);
+                Log.d("日程助手页post", responseData);
                 try {
                     JSONObject jsonObject = new JSONObject(responseData);
-                    JSONArray jsonArray = jsonObject.getJSONArray("schedule");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject schedule = jsonArray.getJSONObject(i);
-                        String pk = schedule.getString("pk");
-                        JSONObject fields = schedule.getJSONObject("fields");
-                        String starttime = fields.getString("starttime");
-                        String endtime = fields.getString("endtime");
-                        String state = fields.getString("state");
-                        String description = fields.getString("description");
+                    String warning = jsonObject.getString("warning");
+                    if (!warning.equals("1")) {
+                        flag = false;
+                    } else {
+                        flag = true;
+                        JSONArray jsonArray = jsonObject.getJSONArray("schedule");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject schedule = jsonArray.getJSONObject(i);
+                            String pk = schedule.getString("pk");
+                            JSONObject fields = schedule.getJSONObject("fields");
+                            String starttime = fields.getString("starttime");
+                            String endtime = fields.getString("endtime");
+                            String state = fields.getString("state");
+                            String description = fields.getString("description");
 
-                        Map map = new HashMap();
-                        map.put("pk", pk);
-                        map.put("starttime", starttime);
-                        map.put("endtime", endtime);
-                        map.put("state", state);
-                        map.put("description", description);
+                            Map map = new HashMap();
+                            map.put("pk", pk);
+                            map.put("starttime", starttime);
+                            map.put("endtime", endtime);
+                            map.put("state", state);
+                            map.put("description", description);
 
-                        list.add(map);
+                            list.add(map);
+                        }
                     }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            recyclerView.setLayoutManager(new LinearLayoutManager(ScheduleHelperActivity.this));//垂直排列 , Ctrl+P
-                            recyclerView.setAdapter(new ScheduleHelperAdapter(ScheduleHelperActivity.this, list));//绑定适配器
+                            if (flag) {
+                                refreshLayout.finishLoadMore(2000);
+                                refreshLayout.setFooterHeight(25);
+                                mAdapter.setData(list);
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(ScheduleHelperActivity.this, warning, Toast.LENGTH_SHORT).show();
+                                refreshLayout.finishLoadMore();
+                            }
                         }
                     });
                 } catch (JSONException e) {

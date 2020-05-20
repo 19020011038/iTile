@@ -8,13 +8,24 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/itile"
+        android:icon="@drawable/itile1"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/itile"
+        android:roundIcon="@drawable/itile1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddFriendByEmailActivity"></activity>
+        <activity android:name=".ChangeSonTaskOwnerActivity"></activity>
+        <activity android:name=".ChangeSonTaskInfoActivity" />
+        <activity android:name=".ChangeTaskInfoActivity" />
+        <activity android:name=".ChangeProjectInfoActivity" />
+        <activity android:name=".ChangeSonTaskMemberActivity" />
+        <activity android:name=".SeeSonTaskMemberActivity" />
+        <activity android:name=".ChangeTaskMemberActivity" />
+        <activity android:name=".SeeTaskMemberActivity" />
+        <activity android:name=".ChangeTaskOwnerActivity" />
+        <activity android:name=".ChangeProjectMemberActivity" />
+        <activity android:name=".SeeProjectMemberActivity" />
+        <activity android:name=".AddFriendByEmailActivity" />
         <activity android:name=".AddFriendByNicknameActivity" />
         <activity android:name=".AddFriendByTelActivity" />
         <activity android:name=".PersonInfoActivity" />
@@ -32,15 +43,21 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".AddressActivity" />
         <activity android:name=".NewProjectActivity" />
-        <activity android:name=".NewScheduleActivity"/>
-        <activity android:name=".ScheduleDetailActivity"/>
-        <activity android:name=".ProjectActivity"/>
-        <activity android:name=".NewTaskActivity"/>
-        <activity android:name=".ListTaskActivity"/>
-        <activity android:name=".TaskActivity"/>
-        <activity android:name=".ListSubTaskActivity"/>
-        <activity android:name=".NewSubTaskActivity"/>
-        <activity android:name=".SubTaskActivity"/>
+        <activity android:name=".NewScheduleActivity" />
+        <activity android:name=".ScheduleDetailActivity" />
+        <activity android:name=".ProjectActivity" />
+        <activity android:name=".NewTaskActivity" />
+<!--
+        <activity android:name=".TaskInProjectActivity" />
+-->
+        <activity android:name=".ScheduleHelperActivity" />
+        <activity android:name=".ProjectHelperActivity" />
+        <activity android:name=".TaskHelperActivity" />
+        <activity android:name=".ListTaskActivity" />
+        <activity android:name=".TaskActivity" />
+        <activity android:name=".ListSubTaskActivity" />
+        <activity android:name=".NewSubTaskActivity" />
+        <activity android:name=".SubTaskActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

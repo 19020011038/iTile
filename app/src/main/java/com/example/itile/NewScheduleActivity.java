@@ -1,9 +1,12 @@
 package com.example.itile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -64,6 +67,11 @@ public class NewScheduleActivity extends AppCompatActivity {
     private Spinner mspinner_fen2;
     private ArrayAdapter<String> adapter_fen2;
 
+    private boolean flag1;
+    private boolean flag2;
+    private boolean flag3;
+    private boolean flag4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +81,10 @@ public class NewScheduleActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+        Bundle bundle = getIntent().getExtras();
+        yyyy = bundle.getString("year");
+        MM = bundle.getString("month");
+        dd = bundle.getString("day");
         back = (ImageView)findViewById(R.id.back_from_new_schedule);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +101,11 @@ public class NewScheduleActivity extends AppCompatActivity {
                 if("".equals(description))
                     Toast.makeText(NewScheduleActivity.this,"请您输入日程详情",Toast.LENGTH_SHORT).show();
                 else {
+                    if(!flag1 || !flag2)
+                        Toast.makeText(NewScheduleActivity.this,"请选择开始时间",Toast.LENGTH_SHORT).show();
+                    else if(!flag3 || !flag4)
+                        Toast.makeText(NewScheduleActivity.this,"请选择结束时间",Toast.LENGTH_SHORT).show();
+                    else
                     postNewSchedule("http://118.190.245.170/worktile/newschedule/",starttime,endtime,description);
                 }
             }
@@ -96,125 +113,29 @@ public class NewScheduleActivity extends AppCompatActivity {
         starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
         endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
 
-        //选择年
-        String[] nian = new String[]{"年", "2018", "2019", "2020", "2021","2022","2023"};
-        //创建一个数组适配器
-        adapter_nian = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nian);
-        adapter_nian.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_nian = findViewById(R.id.spinner_nian);
-        mspinner_nian.setAdapter(adapter_nian);
-        //点击事件
-        mspinner_nian.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_nian.getItem(position);
-                if (positions.equals("年")){
-                    //
-                }else{
-                    yyyy = positions;
-                    starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
-                    endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //选择月
-        String[] yue = new String[]{"月", "01", "02", "03", "04","05","06","07","08","09","10","11","12"};
-        //创建一个数组适配器
-        adapter_yue = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yue);
-        adapter_yue.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_yue = findViewById(R.id.spinner_yue);
-        mspinner_yue.setAdapter(adapter_yue);
-        //点击事件
-        mspinner_yue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_yue.getItem(position);
-                if (positions.equals("月")){
-                    //
-                }else{
-                    MM = positions;
-                    starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
-                    endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //选择日
-        String[] ri = new String[]{"日", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-        //创建一个数组适配器
-        adapter_ri = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ri);
-        adapter_ri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_ri = findViewById(R.id.spinner_ri);
-        mspinner_ri.setAdapter(adapter_ri);
-        //点击事件
-        mspinner_ri.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_ri.getItem(position);
-                if (positions.equals("日")){
-                    //
-                }else{
-                    dd = positions;
-                    starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
-                    endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
-
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-
         //选择开始时
         String[] shi1 = new String[]{"时","00", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
         //创建一个数组适配器
         adapter_shi1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, shi1);
-        adapter_shi1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
+        adapter_shi1.setDropDownViewResource(R.layout.spinner_drop);     //设置下拉列表框的下拉选项样式
 
         mspinner_shi1 = findViewById(R.id.spinner_HH1);
         mspinner_shi1.setAdapter(adapter_shi1);
         //点击事件
         mspinner_shi1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+
+
             private String positions;
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                closeKeyBoard();
                 positions = adapter_shi1.getItem(position);
                 if (positions.equals("时")){
-                    //
+                    flag1 = false;
                 }else{
+                    flag1 = true;
                     HH1 = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
@@ -245,9 +166,11 @@ public class NewScheduleActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 positions = adapter_fen1.getItem(position);
+                closeKeyBoard();
                 if (positions.equals("分")){
-                    //
+                    flag2 = false;
                 }else{
+                    flag2 = true;
                     mm1 = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
@@ -278,9 +201,11 @@ public class NewScheduleActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 positions = adapter_shi2.getItem(position);
+                closeKeyBoard();
                 if (positions.equals("时")){
-                    //
+                    flag3 = false;
                 }else{
+                    flag3 = true;
                     HH2 = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
@@ -311,9 +236,11 @@ public class NewScheduleActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 positions = adapter_fen2.getItem(position);
+                closeKeyBoard();
                 if (positions.equals("分")){
-                    //
+                    flag4 = false;
                 }else{
+                    flag4 = true;
                     mm2 = positions;
                     starttime = yyyy+"-"+MM+"-"+dd+" "+HH1+"-"+mm1;
                     endtime = yyyy+"-"+MM+"-"+dd+" "+HH2+"-"+mm2;
@@ -370,6 +297,28 @@ public class NewScheduleActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+//
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        closeKeyBoard();
+//        return super.onTouchEvent(event);
+//    }
+
+    public void closeKeyBoard() {
+        if (getCurrentFocus() != null && getCurrentFocus().getWindowToken() != null) {
+            View v = getCurrentFocus();
+            closeSoftInput(this, v);
+        }
+    }
+    // 关闭键盘输入法
+    public static void closeSoftInput(Context context, View v) {
+        if (v != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
     }
 
 }

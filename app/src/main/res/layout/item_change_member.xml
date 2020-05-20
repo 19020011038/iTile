@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:id="@+id/friend_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/friend_icon"
+            android:layout_width="50sp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="#ffdb5c"
+            android:layout_marginTop="20dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginBottom="20dip">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:id="@+id/friend_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/friend_icon"
+            android:text="昵称昵称昵称"
+            android:textSize="48px"
+            android:textColor="#000f00"
+            android:layout_marginLeft="18dip"
+            android:layout_marginRight="65dip"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:ellipsize="end">
+        </TextView>
+
+        <CheckBox
+            android:id="@+id/change_cbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dip"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            >
+        </CheckBox>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.1px"
+            android:layout_below="@+id/friend_icon"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:background="#f0f0f0">
+        </TextView>
+    </RelativeLayout>
+</LinearLayout>

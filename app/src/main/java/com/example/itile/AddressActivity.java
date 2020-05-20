@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +34,7 @@ import okhttp3.Response;
 public class AddressActivity extends AppCompatActivity {
 
     private ImageView imageView;
-    private ImageView back;
+    private RelativeLayout back;
     private RecyclerView recyclerView;
     private Map map;
     private FriendAddressAdapter mAdapter;
@@ -126,7 +127,7 @@ public class AddressActivity extends AppCompatActivity {
                 final String responseData = response.body().string();
                 try {
                     list.clear();
-//                    Log.i("zyr", "data个人中心：" + responseData);
+                    Log.i("zyr", "通讯录列表：" + responseData);
                     JSONObject object = new JSONObject(responseData);
 //                    JSONObject object1 = object.getJSONObject("friends_list");
 //                    friend_name = object1.getString("username");

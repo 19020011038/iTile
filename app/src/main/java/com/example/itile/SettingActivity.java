@@ -512,7 +512,7 @@ public class SettingActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Glide.with(SettingActivity.this).load("http://118.190.245.170/worktile/static/"+icon_string).into(setting_icon);
+                        Glide.with(SettingActivity.this).load("http://118.190.245.170/worktile/media/"+icon_string).into(setting_icon);
 //                        Toast.makeText(HomeActivity.this,"显示头像",Toast.LENGTH_SHORT).show();
 //                        Glide.with(SettingActivity.this).load("http://175.24.47.150:8088/worktile/static/"+icon_string).into(setting_icon);
                     }

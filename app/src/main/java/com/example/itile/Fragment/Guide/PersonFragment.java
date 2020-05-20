@@ -160,7 +160,7 @@ public class PersonFragment extends Fragment {
                             home_telephone.setText(telephone);
                             home_email.setText(email);
 //                            Glide.with(HomeActivity.this).load("http://175.24.47.150:8088/worktile/static/"+icon).into(home_icon);
-                            Glide.with(getActivity()).load("http://118.190.245.170/worktile/static/"+icon).into(home_icon);
+                            Glide.with(getActivity()).load("http://118.190.245.170/worktile/media/"+icon).into(home_icon);
                             Log.i("zyr", "shortcomment:list.size:"+list.size());
 //                            recyclerView.setLayoutManager(new LinearLayoutManager(MyShortCommentsActivity.this));//纵向
 ////                            recyclerView.setAdapter(new MyShortCommentsAdapter(MyShortCommentsActivity.this, list));

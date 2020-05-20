@@ -57,7 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="150px"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:descendantFocusability="afterDescendants">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_work"
             android:layout_width="match_parent"
