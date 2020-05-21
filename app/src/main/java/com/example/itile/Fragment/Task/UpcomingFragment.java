@@ -64,7 +64,10 @@ public class UpcomingFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_task_upcoming, container, false);
 
+        recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
 
+        list.clear();
+        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
         return root;
 
     }
@@ -73,10 +76,7 @@ public class UpcomingFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        recyclerView = getActivity().findViewById(R.id.recyclerView);
 
-        list.clear();
-        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
 
 
 
@@ -144,7 +144,7 @@ public class UpcomingFragment extends Fragment {
 
                     }
 
-                    if (!getActivity().equals(null))
+
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

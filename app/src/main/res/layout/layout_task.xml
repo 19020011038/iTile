@@ -200,6 +200,14 @@
             android:layout_marginRight="20dp"
             android:text="名"
             android:textSize="20dp"/>
+        <com.example.itile.Util.RoundPicture
+            android:id="@+id/manager_pic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@+id/manager"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/glide"/>
 
 
     </RelativeLayout>

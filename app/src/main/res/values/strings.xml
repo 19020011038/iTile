@@ -5,6 +5,6 @@
     <string name="work">工作</string>
     <string name="person">个人</string>
     <string name="tab_text_1">未开始</string>
-    <string name="tab_text_2">待完成</string>
+    <string name="tab_text_2">进行中</string>
     <string name="tab_text_3">已完成</string>
 </resources>

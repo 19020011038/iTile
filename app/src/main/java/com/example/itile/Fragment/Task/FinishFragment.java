@@ -65,7 +65,9 @@ public class FinishFragment extends Fragment {
 
 
         View root = inflater.inflate(R.layout.fragment_task_finish, container, false);
-
+        recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
+        list3.clear();
+        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
         return root;
 
     }
@@ -75,11 +77,9 @@ public class FinishFragment extends Fragment {
         super.onResume();
 
 
-        list3.clear();
-        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
 
 
-        recyclerView = getActivity().findViewById(R.id.recyclerView);
+
 
 
 
@@ -105,7 +105,7 @@ public class FinishFragment extends Fragment {
 
                     JSONObject jsonObject2 = jsonObject.getJSONObject("data");
 
-                    JSONArray jsonArray = jsonObject2.getJSONArray("notstart");
+                    JSONArray jsonArray = jsonObject2.getJSONArray("ended");
 
                     Log.d("33333",responseData);
 
