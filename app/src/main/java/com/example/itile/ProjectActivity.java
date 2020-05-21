@@ -9,19 +9,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.itile.Adapter.AllProjectAdapter;
 import com.example.itile.Util.HttpUtil;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,8 +37,12 @@ public class ProjectActivity extends AppCompatActivity {
     private ImageView back;
     private String message;
 
+    private TextView show_state;
     private RelativeLayout relativeLayout1;
     private TextView change;
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_project);
@@ -56,10 +54,9 @@ public class ProjectActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         Aname = findViewById(R.id.name);
         Adescription = findViewById(R.id.description);
+        show_state = findViewById(R.id.state);
 
 
-
-        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id);
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +90,7 @@ public class ProjectActivity extends AppCompatActivity {
         });
 
 
+
         relativeLayout1 = findViewById(R.id.member);
 
         relativeLayout1.setOnClickListener(new View.OnClickListener(){
@@ -107,6 +105,14 @@ public class ProjectActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id);
 
     }
 
@@ -144,6 +150,11 @@ public class ProjectActivity extends AppCompatActivity {
 
                             Aname.setText(name);
                             Adescription.setText(description);
+                            if (state=="0"){
+                                show_state.setText("进行中");
+                            }
+                            else
+                                show_state.setText("已完成");
 
 
                         }
