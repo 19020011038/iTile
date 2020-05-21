@@ -120,6 +120,7 @@ public class PersonFragment extends Fragment {
                     list.clear();
                     Log.i("zyr","data个人中心："+responseData);
                     JSONObject object = new JSONObject(responseData);
+
                     JSONObject object1 = object.getJSONObject("user");
                     nickname = object1.getString("user_name");
                     icon = object1.getString("avatar");
@@ -130,6 +131,7 @@ public class PersonFragment extends Fragment {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                         JSONObject object3 = jsonObject1.getJSONObject("fields");
+                        String task_id = jsonObject1.getString("pk");
 //                int news_id = jsonObject1.getInt("news_id");
 //                        String status = jsonObject1.getString("status");
                         String time1 = object3.getString("starttime");  //头像
@@ -146,6 +148,7 @@ public class PersonFragment extends Fragment {
                         map.put("time2", time2);
                         map.put("d", d);
                         map.put("state", state);
+                        map.put("task_id", task_id);
 //                        map.put("book_num", book_num);
 //                        map.put("book_photo", book_photo);
 //                        map.put("comment_id", comment_id);

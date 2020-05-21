@@ -84,7 +84,7 @@ public class ChangeTaskInfoActivity extends AppCompatActivity {
         radioOnClick.setIndex(lastChoose);
 
         if (lastChoose==0)
-            state.setText("未完成");
+            state.setText("未开始");
         else if(lastChoose == 1)
             state.setText("进行中");
         else
@@ -180,7 +180,7 @@ public class ChangeTaskInfoActivity extends AppCompatActivity {
                             if (result.equals("POST成功")){
                                 lastChoose = radioOnClick.getIndex();
                                 if (lastChoose==0)
-                                    state.setText("未完成");
+                                    state.setText("未开始");
                                 else if(lastChoose == 1)
                                     state.setText("进行中");
                                 else
