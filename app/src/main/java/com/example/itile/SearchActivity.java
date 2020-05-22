@@ -52,6 +52,9 @@ public class SearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if(query.equals(""))
+                    Toast.makeText(SearchActivity.this,"请您输入搜索内容",Toast.LENGTH_SHORT).show();
+                else
                 list.clear();
                 postSearch("http://118.190.245.170/worktile/helper/",query);
                 return false;
