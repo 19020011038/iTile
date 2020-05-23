@@ -13,6 +13,16 @@ import okhttp3.RequestBody;
 public class HttpUtil {
 
     //各种详情
+    public static void RightWithOkHttp(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
+    //各种详情
     public static void DetailWithOkHttp(String address,okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()

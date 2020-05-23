@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -60,6 +61,10 @@ public class SubTaskActivity extends AppCompatActivity {
     private String manager_pic;
     private ImageView head;
     private TextView show_state;
+    private String ifcreator;
+    private RelativeLayout belong;
+    private int i=0;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_subtask);
@@ -69,6 +74,7 @@ public class SubTaskActivity extends AppCompatActivity {
         project_id = intent.getStringExtra("project_id");
         subtask_id = intent.getStringExtra("subtask_id");
 
+        belong = findViewById(R.id.belong);
         show_state = findViewById(R.id.state);
         head = findViewById(R.id.manager_pic);
         Aname = findViewById(R.id.name);
@@ -87,16 +93,34 @@ public class SubTaskActivity extends AppCompatActivity {
             }
         });
 
+        belong.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                RightWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
+
+
+            }
+        });
+
         relativeLayout1 = findViewById(R.id.re);
 
         relativeLayout1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SubTaskActivity.this,SeeSonTaskMemberActivity.class);
-                intent.putExtra("subtask_id",subtask_id);
-                intent.putExtra("task_id",task_id);
-                startActivity(intent);
+                if(ifcreator=="0")
+                {
+                    Toast.makeText(SubTaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(SubTaskActivity.this,SeeSonTaskMemberActivity.class);
+                    intent.putExtra("subtask_id",subtask_id);
+                    intent.putExtra("task_id",task_id);
+                    intent.putExtra("ifcreator",ifcreator);
+                    startActivity(intent);
+                }
+
+
 
 
             }
@@ -131,10 +155,24 @@ public class SubTaskActivity extends AppCompatActivity {
             }
         });
 
-        DetailWithOkHttp("http://118.190.245.170/worktile/task/"+task_id+"/subtask/"+subtask_id);
+
 
     }
-    private void GlideWithPictureUrl(String image,ImageView imageView){
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DetailWithOkHttp("http://118.190.245.170/worktile/task/"+task_id+"/subtask/"+subtask_id);
+
+        if(ifcreator=="0")
+        {
+            change.setVisibility(View.INVISIBLE);
+        }
+
+
+    }
+
+    private void GlideWithPictureUrl(String image, ImageView imageView){
         String picture_1 = image.replace("\\","");
         String picture_2 = picture_1.replace("\"","");
         String picture_3 = picture_2.replace("[","");
@@ -187,6 +225,7 @@ public class SubTaskActivity extends AppCompatActivity {
                     manager_pic = jsonObject1.getString("manager_pic");
                     String time1 = starttime.replace("T", " ");
                     String time2 = endtime.replace("T", " ");
+                    ifcreator = jsonObject1.getString("ifcreator");
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -209,6 +248,54 @@ public class SubTaskActivity extends AppCompatActivity {
                             }
                             else
                                 show_state.setText("已完成");
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void RightWithOkHttp(String address) {
+        HttpUtil.RightWithOkHttp(address, new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //在这里对异常情况进行处理
+                //       Toast.makeText(getActivity(),"获取图书信息失败，请检查您的网络",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //得到服务器返回的具体内容
+                final String responseData = response.body().string();
+                try {
+                    JSONObject jsonObject = new JSONObject(responseData);
+                    JSONObject jsonObject1 = jsonObject.getJSONObject("data");
+
+
+                    right = jsonObject1.getString("right");
+
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            if (right=="0")i=0;
+                            else i=1;
+                            if (i==0)
+                                Toast.makeText(SubTaskActivity.this, "您没有权限访问该页面！", Toast.LENGTH_SHORT).show();
+
+                            else {
+                                Intent intent = new Intent(SubTaskActivity.this, TaskActivity.class);
+                                intent.putExtra("project_id",project_id);
+                                intent.putExtra("task_id",task_id);
+                                startActivity(intent);
+                                finish();}
+
+
                         }
                     });
 
