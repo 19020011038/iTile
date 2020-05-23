@@ -17,6 +17,7 @@ import com.example.itile.ProjectActivity;
 import com.example.itile.R;
 import com.example.itile.ScheduleDetailActivity;
 import com.example.itile.ScheduleHelperActivity;
+import com.example.itile.TaskActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -61,7 +62,7 @@ public class TaskHelperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             viewHolder.a_task.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(TaskHelperAdapter.this.context, TaskHelperAdapter.class);
+                    Intent intent = new Intent(TaskHelperAdapter.this.context, TaskActivity.class);
                     intent.putExtra("task_id",list.get(position).get("pk").toString());
                     intent.putExtra("project_id",list.get(position).get("project").toString());
                     context.startActivity(intent);
