@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -46,6 +47,7 @@ public class FormAdapter extends RecyclerView.Adapter<FormAdapter.ViewHolder>{
         String notstart = list.get(position).get("notstart").toString();
         String isgoing = list.get(position).get("isgoing").toString();
         String ended = list.get(position).get("ended").toString();
+        int int_rate = Integer.valueOf(rate);
 
 
         holder.mName.setText(name);
@@ -53,6 +55,9 @@ public class FormAdapter extends RecyclerView.Adapter<FormAdapter.ViewHolder>{
         holder.textView2.setText(isgoing);
         holder.textView3.setText(ended);
         holder.rate.setText(rate);
+
+        holder.pbar.setMax(100);
+        holder.pbar.setProgress(int_rate);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +81,7 @@ public class FormAdapter extends RecyclerView.Adapter<FormAdapter.ViewHolder>{
         private TextView textView2;
         private TextView textView3;
         private TextView rate;
+        private ProgressBar pbar;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,7 +91,7 @@ public class FormAdapter extends RecyclerView.Adapter<FormAdapter.ViewHolder>{
             textView3 = itemView.findViewById(R.id.text3);
             rate = itemView.findViewById(R.id.rate);
             relativeLayout = itemView.findViewById(R.id.re);
-
+            pbar = itemView.findViewById(R.id.pbar);
 
         }
 

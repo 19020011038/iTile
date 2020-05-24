@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -49,9 +51,14 @@ public class SettingActivity extends AppCompatActivity {
 
     private SharedPreferencesUtil check;
     private ImageView setting_icon;
+    private RelativeLayout icon;
     private Button setting_signout;
     private String result;
     private String icon_string;
+    private TextView nickname;
+    private TextView sex;
+    private TextView work;
+    private TextView birthday;
 
     private byte[] a = null;
 
@@ -75,6 +82,11 @@ public class SettingActivity extends AppCompatActivity {
 
         setting_icon = findViewById(R.id.setting_icon);
         setting_signout = findViewById(R.id.setting_signout);
+        icon = findViewById(R.id.icon);
+        nickname = findViewById(R.id.nickname);
+        sex = findViewById(R.id.sex);
+        work = findViewById(R.id.work);
+        birthday = findViewById(R.id.birthday);
 
         setting_signout.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -95,6 +107,7 @@ public class SettingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        homeNameOkHttp("http://118.190.245.170/worktile/userinfo/");
 //        //别忘了这句！！！！
 //        check = SharedPreferencesUtil.getInstance(getApplicationContext());
 //
@@ -127,7 +140,16 @@ public class SettingActivity extends AppCompatActivity {
             case R.id.setting_back:
                 finish();
                 break;
-            case R.id.setting_icon:
+            case R.id.setting_change_sex:  //修改性别
+
+                break;
+            case R.id.setting_change_work:  //修改性别
+
+                break;
+            case R.id.setting_change_birthday:  //修改性别
+
+                break;
+            case R.id.icon:
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder (SettingActivity.this);
                 dialog.setTitle("是否更改头像？");
@@ -482,7 +504,7 @@ public class SettingActivity extends AppCompatActivity {
             }//标签页
         });
     }
-    //展示头像
+    //展示信息
     public void homeNameOkHttp(String address){
         HttpUtil.homeNameOkHttp(address, new Callback() {
             @Override
@@ -503,20 +525,50 @@ public class SettingActivity extends AppCompatActivity {
                 try{
                     JSONObject object = new JSONObject(responseData);
                     JSONObject object1 = object.getJSONObject("user");
+                    String s_nickname=object1.getString("username");
                     icon_string = object1.getString("avatar");
+                    String constellation = object1.getString("constellation");//星座
+                    String profession = object1.getString("profession"); //专业
+                    String age = object1.getString("age");//年龄
+                    String gender = object1.getString("gender");//性别
+                    String introduction = object1.getString("introduction");//简介
+                    JSONObject birthday_s = object1.getJSONObject("birthday");
+                    String year_s = birthday_s.getString("year");
+                    String month_s = birthday_s.getString("month");
+                    String day_s = birthday_s.getString("day");
+                    JSONObject now_s = object1.getJSONObject("now");
+                    String year_now = now_s.getString("year");
+                    String month_now = now_s.getString("month");
+                    String day_now = now_s.getString("day");
                     Log.i("zyr", "HomeActivity.icon_url:"+icon_string);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.i( "zyr", "LLL"+responseData);
-                }
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        String birthday_all = year_s+"-"+month_s+"-"+day_s;
+                        nickname.setText(s_nickname);
+                        if (!gender.equals("null"))
+                            sex.setText(gender);
+                        else
+                            sex.setText("男");
+                        if (!profession.equals("null"))
+                            work.setText(profession);
+                        else
+                            work.setText("未填写");
+                        if (!year_s.equals("null"))
+                            birthday.setText(birthday_all);
+                        else
+                            birthday.setText("未填写");
                         Glide.with(SettingActivity.this).load("http://118.190.245.170/worktile/media/"+icon_string).into(setting_icon);
 //                        Toast.makeText(HomeActivity.this,"显示头像",Toast.LENGTH_SHORT).show();
 //                        Glide.with(SettingActivity.this).load("http://175.24.47.150:8088/worktile/static/"+icon_string).into(setting_icon);
                     }
                 });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i( "zyr", "LLL"+responseData);
+                    Toast.makeText(SettingActivity.this, "服务器连接错误", Toast.LENGTH_SHORT).show();
+                }
             }//标签页
         });
     }

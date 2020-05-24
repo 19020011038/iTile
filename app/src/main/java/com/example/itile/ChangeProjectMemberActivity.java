@@ -101,6 +101,7 @@ public class ChangeProjectMemberActivity extends AppCompatActivity {
                 final String responseData = response.body().string();
                 try {
                     list.clear();
+                    Log.i("zyr", "Data项目修改成员："+responseData);
                     JSONObject object = new JSONObject(responseData);
                     JSONArray jsonArray = object.getJSONArray("friends_list");
                     favorList.clear();

@@ -37,140 +37,323 @@
             android:textSize="20dp"/>
     </RelativeLayout>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_marginTop="12dip">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/personinfo_icon"
-            android:layout_width="170px"
-            android:layout_height="170px"
-            android:layout_gravity="center"
-            android:src="#ffdb5c"
-            android:layout_marginTop="25dip"
-            android:layout_marginLeft="30dip"
-            android:layout_marginBottom="25dip">
-        </de.hdodenhof.circleimageview.CircleImageView>
-
-        <TextView
-            android:id="@+id/personinfo_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/personinfo_icon"
-            android:layout_centerVertical="true"
-            android:shadowColor="#f0f0f0"
-            android:text="朋友昵称"
-            android:textSize="60px"
-            android:textColor="#454545"
-            android:layout_marginLeft="30dip"
-            android:layout_marginRight="12dip"
-            android:maxLines="1"
-            android:ellipsize="end">
-        </TextView>
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/person_tv1"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="20dip"
-            android:layout_marginRight="20dip"
-            android:background="#e0e0e0">
-        </TextView>
-
-        <TextView
-            android:id="@+id/person_tv2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="35dip"
-            android:layout_marginTop="22dip"
-            android:layout_marginBottom="22dip"
-            android:text="Tel"
-            android:textColor="#454545"
-            android:textSize="48px"
-            android:textStyle="bold">
-        </TextView>
-
-        <TextView
-            android:id="@+id/personinfo_tel"
+        <RelativeLayout
+            android:id="@+id/rel_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/person_tv2"
-            android:layout_marginTop="22dip"
-            android:layout_marginBottom="22dip"
-            android:text="123456"
-            android:textSize="48px"
-            android:layout_marginLeft="12dip"
-            android:textColor="#808080"
-            android:layout_marginRight="15dip"
-            android:ellipsize="end"
-            android:maxLines="1">
-        </TextView>
+            android:background="#ffffff"
+            android:layout_marginTop="12dip">
 
-        <TextView
-            android:id="@+id/person_tv3"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/personinfo_icon"
+                android:layout_width="170px"
+                android:layout_height="170px"
+                android:layout_gravity="center"
+                android:src="#ffdb5c"
+                android:layout_marginTop="25dip"
+                android:layout_marginLeft="30dip"
+                android:layout_marginBottom="25dip">
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/personinfo_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/personinfo_icon"
+                android:shadowColor="#f0f0f0"
+                android:text="朋友昵称"
+                android:textSize="46px"
+                android:textColor="#454545"
+                android:layout_marginLeft="30dip"
+                android:layout_marginRight="12dip"
+                android:layout_marginTop="30dp"
+                android:maxLines="1"
+                android:ellipsize="end">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/sex"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/manpicture"
+                android:layout_marginLeft="25dp"
+                android:layout_below="@+id/personinfo_name"
+                android:layout_toRightOf="@+id/personinfo_icon"
+                android:layout_marginTop="12dp">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/personinfo_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/sex"
+                android:layout_below="@+id/personinfo_name"
+                android:layout_marginTop="11dp"
+                android:text="20岁"
+                android:textSize="18sp"
+                android:textColor="#808080"
+                android:layout_marginLeft="12dp">
+            </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_2"
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="20dip"
-            android:layout_marginRight="20dip"
-            android:background="#e0e0e0"
-            android:layout_below="@+id/personinfo_tel">
-        </TextView>
-
-        <TextView
-            android:id="@+id/person_tv4"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="35dip"
-            android:layout_marginTop="22dip"
-            android:layout_marginBottom="22dip"
-            android:text="E-mail"
-            android:textColor="#454545"
-            android:textSize="48px"
-            android:textStyle="bold"
-            android:layout_below="@+id/person_tv3">
-        </TextView>
+            android:background="#ffffff"
+            android:layout_below="@id/rel_1">
 
-        <TextView
-            android:id="@+id/personinfo_email"
+            <TextView
+                android:id="@+id/person_tv1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:background="#e0e0e0"
+                android:layout_below="@+id/personinfo_work">
+            </TextView>
+
+            <TextView
+                android:id="@+id/person_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dip"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="Tel"
+                android:textColor="#454545"
+                android:textSize="48px"
+                android:textStyle="bold"
+                android:layout_below="@+id/person_tv1">
+            </TextView>
+
+            <TextView
+                android:id="@+id/personinfo_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/person_tv2"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="123456"
+                android:textSize="48px"
+                android:layout_marginLeft="12dip"
+                android:textColor="#808080"
+                android:layout_marginRight="15dip"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_below="@+id/person_tv1">
+            </TextView>
+
+            <TextView
+                android:id="@+id/person_tv3"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:background="#e0e0e0"
+                android:layout_below="@+id/personinfo_tel">
+            </TextView>
+
+            <TextView
+                android:id="@+id/person_tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dip"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="E-mail"
+                android:textColor="#454545"
+                android:textSize="48px"
+                android:textStyle="bold"
+                android:layout_below="@+id/person_tv3">
+            </TextView>
+
+            <TextView
+                android:id="@+id/personinfo_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/person_tv3"
+                android:layout_toRightOf="@+id/person_tv4"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="123456@qq.com"
+                android:textSize="48px"
+                android:layout_marginLeft="12dip"
+                android:textColor="#808080"
+                android:layout_marginRight="15dip"
+                android:maxLines="1"
+                android:ellipsize="end">
+            </TextView>
+
+            <TextView
+                android:id="@+id/person_tv7"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:background="#e0e0e0">
+            </TextView>
+
+            <TextView
+                android:id="@+id/person_tv8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dip"
+                android:layout_marginTop="18dip"
+                android:layout_marginBottom="18dip"
+                android:text="职业"
+                android:textColor="#454545"
+                android:textSize="48px"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:id="@+id/personinfo_work"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/person_tv8"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="学生"
+                android:textSize="48px"
+                android:layout_marginLeft="12dip"
+                android:textColor="#808080"
+                android:layout_marginRight="15dip"
+                android:ellipsize="end"
+                android:maxLines="1">
+            </TextView>
+
+            <TextView
+                android:id="@+id/person_tv9"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:background="#e0e0e0"
+                android:layout_below="@+id/personinfo_email">
+            </TextView>
+
+            <TextView
+                android:id="@+id/person_tv10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dip"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="生日"
+                android:textColor="#454545"
+                android:textSize="48px"
+                android:textStyle="bold"
+                android:layout_below="@+id/person_tv9">
+            </TextView>
+
+            <TextView
+                android:id="@+id/personinfo_birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/person_tv9"
+                android:layout_toRightOf="@+id/person_tv10"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="2001-1-1"
+                android:textSize="48px"
+                android:layout_marginLeft="12dip"
+                android:textColor="#808080"
+                android:layout_marginRight="15dip"
+                android:maxLines="1"
+                android:ellipsize="end">
+            </TextView>
+
+            <TextView
+                android:id="@+id/personinfo_constell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/person_tv9"
+                android:layout_toRightOf="@+id/personinfo_birthday"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="摩羯座"
+                android:textSize="48px"
+                android:layout_marginLeft="12dip"
+                android:textColor="#808080"
+                android:layout_marginRight="15dip"
+                android:maxLines="1"
+                android:ellipsize="end">
+            </TextView>
+
+            <TextView
+                android:id="@+id/person_tv12"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:background="#e0e0e0"
+                android:layout_below="@+id/personinfo_birthday">
+            </TextView>
+
+            <TextView
+                android:id="@+id/person_tv11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dip"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="个人简介"
+                android:textColor="#454545"
+                android:textSize="48px"
+                android:textStyle="bold"
+                android:layout_below="@+id/person_tv12">
+            </TextView>
+
+            <TextView
+                android:id="@+id/personinfo_intro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/person_tv10"
+                android:layout_toRightOf="@+id/person_tv11"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:text="简介"
+                android:textSize="48px"
+                android:layout_marginLeft="12dip"
+                android:textColor="#808080"
+                android:layout_marginRight="15dip"
+                android:maxLines="3"
+                android:ellipsize="end">
+            </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/person_tv3"
-            android:layout_toRightOf="@+id/person_tv4"
-            android:layout_marginTop="22dip"
-            android:layout_marginBottom="22dip"
-            android:text="123456@qq.com"
-            android:textSize="48px"
-            android:layout_marginLeft="12dip"
-            android:textColor="#808080"
-            android:layout_marginRight="15dip"
-            android:maxLines="1"
-            android:ellipsize="end">
-        </TextView>
+            android:layout_below="@id/rel_2">
+
+            <Button
+                android:id="@+id/personinfo_add_friend"
+                android:layout_width="match_parent"
+                android:layout_height="55dip"
+                android:background="@drawable/edittext_shape"
+                android:layout_marginTop="50dip"
+                android:layout_marginLeft="34dip"
+                android:layout_marginRight="34dip"
+                android:layout_marginBottom="20dp"
+                android:text="添加好友"
+                android:textColor="#ffffff"
+                android:textSize="60px">
+            </Button>
+        </RelativeLayout>
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/personinfo_add_friend"
-            android:layout_width="match_parent"
-            android:layout_height="55dip"
-            android:background="@drawable/edittext_shape"
-            android:layout_marginTop="50dip"
-            android:layout_marginLeft="34dip"
-            android:layout_marginRight="34dip"
-            android:text="添加好友"
-            android:textColor="#ffffff"
-            android:textSize="60px">
-        </Button>
-    </RelativeLayout>
+    </ScrollView>
 </LinearLayout>
