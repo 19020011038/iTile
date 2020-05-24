@@ -152,7 +152,7 @@ public class ProjectActivity extends AppCompatActivity {
                         state = jsonObject1.getString("state");
                         description = jsonObject1.getString("description");
 
-                    ifcreator = jsonObject1.getString("ifcreator");
+                    ifcreator = jsonObject.getString("ifcreator");
 //
 //
 //                        Log.d("nameqsh",name);
@@ -183,6 +183,7 @@ public class ProjectActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.i("zyr", responseData);
                 }
 
 

@@ -3,6 +3,7 @@ package com.example.itile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -225,7 +226,7 @@ public class SubTaskActivity extends AppCompatActivity {
                     manager_pic = jsonObject1.getString("manager_pic");
                     String time1 = starttime.replace("T", " ");
                     String time2 = endtime.replace("T", " ");
-                    ifcreator = jsonObject1.getString("ifcreator");
+                    ifcreator = jsonObject1.getString("ifmanager");
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -253,6 +254,8 @@ public class SubTaskActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+
+                    Log.i("zyr", responseData);
                 }
             }
         });
