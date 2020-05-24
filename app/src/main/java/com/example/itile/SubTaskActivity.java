@@ -109,7 +109,7 @@ public class SubTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(ifcreator=="0")
+                if(ifcreator.equals("0"))
                 {
                     Toast.makeText(SubTaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
                 }
@@ -165,10 +165,7 @@ public class SubTaskActivity extends AppCompatActivity {
         super.onResume();
         DetailWithOkHttp("http://118.190.245.170/worktile/task/"+task_id+"/subtask/"+subtask_id);
 
-        if(ifcreator=="0")
-        {
-            change.setVisibility(View.INVISIBLE);
-        }
+
 
 
     }
@@ -240,15 +237,21 @@ public class SubTaskActivity extends AppCompatActivity {
                             Aproject.setText(task_name);
 
                             GlideWithPictureUrl("http://118.190.245.170/worktile/media/"+manager_pic,head);
-                            if (state=="0"){
+                            if (state.equals("0")){
                                 show_state.setText("未开始");
                             }
-                            else if (state=="1")
+                            else if (state.equals("1"))
                             {
                                 show_state.setText("进行中");
                             }
                             else
                                 show_state.setText("已完成");
+
+                            if(ifcreator.equals("0"))
+                            {
+                                change.setVisibility(View.INVISIBLE);
+                            }
+
                         }
                     });
 
@@ -286,7 +289,7 @@ public class SubTaskActivity extends AppCompatActivity {
                         @Override
                         public void run() {
 
-                            if (right=="0")i=0;
+                            if (right.equals("0"))i=0;
                             else i=1;
                             if (i==0)
                                 Toast.makeText(SubTaskActivity.this, "您没有权限访问该页面！", Toast.LENGTH_SHORT).show();

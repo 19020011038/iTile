@@ -77,6 +77,7 @@ public class ListSubTaskActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         list.clear();
         SubTaskWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id+"/all-subtasks");
 

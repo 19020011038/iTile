@@ -53,14 +53,14 @@ public class ProjectActivity extends AppCompatActivity {
         project_id = intent.getStringExtra("project_id");
 
         relativeLayout = findViewById(R.id.all_task);
-        back = findViewById(R.id.back);
+
         Aname = findViewById(R.id.name);
         Adescription = findViewById(R.id.description);
         show_state = findViewById(R.id.state);
 
 
 
-
+        back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,17 +80,7 @@ public class ProjectActivity extends AppCompatActivity {
 
         change = findViewById(R.id.change);
         //change.setVisibility(View.INVISIBLE);
-        change.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(ProjectActivity.this,ChangeProjectInfoActivity.class);
-                intent.putExtra("project_id",project_id);
-                intent.putExtra("state",state);
-                startActivity(intent);
-
-            }
-        });
 
 
 
@@ -126,6 +116,20 @@ public class ProjectActivity extends AppCompatActivity {
 
         DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id);
 
+
+
+
+        change.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ProjectActivity.this,ChangeProjectInfoActivity.class);
+                intent.putExtra("project_id",project_id);
+                intent.putExtra("state",state);
+                startActivity(intent);
+
+            }
+        });
     }
 
 
@@ -164,13 +168,13 @@ public class ProjectActivity extends AppCompatActivity {
 
                             Aname.setText(name);
                             Adescription.setText(description);
-                            if (state=="0"){
+                            if (state.equals("0")){
                                 show_state.setText("进行中");
                             }
                             else
                                 show_state.setText("已完成");
 
-                            if(ifcreator=="0")
+                            if(ifcreator.equals("0"))
                             {
                                 change.setVisibility(View.INVISIBLE);
                             }

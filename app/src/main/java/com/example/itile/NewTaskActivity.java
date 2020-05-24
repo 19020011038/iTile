@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -55,7 +56,7 @@ public class NewTaskActivity extends AppCompatActivity {
     private String description;
     private String starttime;
     private String endtime;
-
+private ImageView back;
     private TextView finish;
 
     private Spinner mspinner_yue1;
@@ -105,13 +106,21 @@ public class NewTaskActivity extends AppCompatActivity {
             }
         });
 
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         finish = (TextView) findViewById(R.id.finish);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                starttime = yyyy1 + "-" + MM1 + "-" + dd1 + " " + HH1 + ":" + mm1 + ":" + "00";
-                endtime = yyyy2 + "-" + MM2 + "-" + dd2 + " " + HH2 + ":" + mm2 + ":" + "00";
+                starttime = yyyy1 + "-" + MM1 + "-" + dd1 + " " + HH1 + ":" + mm1 ;
+                endtime = yyyy2 + "-" + MM2 + "-" + dd2 + " " + HH2 + ":" + mm2 ;
 
 
                 Log.d("showstr",starttime);
