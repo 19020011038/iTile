@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.itile.Adapter.HomeAdapter;
+import com.example.itile.Adapter.SearchAdapter;
 import com.example.itile.LoginActivity;
 import com.example.itile.ProjectHelperActivity;
 import com.example.itile.R;
@@ -50,6 +51,12 @@ public class HomeFragment extends Fragment {
     private View re2;
     private View re3;
     private ImageView search;
+    private String description1;
+    private String description2;
+    private String description3;
+    private TextView content1;
+    private TextView content2;
+    private TextView content3;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,9 +68,13 @@ public class HomeFragment extends Fragment {
         return root;
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
+        content1 = getActivity().findViewById(R.id.schedule_content);
+        content2 = getActivity().findViewById(R.id.project_content);
+        content3 = getActivity().findViewById(R.id.task_content);
         schedule_helper_content = getActivity().findViewById(R.id.text1);
         project_helper_content = getActivity().findViewById(R.id.text2);
         task_helper_content = getActivity().findViewById(R.id.text3);
@@ -107,8 +118,9 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        getHelper("http://175.24.47.150:8088/worktile/helper/");
+        getHelper("http://118.190.245.170/worktile/helper/");
     }
+
     public void getHelper(String address) {
         HttpUtil.getHelper(address, new Callback() {
             @Override
@@ -120,25 +132,42 @@ public class HomeFragment extends Fragment {
                     }
                 });
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 //得到服务器返回的具体内容
                 String responseData = response.body().string();
-                Log.d("getHelper的返回内容",responseData);
+                Log.d("getHelper的返回内容", responseData);
                 try {
                     JSONObject jsonObject = new JSONObject(responseData);
-                    flag_schedule = jsonObject.getString("schedulestate");
-                    flag_project = jsonObject.getString("projectstate");
-                    flag_task = jsonObject.getString("taskstate");
+                    JSONObject jsonObject1 = jsonObject.getJSONObject("state");
+                    JSONObject jsonObject2 = jsonObject1.getJSONObject("schedulestate");
+                    flag_schedule = jsonObject2.getString("state");
+                    description1 = jsonObject2.getString("description");
+                    JSONObject jsonObject3 = jsonObject1.getJSONObject("projectstate");
+                    flag_project = jsonObject3.getString("state");
+                    description2 = jsonObject3.getString("description");
+                    JSONObject jsonObject4 = jsonObject1.getJSONObject("taskstate");
+                    flag_task = jsonObject4.getString("state");
+                    description3 = jsonObject4.getString("description");
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if(flag_schedule.equals("0"))
+                            if (flag_schedule.equals("0"))
                                 hongdian1.setVisibility(View.GONE);
-                            if(flag_project.equals("0"))
+                            if (flag_project.equals("0"))
                                 hongdian2.setVisibility(View.GONE);
-                            if(flag_task.equals("0"))
+                            if (flag_task.equals("0"))
                                 hongdian3.setVisibility(View.GONE);
+
+                            content1.setText(description1);
+                            content2.setText(description2);
+                            content3.setText(description3);
+
+                            Log.d("描述1",description1);
+                            Log.d("描述2",description2);
+                            Log.d("描述3",description3);
+
                         }
                     });
                 } catch (JSONException e) {

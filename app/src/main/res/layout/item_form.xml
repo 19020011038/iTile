@@ -105,6 +105,18 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/line1">
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:id="@+id/pbar"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13dp"
+            android:layout_toLeftOf="@+id/rate"
+            android:layout_marginRight="10dp">
+        </ProgressBar>
+
         <TextView
             android:id="@+id/rate"
             android:layout_width="wrap_content"
@@ -113,7 +125,6 @@
             android:text="%40"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp">
-
         </TextView>
     </RelativeLayout>
 

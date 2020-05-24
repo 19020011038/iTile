@@ -469,11 +469,12 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
-    //项目助手页POST choice
-    public static void postProjectHelper(String address, String choice, okhttp3.Callback callback){
+    //项目助手页POST choice,page
+    public static void postProjectHelper(String address, String choice,String page, okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("choice",choice)
+                .add("page",page)
                 .build();
         Request request = new Request.Builder()
                 .url(address)
@@ -495,11 +496,12 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
-    //任务助手页POST choice
-    public static void postTaskHelper(String address, String choice, okhttp3.Callback callback){
+    //任务助手页POST choice,page
+    public static void postTaskHelper(String address, String choice,String page, okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("choice",choice)
+                .add("page",page)
                 .build();
         Request request = new Request.Builder()
                 .url(address)

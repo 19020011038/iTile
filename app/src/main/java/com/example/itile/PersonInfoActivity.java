@@ -33,6 +33,12 @@ public class PersonInfoActivity extends AppCompatActivity {
     private ImageView personinfo_icon;
     private TextView personinfo_tel;
     private TextView personinfo_email;
+    private TextView personinfo_work;
+    private TextView personinfo_age;
+    private TextView personinfo_birthday;
+    private TextView personinfo_constell;
+    private TextView personinfo_intro;
+    private ImageView personinfo_sex;
     private String person_id;
     private String result;
     private RelativeLayout personinfo_back;
@@ -49,6 +55,12 @@ public class PersonInfoActivity extends AppCompatActivity {
         personinfo_tel = findViewById(R.id.personinfo_tel);
         personinfo_email = findViewById(R.id.personinfo_email);
         personinfo_back = findViewById(R.id.personinfo_back);
+        personinfo_sex = findViewById(R.id.sex);
+        personinfo_age = findViewById(R.id.personinfo_age);
+        personinfo_work = findViewById(R.id.personinfo_work);
+        personinfo_birthday = findViewById(R.id.personinfo_birthday);
+        personinfo_constell = findViewById(R.id.personinfo_constell);
+        personinfo_intro = findViewById(R.id.personinfo_intro);
 
         Intent intent = getIntent();
         person_id = intent.getStringExtra("friend_id");
@@ -142,13 +154,20 @@ public class PersonInfoActivity extends AppCompatActivity {
                 try{
                     Log.i("zyr","data个人页："+responseData);
                     JSONObject object = new JSONObject(responseData);
-//                    JSONObject object1 = object.getJSONObject("friend");
-                    String nickname = object.getString("user_name");
-                    String icon = object.getString("avatar");
-                    String telephone = object.getString("telephone");
-                    String email = object.getString("email");
+                    JSONObject object1 = object.getJSONObject("friend");
+                    String nickname = object1.getString("user_name");
+                    String icon = object1.getString("avatar");
+                    String telephone = object1.getString("telephone");
+                    String email = object1.getString("email");
                     String is_friend = object.getString("isfriend");
-
+                    String age_s = object1.getString("age");
+                    String constell_s = object1.getString("constellation");
+                    String work_s = object1.getString("profession");
+                    String sex_s = object1.getString("gender");
+                    String intro_s = object1.getString("introduction");
+                    JSONObject birthday = object1.getJSONObject("birthday");
+                    String month_s = birthday.getString("month");
+                    String day_s = birthday.getString("day");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -158,6 +177,29 @@ public class PersonInfoActivity extends AppCompatActivity {
                             if(is_friend.equals("1")){
                                 personinfo_add_frind.setVisibility(View.GONE);
                             }
+                            String birthday_all = month_s+"-"+day_s;
+                            if (sex_s.equals("女"))
+                                personinfo_sex.setBackgroundResource(R.drawable.womanpicture);
+                            if (!work_s.equals("null"))
+                                personinfo_work.setText(work_s);
+                            else
+                                personinfo_work.setText("未填写");
+                            if (!month_s.equals("null"))
+                                personinfo_birthday.setText(birthday_all);
+                            else
+                                personinfo_birthday.setText("未填写");
+                            if (!intro_s.equals("null"))
+                                personinfo_intro.setText(intro_s);
+                            else
+                                personinfo_intro.setText("未填写");
+                            if (!constell_s.equals("null"))
+                                personinfo_constell.setText(constell_s);
+                            else
+                                personinfo_constell.setText("");
+                            if (!age_s.equals("null"))
+                                personinfo_age.setText(age_s+"岁");
+                            else
+                                personinfo_age.setText("");
 //                            Glide.with(PersonInfoActivity.this).load("http://175.24.47.150:8088/worktile/static/"+icon).into(personinfo_icon);
                             Glide.with(PersonInfoActivity.this).load("http://118.190.245.170/worktile/media/"+icon).into(personinfo_icon);
                         }

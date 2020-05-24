@@ -82,6 +82,8 @@
                     android:textSize="45px"
                     android:layout_below="@id/text1"
                     android:layout_marginTop="5dp"
+                    android:maxLength="10"
+                    android:ellipsize="end"
                     android:id="@+id/schedule_content"/>
 
             </RelativeLayout>
@@ -132,6 +134,8 @@
                     android:textSize="45px"
                     android:layout_below="@id/text2"
                     android:layout_marginTop="5dp"
+                    android:maxLength="10"
+                    android:ellipsize="end"
                     android:id="@+id/project_content"/>
 
             </RelativeLayout>
@@ -178,6 +182,8 @@
                     android:layout_height="wrap_content"
                     android:text="一些内容..."
                     android:textSize="45px"
+                    android:maxLength="10"
+                    android:ellipsize="end"
                     android:layout_below="@id/text3"
                     android:layout_marginTop="5dp"
                     android:id="@+id/task_content"/>
