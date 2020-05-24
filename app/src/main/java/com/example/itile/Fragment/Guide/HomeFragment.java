@@ -153,15 +153,33 @@ public class HomeFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (flag_schedule.equals("0"))
-                                hongdian1.setVisibility(View.GONE);
-                            if (flag_project.equals("0"))
-                                hongdian2.setVisibility(View.GONE);
-                            if (flag_task.equals("0"))
-                                hongdian3.setVisibility(View.GONE);
-
+                            if (flag_schedule.equals("0")){
+                                hongdian1.setImageResource(R.drawable.baise);
+                                hongdian1.invalidate();
+                            }else {
+                                hongdian1.setImageResource(R.drawable.hongdian);
+                                hongdian1.invalidate();
+                            }
                             content1.setText(description1);
+                            if (flag_project.equals("0")){
+                                hongdian2.setImageResource(R.drawable.baise);
+                                hongdian2.invalidate();
+                            }else {
+                                Log.d("hongdian",flag_project);
+                                hongdian2.setImageResource(R.drawable.hongdian);
+                                Log.d("hongdian2243",flag_project);
+                                hongdian2.invalidate();
+                                Log.d("hongdian000000",flag_project);
+                            }
                             content2.setText(description2);
+                            if (flag_task.equals("0")){
+                                hongdian3.setImageResource(R.drawable.baise);
+                                hongdian3.invalidate();
+                            }else {
+                                hongdian3.setImageResource(R.drawable.hongdian);
+                                hongdian3.invalidate();
+                            }
+
                             content3.setText(description3);
 
                             Log.d("描述1",description1);

@@ -87,14 +87,15 @@
                     android:id="@+id/schedule_content"/>
 
             </RelativeLayout>
+
             <ImageView
+                android:id="@+id/hongdian1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/hongdian"
-                android:layout_toRightOf="@id/rl1"
-                android:id="@+id/hongdian1"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@id/rl1"
+                 />
 
 
 
@@ -142,7 +143,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/hongdian"
+
                 android:layout_toRightOf="@id/rl2"
                 android:id="@+id/hongdian2"
                 android:layout_marginLeft="15dp"
@@ -192,7 +193,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/hongdian"
+
                 android:layout_toRightOf="@id/rl3"
                 android:id="@+id/hongdian3"
                 android:layout_marginLeft="15dp"
