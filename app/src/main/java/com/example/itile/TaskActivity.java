@@ -224,7 +224,7 @@ public class TaskActivity extends AppCompatActivity {
                         project_name = jsonObject1.getString("project_name");
                         subtask_num = jsonObject1.getString("subtask_num");
                     manager_pic = jsonObject1.getString("manager_pic");
-                    ifcreator = jsonObject1.getString("ifcreator");
+                    ifcreator = jsonObject1.getString("ifmanager");
 
                     Log.d("520",manager_pic);
                     String time1 = starttime.replace("T", " ");
@@ -262,6 +262,8 @@ public class TaskActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+
+                    Log.i("zyr", responseData);
                 }
             }
         });
