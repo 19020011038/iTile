@@ -15,7 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.itile.ProjectActivity;
 import com.example.itile.R;
+import com.example.itile.TaskActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -73,9 +75,18 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             viewHolder.p_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(SearchAdapter.this.context,详情.class);
-//                    intent.putExtra(字段名,list.get(position).get("pk").toString());
-//                    context.startActivity(intent);
+                    if(list.get(position).get("type").toString().equals("1")){
+                        Intent intent = new Intent(SearchAdapter.this.context, ProjectActivity.class);
+                        intent.putExtra("project_id",list.get(position).get("pk").toString());
+                        context.startActivity(intent);
+                    }else if(list.get(position).get("type").toString().equals("2")){
+                        Intent intent = new Intent(SearchAdapter.this.context, TaskActivity.class);
+                        intent.putExtra("task_id",list.get(position).get("pk").toString());
+                        intent.putExtra("project_id",list.get(position).get("project").toString());
+                        context.startActivity(intent);
+                    }else {
+
+                    }
                 }
             });
             if(list.get(position).get("state").toString().equals("0")){

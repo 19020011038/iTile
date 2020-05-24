@@ -117,6 +117,8 @@ public class SearchActivity extends AppCompatActivity {
                             String p_name = fields.getString("name");
                             String description = fields.getString("description");
                             String s_state = fields.getString("state");
+                            String p = fields.getString("project");
+
 
                             Map map = new HashMap();
                             map.put("pk", pk);
@@ -125,6 +127,7 @@ public class SearchActivity extends AppCompatActivity {
                             map.put("name", p_name);
                             map.put("description",description);
                             map.put("state",s_state);
+                            map.put("project",p);
                             map.put("type",2);
 
                             list.add(map);
