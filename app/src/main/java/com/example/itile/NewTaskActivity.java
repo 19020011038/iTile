@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -55,7 +56,7 @@ public class NewTaskActivity extends AppCompatActivity {
     private String description;
     private String starttime;
     private String endtime;
-
+private ImageView back;
     private TextView finish;
 
     private Spinner mspinner_yue1;
@@ -102,6 +103,14 @@ public class NewTaskActivity extends AppCompatActivity {
                     if(s.subSequence(i-1, i).toString().equals("\n"))
                         s.replace(i-1, i, "");
                 }
+            }
+        });
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

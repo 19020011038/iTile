@@ -53,14 +53,14 @@ public class ProjectActivity extends AppCompatActivity {
         project_id = intent.getStringExtra("project_id");
 
         relativeLayout = findViewById(R.id.all_task);
-        back = findViewById(R.id.back);
+
         Aname = findViewById(R.id.name);
         Adescription = findViewById(R.id.description);
         show_state = findViewById(R.id.state);
 
 
 
-
+        back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,8 +154,6 @@ public class ProjectActivity extends AppCompatActivity {
 
                         name = jsonObject1.getString("name");
                         state = jsonObject1.getString("state");
-
-                    Log.d("524",state);
                         description = jsonObject1.getString("description");
 
                     ifcreator = jsonObject.getString("ifcreator");
@@ -170,13 +168,13 @@ public class ProjectActivity extends AppCompatActivity {
 
                             Aname.setText(name);
                             Adescription.setText(description);
-                            if (state=="0"){
+                            if (state.equals("0")){
                                 show_state.setText("进行中");
                             }
                             else
                                 show_state.setText("已完成");
 
-                            if(ifcreator=="0")
+                            if(ifcreator.equals("0"))
                             {
                                 change.setVisibility(View.INVISIBLE);
                             }

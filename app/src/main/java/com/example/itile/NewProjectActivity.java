@@ -124,7 +124,6 @@ public class NewProjectActivity extends AppCompatActivity {
                         @Override
                         public void run() {
 
-                            Toast.makeText(NewProjectActivity.this, "123123", Toast.LENGTH_SHORT).show();
 
                         }
                     });

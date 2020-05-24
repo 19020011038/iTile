@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -80,6 +81,8 @@ public class NewSubTaskActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter_fen2;
     String[] nian = new String[]{"年", "2018", "2019", "2020", "2021","2022","2023"};
 
+    private ImageView back;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_new_subtask);
@@ -91,6 +94,15 @@ public class NewSubTaskActivity extends AppCompatActivity {
         check = SharedPreferencesUtil.getInstance(getApplicationContext());
         finish = findViewById(R.id.finish);
         name = findViewById(R.id.name);
+
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         tip = findViewById(R.id.tip);
 
         tip.addTextChangedListener(new TextWatcher() {
