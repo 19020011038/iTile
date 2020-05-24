@@ -80,17 +80,7 @@ public class ProjectActivity extends AppCompatActivity {
 
         change = findViewById(R.id.change);
         //change.setVisibility(View.INVISIBLE);
-        change.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(ProjectActivity.this,ChangeProjectInfoActivity.class);
-                intent.putExtra("project_id",project_id);
-                intent.putExtra("state",state);
-                startActivity(intent);
-
-            }
-        });
 
 
 
@@ -126,6 +116,20 @@ public class ProjectActivity extends AppCompatActivity {
 
         DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id);
 
+
+
+
+        change.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ProjectActivity.this,ChangeProjectInfoActivity.class);
+                intent.putExtra("project_id",project_id);
+                intent.putExtra("state",state);
+                startActivity(intent);
+
+            }
+        });
     }
 
 
@@ -150,6 +154,8 @@ public class ProjectActivity extends AppCompatActivity {
 
                         name = jsonObject1.getString("name");
                         state = jsonObject1.getString("state");
+
+                    Log.d("524",state);
                         description = jsonObject1.getString("description");
 
                     ifcreator = jsonObject.getString("ifcreator");

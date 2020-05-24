@@ -110,8 +110,8 @@ public class NewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                starttime = yyyy1 + "-" + MM1 + "-" + dd1 + " " + HH1 + ":" + mm1 + ":" + "00";
-                endtime = yyyy2 + "-" + MM2 + "-" + dd2 + " " + HH2 + ":" + mm2 + ":" + "00";
+                starttime = yyyy1 + "-" + MM1 + "-" + dd1 + " " + HH1 + ":" + mm1 ;
+                endtime = yyyy2 + "-" + MM2 + "-" + dd2 + " " + HH2 + ":" + mm2 ;
 
 
                 Log.d("showstr",starttime);
