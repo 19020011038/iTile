@@ -39,6 +39,7 @@ public class SeeProjectMemberActivity extends AppCompatActivity {
     private String project_id;
 
     List<Map<String, Object>> list = new ArrayList<>();
+    private String ifcreator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +48,19 @@ public class SeeProjectMemberActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         project_id = intent.getStringExtra("project_id");
+        ifcreator = intent.getStringExtra("ifcreator");
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        if(ifcreator =="0")
+        {
+            change_member.setVisibility(View.INVISIBLE);
+        }
 
         change_member = findViewById(R.id.change_member);
         back = findViewById(R.id.back);

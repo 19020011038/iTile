@@ -38,7 +38,7 @@ public class SeeTaskMemberActivity extends AppCompatActivity {
     private FriendAddressAdapter mAdapter;
     private String project_id;
     private String task_id;
-
+    private String ifcreator;
     List<Map<String, Object>> list = new ArrayList<>();
 
     @Override
@@ -49,11 +49,17 @@ public class SeeTaskMemberActivity extends AppCompatActivity {
         Intent intent = getIntent();
         project_id = intent.getStringExtra("project_id");
         task_id = intent.getStringExtra("task_id");
+        ifcreator = intent.getStringExtra("ifcreator");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        if(ifcreator =="0")
+        {
+            change_member.setVisibility(View.INVISIBLE);
+        }
 
         change_member = findViewById(R.id.change_member);
         back = findViewById(R.id.back);
