@@ -90,17 +90,17 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(ifcreator=="0")
-                {
-                    Toast.makeText(ProjectActivity.this, "只有项目负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
-                }
+//                if(ifcreator=="0")
+//                {
+//                    Toast.makeText(ProjectActivity.this, "只有项目负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
+//                }
 
-                else {
+//                else {
                     Intent intent = new Intent(ProjectActivity.this, SeeProjectMemberActivity.class);
                     intent.putExtra("project_id",project_id);
                     intent.putExtra("ifcreator",ifcreator);
                     startActivity(intent);
-                }
+//                }
 
 
 
