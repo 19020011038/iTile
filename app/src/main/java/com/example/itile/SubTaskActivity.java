@@ -109,17 +109,17 @@ public class SubTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(ifcreator.equals("0"))
-                {
-                    Toast.makeText(SubTaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
-                }
-                else {
+//                if(ifcreator.equals("0"))
+//                {
+//                    Toast.makeText(SubTaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
+//                }
+//                else {
                     Intent intent = new Intent(SubTaskActivity.this,SeeSonTaskMemberActivity.class);
                     intent.putExtra("subtask_id",subtask_id);
                     intent.putExtra("task_id",task_id);
                     intent.putExtra("ifcreator",ifcreator);
                     startActivity(intent);
-                }
+//                }
 
 
 
@@ -231,8 +231,11 @@ public class SubTaskActivity extends AppCompatActivity {
 
                             Aname.setText(subtaskname);
                             Adescription.setText(description);
-                            Astarttime.setText(time1);
-                            Aendtime.setText(time2);
+                            String time11 = time1.substring(0,time1.length()-3);
+                            String time22 = time2.substring(0,time2.length()-3);
+
+                            Astarttime.setText(time11);
+                            Aendtime.setText(time22);
                             Amanager.setText(manager_name);
                             Aproject.setText(task_name);
 
