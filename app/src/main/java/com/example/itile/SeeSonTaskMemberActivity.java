@@ -57,7 +57,7 @@ public class SeeSonTaskMemberActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if(ifcreator =="0")
+        if(ifcreator.equals("0"))
         {
             change_member.setVisibility(View.INVISIBLE);
         }
