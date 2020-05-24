@@ -118,7 +118,7 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(ifcreator=="0")
+                if(ifcreator.equals("0"))
                 {
                     Toast.makeText(TaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
                 }
@@ -144,17 +144,7 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
                 change = findViewById(R.id.change);
-        change.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(TaskActivity.this,ChangeTaskInfoActivity.class);
-                intent.putExtra("project_id",project_id);
-                intent.putExtra("task_id",task_id);
-                intent.putExtra("state",state);
-                startActivity(intent);
-            }
-        });
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,10 +159,23 @@ public class TaskActivity extends AppCompatActivity {
         super.onResume();
 
         DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
-        if(ifcreator=="0")
-        {
-            change.setVisibility(View.INVISIBLE);
-        }
+
+        change.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(TaskActivity.this,ChangeTaskInfoActivity.class);
+                intent.putExtra("project_id",project_id);
+                intent.putExtra("task_id",task_id);
+                intent.putExtra("state",state);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
     }
 
     private void GlideWithPictureUrl(String image,ImageView imageView){
@@ -211,7 +214,6 @@ public class TaskActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(responseData);
                     JSONObject jsonObject1 = jsonObject.getJSONObject("data");
-
                         name = jsonObject1.getString("task_name");
                         state = jsonObject1.getString("state");
                         description = jsonObject1.getString("description");
@@ -233,7 +235,6 @@ public class TaskActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
                             Aname.setText(name);
                             Adescription.setText(description);
                             Astarttime.setText(time1);
@@ -254,8 +255,10 @@ public class TaskActivity extends AppCompatActivity {
                             else
                                 show_state.setText("已完成");
 
-
-
+                            if(ifcreator.equals("0"))
+                            {
+                                change.setVisibility(View.INVISIBLE);
+                            }
 
                         }
                     });
@@ -296,7 +299,7 @@ public class TaskActivity extends AppCompatActivity {
                         public void run() {
 
 
-                            if (right=="0")i=0;
+                            if (right.equals("0"))i=0;
                             else i=1;
 
                             if (i==0)

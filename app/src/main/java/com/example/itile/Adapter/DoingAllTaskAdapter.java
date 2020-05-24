@@ -1,6 +1,7 @@
 package com.example.itile.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.itile.R;
+import com.example.itile.TaskActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -35,17 +37,19 @@ public class DoingAllTaskAdapter extends RecyclerView.Adapter<DoingAllTaskAdapte
     public void onBindViewHolder(@NonNull DoingAllTaskAdapter.ViewHolder holder, final int position) {
         String name = list.get(position).get("name").toString();
         String id = list.get(position).get("id").toString();
+        String project = list.get(position).get("project").toString();
 
         holder.mName.setText(name);
 
-//        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, TaskActivity.class);
-//                intent.putExtra("task_id",id);
-//                context.startActivity(intent);
-//            }
-//        });
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, TaskActivity.class);
+                intent.putExtra("task_id",id);
+                intent.putExtra("project_id",project);
+                context.startActivity(intent);
+            }
+        });
 
 
     }
