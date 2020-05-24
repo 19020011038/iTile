@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.itile.Util.HttpUtil;
@@ -40,6 +41,7 @@ public class ProjectActivity extends AppCompatActivity {
     private TextView show_state;
     private RelativeLayout relativeLayout1;
     private TextView change;
+    private String ifcreator;
 
 
 
@@ -77,6 +79,7 @@ public class ProjectActivity extends AppCompatActivity {
         });
 
         change = findViewById(R.id.change);
+        //change.setVisibility(View.INVISIBLE);
         change.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -97,9 +100,18 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ProjectActivity.this, SeeProjectMemberActivity.class);
-                intent.putExtra("project_id",project_id);
-                startActivity(intent);
+                if(ifcreator=="0")
+                {
+                    Toast.makeText(ProjectActivity.this, "只有项目负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+                    Intent intent = new Intent(ProjectActivity.this, SeeProjectMemberActivity.class);
+                    intent.putExtra("project_id",project_id);
+                    intent.putExtra("ifcreator",ifcreator);
+                    startActivity(intent);
+                }
+
 
 
 
@@ -120,6 +132,8 @@ public class ProjectActivity extends AppCompatActivity {
     public void DetailWithOkHttp(String address) {
         HttpUtil.ShowAllProjectWithOkHttp(address, new Callback() {
 
+
+
             @Override
             public void onFailure(Call call, IOException e) {
                 //在这里对异常情况进行处理
@@ -138,7 +152,7 @@ public class ProjectActivity extends AppCompatActivity {
                         state = jsonObject1.getString("state");
                         description = jsonObject1.getString("description");
 
-////                        message = jsonObject1.getString("message");
+                    ifcreator = jsonObject1.getString("ifcreator");
 //
 //
 //                        Log.d("nameqsh",name);
@@ -156,8 +170,13 @@ public class ProjectActivity extends AppCompatActivity {
                             else
                                 show_state.setText("已完成");
 
-
+                            if(ifcreator=="0")
+                            {
+                                change.setVisibility(View.INVISIBLE);
+                            }
                         }
+
+
                     });
 
 

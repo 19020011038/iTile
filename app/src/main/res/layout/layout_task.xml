@@ -258,6 +258,7 @@
         android:layout_centerVertical="true"
         android:layout_marginHorizontal="15dp"/>
     <RelativeLayout
+        android:id="@+id/belong"
         android:layout_width="match_parent"
         android:layout_height="150px"
         android:background="#ffffff"

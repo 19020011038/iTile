@@ -52,6 +52,7 @@
                       android:layout_height="match_parent"
                       android:textSize="24dp"
                       android:text="项目名称"
+                      android:maxLength="8"
                       android:gravity="left|center"
                       android:id="@+id/project_helper_name"/>
               </LinearLayout>

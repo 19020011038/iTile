@@ -18,6 +18,7 @@ import com.example.itile.R;
 import com.example.itile.ScheduleDetailActivity;
 import com.example.itile.ScheduleHelperActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +27,18 @@ import static android.graphics.Color.RED;
 import static android.graphics.Color.YELLOW;
 
 public class ProjectHelperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<Map<String, Object>> list;
+    private List<Map<String, Object>> list = new ArrayList<>();
     private Context context;
     public final int KongBai_View = 2;
     public final int Item_View = 1;
+    public List<Map<String, Object>> getData() {
+        return list;
+    }
+
+    public void setData(List<Map<String, Object>> list) {
+        this.list = list;
+    }
+
 
     public ProjectHelperAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;

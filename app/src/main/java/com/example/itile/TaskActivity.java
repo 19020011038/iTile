@@ -8,6 +8,7 @@ package com.example.itile;
         import android.widget.ImageView;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
+        import android.widget.Toast;
 
         import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,10 +57,12 @@ public class TaskActivity extends AppCompatActivity {
     private String manager_pic;
     private ImageView head;
     private TextView show_state;
-
+    private String ifcreator;
+    private RelativeLayout belong;
     private RelativeLayout relativeLayout1;
-
     private TextView change;
+
+    private int i=0;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +72,7 @@ public class TaskActivity extends AppCompatActivity {
         task_id = intent.getStringExtra("task_id");
         project_id = intent.getStringExtra("project_id");
 
-
+        belong = findViewById(R.id.belong);
         show_state = findViewById(R.id.state);
         head = findViewById(R.id.manager_pic);
         relativeLayout = findViewById(R.id.all_task);
@@ -83,6 +86,18 @@ public class TaskActivity extends AppCompatActivity {
         owner = findViewById(R.id.owner);
         tvstate = findViewById(R.id.state);
 
+        belong.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+
+                RightWithOkHttp("http://118.190.245.170/worktile/project/"+project_id);
+
+
+
+            }
+        });
+
         relativeLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -91,8 +106,6 @@ public class TaskActivity extends AppCompatActivity {
                 intent.putExtra("project_id",project_id);
                 intent.putExtra("task_id",task_id);
                 startActivity(intent);
-
-
             }
         });
 
@@ -105,12 +118,17 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(TaskActivity.this,SeeTaskMemberActivity.class);
-                intent.putExtra("project_id",project_id);
-                intent.putExtra("task_id",task_id);
-                startActivity(intent);
-
-
+                if(ifcreator=="0")
+                {
+                    Toast.makeText(TaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(TaskActivity.this,SeeTaskMemberActivity.class);
+                    intent.putExtra("project_id",project_id);
+                    intent.putExtra("task_id",task_id);
+                    intent.putExtra("ifcreator",ifcreator);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -123,11 +141,8 @@ public class TaskActivity extends AppCompatActivity {
                 intent.putExtra("task_id",task_id);
                 intent.putExtra("owner_id", manager_id);
                 startActivity(intent);
-
-
             }
         });
-
                 change = findViewById(R.id.change);
         change.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -140,8 +155,6 @@ public class TaskActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,10 +162,6 @@ public class TaskActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
     }
 
     @Override
@@ -160,6 +169,10 @@ public class TaskActivity extends AppCompatActivity {
         super.onResume();
 
         DetailWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id);
+        if(ifcreator=="0")
+        {
+            change.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void GlideWithPictureUrl(String image,ImageView imageView){
@@ -211,6 +224,7 @@ public class TaskActivity extends AppCompatActivity {
                         project_name = jsonObject1.getString("project_name");
                         subtask_num = jsonObject1.getString("subtask_num");
                     manager_pic = jsonObject1.getString("manager_pic");
+                    ifcreator = jsonObject1.getString("ifcreator");
 
                     Log.d("520",manager_pic);
                     String time1 = starttime.replace("T", " ");
@@ -240,6 +254,58 @@ public class TaskActivity extends AppCompatActivity {
                             else
                                 show_state.setText("已完成");
 
+
+
+
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    public void RightWithOkHttp(String address) {
+        HttpUtil.RightWithOkHttp(address, new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //在这里对异常情况进行处理
+                //       Toast.makeText(getActivity(),"获取图书信息失败，请检查您的网络",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //得到服务器返回的具体内容
+                final String responseData = response.body().string();
+                try {
+                    JSONObject jsonObject = new JSONObject(responseData);
+                    JSONObject jsonObject1 = jsonObject.getJSONObject("data");
+
+
+                    right = jsonObject1.getString("right");
+
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+
+                            if (right=="0")i=0;
+                            else i=1;
+
+                            if (i==0)
+                                Toast.makeText(TaskActivity.this, "您没有权限访问该页面！", Toast.LENGTH_SHORT).show();
+
+                            else {
+                                Intent intent = new Intent(TaskActivity.this, ProjectActivity.class);
+                                intent.putExtra("project_id",project_id);
+                                startActivity(intent);
+                                finish();
+                            }
 
                         }
                     });

@@ -51,6 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textSize="24dp"
+                        android:maxLength="8"
                         android:text="任务名称"
                         android:gravity="left|center"
                         android:id="@+id/task_helper_name"/>

@@ -42,8 +42,6 @@ public class ScheduleHelperActivity extends AppCompatActivity {
     private ScheduleHelperAdapter mAdapter;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +55,7 @@ public class ScheduleHelperActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_schedule_helper);
         LinearLayoutManager manager = new LinearLayoutManager(ScheduleHelperActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
-        mAdapter = new ScheduleHelperAdapter(ScheduleHelperActivity.this,list);
+        mAdapter = new ScheduleHelperAdapter(ScheduleHelperActivity.this, list);
         recyclerView.setAdapter(mAdapter);
 
         back = (ImageView) findViewById(R.id.back_from_schedule_helper);
@@ -119,23 +117,30 @@ public class ScheduleHelperActivity extends AppCompatActivity {
                     } else {
                         flag = true;
                         JSONArray jsonArray = jsonObject.getJSONArray("schedule");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject schedule = jsonArray.getJSONObject(i);
-                            String pk = schedule.getString("pk");
-                            JSONObject fields = schedule.getJSONObject("fields");
-                            String starttime = fields.getString("starttime");
-                            String endtime = fields.getString("endtime");
-                            String state = fields.getString("state");
-                            String description = fields.getString("description");
+                        if (String.valueOf(jsonArray).equals("[]")) {
+                            Map map1 = new HashMap();
+                            map1.put("type", 0);
+                            list.add(map1);
+                        } else {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject schedule = jsonArray.getJSONObject(i);
+                                String pk = schedule.getString("pk");
+                                JSONObject fields = schedule.getJSONObject("fields");
+                                String starttime = fields.getString("starttime");
+                                String endtime = fields.getString("endtime");
+                                String state = fields.getString("state");
+                                String description = fields.getString("description");
 
-                            Map map = new HashMap();
-                            map.put("pk", pk);
-                            map.put("starttime", starttime);
-                            map.put("endtime", endtime);
-                            map.put("state", state);
-                            map.put("description", description);
+                                Map map = new HashMap();
+                                map.put("pk", pk);
+                                map.put("starttime", starttime);
+                                map.put("endtime", endtime);
+                                map.put("state", state);
+                                map.put("description", description);
+                                map.put("type",1);
 
-                            list.add(map);
+                                list.add(map);
+                            }
                         }
                     }
                     runOnUiThread(new Runnable() {
