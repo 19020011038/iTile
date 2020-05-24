@@ -164,7 +164,7 @@ public class ProjectActivity extends AppCompatActivity {
 
                             Aname.setText(name);
                             Adescription.setText(description);
-                            if (state=="0"){
+                            if (state.equals("0")){
                                 show_state.setText("进行中");
                             }
                             else

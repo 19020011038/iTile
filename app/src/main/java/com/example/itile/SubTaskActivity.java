@@ -240,10 +240,10 @@ public class SubTaskActivity extends AppCompatActivity {
                             Aproject.setText(task_name);
 
                             GlideWithPictureUrl("http://118.190.245.170/worktile/media/"+manager_pic,head);
-                            if (state=="0"){
+                            if (state.equals("0")){
                                 show_state.setText("未开始");
                             }
-                            else if (state=="1")
+                            else if (state.equals("1"))
                             {
                                 show_state.setText("进行中");
                             }
