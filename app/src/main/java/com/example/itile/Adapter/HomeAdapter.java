@@ -1,6 +1,7 @@
 package com.example.itile.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +10,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.itile.PersonInfoActivity;
 import com.example.itile.R;
+import com.example.itile.ScheduleDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +72,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //        holder.main_image.setImageURI((Uri) list.get(position).get("images"));
             final String time1 = list.get(position).get("time1").toString(); //这个非常重要
             final String time2 = list.get(position).get("time2").toString(); //这个非常重要
+            String id = list.get(position).get("task_id").toString();
             String time11 = time1.substring(11, 16);
             String time22 = time2.substring(11, 16);
             recyclerViewHolder.time1.setText(time11);
@@ -78,6 +83,15 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (state.equals("0")) {
                 recyclerViewHolder.point.setBackgroundResource(R.drawable.point1);
             }
+            recyclerViewHolder.all.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ScheduleDetailActivity.class);
+                    intent.putExtra("pk", id);
+                    context.startActivity(intent);
+//                    Toast.makeText(context,"task_id:"+id, Toast.LENGTH_SHORT).show();
+                }
+            });
 //            recyclerViewHolder.mybook_comment_name.setText(list.get(position).get("还没给的书评名字").toString());
 //            final String score = list.get(position).get("score").toString(); //这个非常重要
 //            final String book_id = list.get(position).get("book_num").toString(); //这个非常重要
@@ -96,6 +110,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         //        private TextView mybook_comment_bookinfo;
 //        private ImageView myshort_comment_bookphoto;
         private TextView state;
+        private RelativeLayout all;
 //        private TextView myshort_comment_time;
 //        private ImageButton myshort_comment_del;
 //        private RelativeLayout myshort_all;
@@ -111,6 +126,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //            myshort_comment_bookstatus = itemView.findViewById(R.id.myshort_comment_bookstatus);
             d = itemView.findViewById(R.id.d);
             point = itemView.findViewById(R.id.point);
+            all = itemView.findViewById(R.id.all);
 //            myshort_comment_del = itemView.findViewById(R.id.myshort_comment_del);
 //            myshort_all = itemView.findViewById(R.id.myshort_all);
         }
