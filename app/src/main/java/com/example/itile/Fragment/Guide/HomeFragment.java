@@ -72,6 +72,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("test","test");
         content1 = getActivity().findViewById(R.id.schedule_content);
         content2 = getActivity().findViewById(R.id.project_content);
         content3 = getActivity().findViewById(R.id.task_content);
