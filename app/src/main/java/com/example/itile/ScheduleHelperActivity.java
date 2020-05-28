@@ -65,7 +65,7 @@ public class ScheduleHelperActivity extends AppCompatActivity {
                 finish();
             }
         });
-        postScheduleHelper("http://118.190.245.170/worktile/schedulehelper/", String.valueOf(page));
+        getScheduleHelper("http://118.190.245.170/worktile/schedulehelper/");
 
     }
 
@@ -85,7 +85,7 @@ public class ScheduleHelperActivity extends AppCompatActivity {
                 refreshLayout.finishRefresh(2000);
                 page = 1;
                 list.clear();
-                postScheduleHelper("http://118.190.245.170/worktile/schedulehelper/", String.valueOf(page));
+                getScheduleHelper("http://118.190.245.170/worktile/schedulehelper/");
             }
         });
     }
@@ -165,5 +165,83 @@ public class ScheduleHelperActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void getScheduleHelper(String address) {
+        HttpUtil.getScheduleHelper(address,  new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ScheduleHelperActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                boolean flag;
+                //得到服务器返回的具体内容
+                String responseData = response.body().string();
+                Log.d("日程助手页get", responseData);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseData);
+                    String warning = jsonObject.getString("warning");
+                    if (!warning.equals("1")) {
+                        flag = false;
+                    } else {
+                        flag = true;
+                        JSONArray jsonArray = jsonObject.getJSONArray("schedule");
+                        if (String.valueOf(jsonArray).equals("[]")) {
+                            Map map1 = new HashMap();
+                            map1.put("type", 0);
+                            list.add(map1);
+                        } else {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject schedule = jsonArray.getJSONObject(i);
+                                String pk = schedule.getString("pk");
+                                JSONObject fields = schedule.getJSONObject("fields");
+                                String starttime = fields.getString("starttime");
+                                String endtime = fields.getString("endtime");
+                                String state = fields.getString("state");
+                                String description = fields.getString("description");
+
+                                Map map = new HashMap();
+                                map.put("pk", pk);
+                                map.put("starttime", starttime);
+                                map.put("endtime", endtime);
+                                map.put("state", state);
+                                map.put("description", description);
+                                map.put("type",1);
+
+                                list.add(map);
+                            }
+                        }
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (flag) {
+                                refreshLayout.finishLoadMore(2000);
+                                refreshLayout.setFooterHeight(25);
+                                mAdapter.setData(list);
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(ScheduleHelperActivity.this, warning, Toast.LENGTH_SHORT).show();
+                                refreshLayout.finishLoadMore();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                }
+            }
+        });
+    }
+
 
 }
