@@ -116,7 +116,7 @@
                     android:layout_below="@+id/home_nickname"
                     android:layout_marginTop="11dp"
                     android:text="20岁"
-                    android:textSize="18sp"
+                    android:textSize="46px"
                     android:textColor="#808080"
                     android:layout_marginLeft="12dp">
                 </TextView>
@@ -358,7 +358,7 @@
                     android:textSize="44px"
                     android:textColor="#434343"
                     android:layout_marginTop="18dip"
-                    android:layout_marginLeft="20dip"
+                    android:layout_marginLeft="18dip"
                     android:singleLine="true"
                     android:maxLines="1"
                     android:ellipsize="end">
@@ -368,15 +368,15 @@
                     android:id="@+id/home_intro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"
+                    android:text="简介"
                     android:textSize="44px"
                     android:textColor="#808080"
                     android:layout_toRightOf="@+id/home_tv6"
                     android:layout_marginTop="18dip"
-                    android:layout_marginLeft="25dip"
+                    android:layout_marginLeft="20dip"
                     android:layout_marginRight="20dip"
                     android:layout_marginBottom="20dp"
-                    android:maxLines="3"
+                    android:maxLines="4"
                     android:ellipsize="end">
                 </TextView>
             </RelativeLayout>
@@ -396,6 +396,7 @@
         </TextView>
 
         <RelativeLayout
+            android:id="@+id/rel_19"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/home2"
@@ -440,6 +441,11 @@
                 android:layout_height="match_parent" />
         </RelativeLayout>
 -->
+        <TextView
+            android:layout_below="@+id/rel_19"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        </TextView>
     </RelativeLayout>
 
     </ScrollView>
