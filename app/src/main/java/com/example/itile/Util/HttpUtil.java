@@ -558,4 +558,18 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
+
+    //个人中心设置页修改信息
+    public static void SettingWithOkHttp(String object, String value, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add(object,value)
+                .build();
+        Request request = new Request.Builder()
+                .url("http://118.190.245.170/worktile/userinfo/")
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
 }

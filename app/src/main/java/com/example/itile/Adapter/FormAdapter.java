@@ -54,7 +54,7 @@ public class FormAdapter extends RecyclerView.Adapter<FormAdapter.ViewHolder>{
         holder.textView1.setText(notstart);
         holder.textView2.setText(isgoing);
         holder.textView3.setText(ended);
-        holder.rate.setText(rate);
+        holder.rate.setText(rate+"%");
 
         holder.pbar.setMax(100);
         holder.pbar.setProgress(int_rate);

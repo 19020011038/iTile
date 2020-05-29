@@ -15,12 +15,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +60,8 @@ public class SettingActivity extends AppCompatActivity {
     private SharedPreferencesUtil check;
     private ImageView setting_icon;
     private RelativeLayout icon;
+    private RelativeLayout change_sex;
+    private RelativeLayout change_work;
     private Button setting_signout;
     private String result;
     private String icon_string;
@@ -59,6 +69,47 @@ public class SettingActivity extends AppCompatActivity {
     private TextView sex;
     private TextView work;
     private TextView birthday;
+    private TextView intro;
+    private int lastChoose_sex=0;
+    private int lastChoose_work=0;
+    private String string_choose;
+    private int now_year = 2020; //今日日期
+    private int now_month = 5;
+    private int now_day = 27;
+    private int year = 2000;
+    private int month = 1;
+    private int day = 1;
+    private NumberPicker numberpicker0;
+    // numberpicker2,numberpicker3是星座month和day
+    private NumberPicker numberpicker2;
+    private NumberPicker numberpicker3;
+    private NumberPicker np;
+    private TextView text;
+    private TextView text1;
+    private int num;
+    String cityy;
+    private String[] city= {"北京","上海","广州","深圳","成都","天津"};
+    private Button bt1;
+    private Button bt2;
+    private android.app.AlertDialog.Builder dialog;
+    private android.app.AlertDialog.Builder dialog2;
+    private TextView tv1;
+    private TextView tv2;
+    private View inputServer2;
+    private EditText edit;
+
+    //修改性别相关
+    private String[] areas_sex = new String[]{"男","女"};
+    private RadioOnClick_sex radioOnClick_sex = new RadioOnClick_sex(0);
+    private ListView areaRadioListView;
+
+    //修改职业相关
+//    private String[] areas_work = new String[]{"IT（计算机/互联网/通信）", "制造（生产/工艺/制造）", "医疗（医疗/护理/制药）", "金融（金融/银行/投资/保险）", "商业（商业/服务业/个体经营）", "文化（文化/广告/传媒）", "艺术（娱乐/艺术/表演）","法律（律师/法务）", "教育（教育/培训）",
+//            "行政（公务员/行政/事业单位）", "模特（模特）","空姐（空姐）","学生（学生）", "其他职业"};
+    private String[] areas_work = new String[]{"暂不填写","IT", "制造", "医疗", "金融", "商业", "文化", "艺术","法律", "教育",
+            "行政", "模特","空姐","学生", "其他职业"};
+    private String[] work_list = new String[]{"未填写","IT", "制造", "医疗", "金融", "商业", "文化", "艺术","法律", "教育", "行政", "模特","空姐","学生", "其他"};
+    private RadioOnClick_work radioOnClick_work = new RadioOnClick_work(0);
 
     private byte[] a = null;
 
@@ -87,6 +138,41 @@ public class SettingActivity extends AppCompatActivity {
         sex = findViewById(R.id.sex);
         work = findViewById(R.id.work);
         birthday = findViewById(R.id.birthday);
+        change_sex = findViewById(R.id.setting_change_sex);
+        change_work = findViewById(R.id.setting_change_work);
+        intro = findViewById(R.id.intro);
+
+        //修改简介
+        LayoutInflater factory = LayoutInflater.from(SettingActivity.this);//提示框
+        inputServer2 = factory.inflate(R.layout.item_setting_intro, null);//这里必须是final的
+        edit=(EditText)inputServer2.findViewById(R.id.intro);//获得输入框对象
+        edit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(100)});
+        edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                for(int i=s.length();i>0;i--){
+                    if(s.subSequence(i-1,i).toString().equals("\n"))
+                        s.replace(i-1,i,"");
+                }
+            }
+        });
+
+        //修改性别
+        radioOnClick_sex.setIndex(0);
+        change_sex.setOnClickListener(new RadioClickListener_sex());
+        //修改职业
+        radioOnClick_work.setIndex(0);
+        change_work.setOnClickListener(new RadioClickListener_work());
 
         setting_signout.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -108,6 +194,8 @@ public class SettingActivity extends AppCompatActivity {
         super.onResume();
 
         homeNameOkHttp("http://118.190.245.170/worktile/userinfo/");
+        radioOnClick_sex.setIndex(lastChoose_sex);
+        radioOnClick_work.setIndex(lastChoose_work);
 //        //别忘了这句！！！！
 //        check = SharedPreferencesUtil.getInstance(getApplicationContext());
 //
@@ -140,14 +228,49 @@ public class SettingActivity extends AppCompatActivity {
             case R.id.setting_back:
                 finish();
                 break;
-            case R.id.setting_change_sex:  //修改性别
-
+//            case R.id.setting_change_sex:  //修改性别
+//
+//                break;
+//            case R.id.setting_change_work:  //修改性别
+//
+//                break;
+            case R.id.setting_change_birthday:  //修改生日
+                dialog = createLoadingDialog(SettingActivity.this, "test");
+                dialog.create().show();
                 break;
-            case R.id.setting_change_work:  //修改性别
+            case R.id.setting_change_intro:
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
+//                builder.setCancelable(false);
+                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        ((ViewGroup) inputServer2.getParent()).removeView(inputServer2);
+                    }
+                });
+//                builder.setTitle("个性点的签名").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer)
+                builder.setTitle("修改简介").setView(inputServer2)
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+//                                ((ViewGroup) inputServer.getParent()).removeView(inputServer);
+                            }
+                        });
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String _sign = edit.getText().toString();
+                        SettingWithOkhttp("introduction", _sign);
+//                        ((ViewGroup) inputServer.getParent()).removeView(inputServer);
 
-                break;
-            case R.id.setting_change_birthday:  //修改性别
-
+//                        if(_sign!=null && !_sign.isEmpty())
+//                        {
+//                            textView.setText(_sign);
+//                        }
+//                        else
+//                        {
+//                            Toast.makeText(SettingActivity.this,"签名为空",Toast.LENGTH_SHORT).show();
+//                        }
+                    }
+                });
+                builder.show();
                 break;
             case R.id.icon:
 
@@ -541,24 +664,55 @@ public class SettingActivity extends AppCompatActivity {
                     String month_now = now_s.getString("month");
                     String day_now = now_s.getString("day");
                     Log.i("zyr", "HomeActivity.icon_url:"+icon_string);
-
+                    now_year = Integer.valueOf(year_now);
+                    now_month = Integer.valueOf(month_now);
+                    now_day = Integer.valueOf(day_now);
+                    if (!year_s.equals("null"))
+                        year = Integer.valueOf(year_s);
+                    if (!month_s.equals("null"))
+                        month = Integer.valueOf(month_s);
+                    if (!day_s.equals("null"))
+                        day = Integer.valueOf(day_s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         String birthday_all = year_s+"-"+month_s+"-"+day_s;
                         nickname.setText(s_nickname);
-                        if (!gender.equals("null"))
+                        if (!gender.equals("null")) {
                             sex.setText(gender);
-                        else
+                            if(gender.equals("女")) {
+                                lastChoose_sex = 1;
+                                radioOnClick_sex.setIndex(lastChoose_sex);
+                            }else{
+                                lastChoose_sex=0;
+                                radioOnClick_sex.setIndex(lastChoose_sex);
+                            }
+                        }else {
                             sex.setText("男");
-                        if (!profession.equals("null"))
+                            lastChoose_sex=0;
+                            radioOnClick_sex.setIndex(lastChoose_sex);
+                        }
+                        if (!profession.equals("null")) {
                             work.setText(profession);
+                            for (int i=0;i<14;i++)
+                                if (profession.equals(work_list[i])) {
+                                    lastChoose_work = i;
+                                    radioOnClick_work.setIndex(lastChoose_work);
+                                    break;
+                                }
+                        }
                         else
                             work.setText("未填写");
                         if (!year_s.equals("null"))
                             birthday.setText(birthday_all);
                         else
                             birthday.setText("未填写");
+                        if (!introduction.equals("null")) {
+                            intro.setText(introduction);
+                            edit.setText(introduction);
+                        }
+                        else
+                            intro.setText("未填写");
                         Glide.with(SettingActivity.this).load("http://118.190.245.170/worktile/media/"+icon_string).into(setting_icon);
 //                        Toast.makeText(HomeActivity.this,"显示头像",Toast.LENGTH_SHORT).show();
 //                        Glide.with(SettingActivity.this).load("http://175.24.47.150:8088/worktile/static/"+icon_string).into(setting_icon);
@@ -571,5 +725,362 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }//标签页
         });
+    }
+
+    //修改性别相关
+    class RadioClickListener_sex implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            AlertDialog ad =new AlertDialog.Builder(SettingActivity.this).setTitle("修改性别").setSingleChoiceItems(areas_sex,lastChoose_sex,radioOnClick_sex).create();
+            areaRadioListView=ad.getListView();
+            ad.show();
+        }
+    }
+    /**
+     * 点击单选框事件
+     * @author xmz
+     *
+     */
+    //修改性别相关
+    class RadioOnClick_sex implements DialogInterface.OnClickListener{
+        private int index;
+
+        public RadioOnClick_sex(int index){
+            this.index = index;
+        }
+        public void setIndex(int index){
+            this.index=index;
+        }
+        public int getIndex(){
+            return index;
+        }
+        public String getStringIndex(){
+            if (index==1)
+                return "女";
+            else
+                return "男";
+        }
+        public void onClick(DialogInterface dialog, int whichButton){
+            setIndex(whichButton);
+
+            SettingWithOkhttp("gender",radioOnClick_sex.getStringIndex());
+            dialog.dismiss();
+        }
+    }
+
+    //修改职业相关
+    class RadioClickListener_work implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            AlertDialog ad =new AlertDialog.Builder(SettingActivity.this).setTitle("选择职业").setSingleChoiceItems(areas_work,lastChoose_work,radioOnClick_work).create();
+            areaRadioListView=ad.getListView();
+            ad.show();
+        }
+    }
+    /**
+     * 点击单选框事件
+     * @author xmz
+     *
+     */
+    //修改职业相关
+    class RadioOnClick_work implements DialogInterface.OnClickListener{
+        private int index;
+
+        public RadioOnClick_work(int index){
+            this.index = index;
+        }
+        public void setIndex(int index){
+            this.index=index;
+        }
+        public int getIndex(){
+            return index;
+        }
+        public String getStringIndex(){
+            return work_list[index];
+        }
+        public void onClick(DialogInterface dialog, int whichButton){
+            setIndex(whichButton);
+            SettingWithOkhttp("profession",radioOnClick_work.getStringIndex());
+            dialog.dismiss();
+        }
+    }
+
+
+    //修改相关
+    public void SettingWithOkhttp(String object_string, String value){
+        HttpUtil.SettingWithOkHttp( object_string,value, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //在这里对异常情况进行处理
+                Log.i("zyr", " name : error");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SettingActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //得到服务器返回的具体内容
+                final String responseData = response.body().string();
+                try {
+                    JSONObject object = new JSONObject(responseData);
+                    String result = object.getString("warning");
+                    Log.i("zyr", "response:"+responseData);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (result.equals("1")){
+                                if (object_string.equals("gender")) {
+                                    lastChoose_sex = radioOnClick_sex.getIndex();
+                                    if (lastChoose_sex == 0)
+                                        sex.setText("男");
+                                    else
+                                        sex.setText("女");
+                                    Toast.makeText(SettingActivity.this, "性别修改成功", Toast.LENGTH_SHORT).show();
+                                }else if (object_string.equals("profession")){
+                                    lastChoose_work = radioOnClick_work.getIndex();
+                                    work.setText(work_list[lastChoose_work]);
+                                    Toast.makeText(SettingActivity.this, "职业修改成功", Toast.LENGTH_SHORT).show();
+                                }else if(object_string.equals("birthday")){
+                                    Toast.makeText(SettingActivity.this, "生日修改成功", Toast.LENGTH_SHORT).show();
+                                    birthday.setText(year+"-"+month+"-"+day);
+                                }else if (object_string.equals("introduction")){
+                                    intro.setText(value);
+                                    Toast.makeText(SettingActivity.this, "简介修改成功", Toast.LENGTH_SHORT).show();
+                                }
+                            }else {
+                                Toast.makeText(SettingActivity.this, "修改失败，请稍后重试", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i("zyr", "LLL" + responseData);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(SettingActivity.this, "无法连接到服务器", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }//标签页
+        });
+    }
+
+    //下面是修改生日相关
+    public android.app.AlertDialog.Builder createLoadingDialog(Context context, String msg) {
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.item_birthday, null);// 得到加载view
+
+        numberpicker0 = (NumberPicker) v.findViewById(R.id.numberpicker1);
+        numberpicker0.setMaxValue(now_year);
+        numberpicker0.setMinValue(1900);
+        numberpicker0.setValue(year);
+        numberpicker0.setFocusable(true);
+        numberpicker0.setFocusableInTouchMode(true);
+        numberpicker0.setOnValueChangedListener(yearChangedListener);
+
+        numberpicker2 = (NumberPicker) v.findViewById(R.id.numberpicker2);
+        numberpicker2.setMaxValue(12);
+        numberpicker2.setMinValue(1);
+        numberpicker2.setValue(month);
+        numberpicker2.setFocusable(true);
+        numberpicker2.setFocusableInTouchMode(true);
+        numberpicker2.setOnValueChangedListener(monthChangedListener);
+
+        /*
+         * / setMaxValue根据每月的天数不一样，使用switch()进行分别判断
+         */
+        numberpicker3 = (NumberPicker) v.findViewById(R.id.numberpicker3);
+        numberpicker3.setMinValue(1);
+        numberpicker3.setMaxValue(31);
+        numberpicker3.setValue(day);
+        numberpicker3.setFocusable(true);
+        numberpicker3.setFocusableInTouchMode(true);
+        numberpicker3.setOnValueChangedListener(dayChangedListener);
+        text1 = (TextView) v.findViewById(R.id.textxing);
+
+        xingzuo();
+
+        android.app.AlertDialog.Builder loadingDialog = new android.app.AlertDialog.Builder(context);
+        loadingDialog.setMessage("生日");
+        loadingDialog.setView(v);
+        loadingDialog.setCancelable(false);// 不可以用“返回键”取消
+        loadingDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        tv1.setText(year+"年"+month + "月" + day + "日" +"\t" + text1.getText().toString());
+//                        tv1.setText(month + "月" + day + "日");
+                        SettingWithOkhttp("birthday", year+"-"+month+"-"+day+"-"+text1.getText().toString());
+                    }
+                });
+        loadingDialog.setNegativeButton("取消",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+        return loadingDialog;
+    }
+
+    private NumberPicker.OnValueChangeListener yearChangedListener = new NumberPicker.OnValueChangeListener() {
+
+        @Override
+        public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
+
+            year = numberpicker0.getValue();
+            month = numberpicker2.getValue();
+            xingzuo();
+            if (year==now_year)
+                numberpicker2.setMaxValue(now_month);
+            else
+                numberpicker2.setMaxValue(12);
+            switch (month) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    numberpicker3.setMaxValue(31);
+                    break;
+                case 2:
+                    if ((year%4==0&&year%100!=0)|| year%400==0)
+                        numberpicker3.setMaxValue(29);
+                    else
+                        numberpicker3.setMaxValue(28);
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    numberpicker3.setMaxValue(30);
+                    break;
+
+                default:
+                    break;
+            }
+            if (year==now_year&& month==now_month)
+                numberpicker3.setMaxValue(now_day);
+            // TODO Auto-generated method stub
+//            year = numberpicker0.getValue();
+//            if (year%)
+//            xingzuo();
+//            switch (month) {
+//                case 1:
+//                case 3:
+//                case 5:
+//                case 7:
+//                case 8:
+//                case 10:
+//                case 12:
+//                    numberpicker3.setMaxValue(31);
+//                    break;
+//                case 2:
+//                    numberpicker3.setMaxValue(29);
+//                    break;
+//                case 4:
+//                case 6:
+//                case 9:
+//                case 11:
+//                    numberpicker3.setMaxValue(30);
+//                    break;
+//
+//                default:
+//                    break;
+//            }
+        }
+
+    };
+
+
+    private NumberPicker.OnValueChangeListener monthChangedListener = new NumberPicker.OnValueChangeListener() {
+
+        @Override
+        public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
+            // TODO Auto-generated method stub
+            year = numberpicker0.getValue();
+            month = numberpicker2.getValue();
+            xingzuo();
+
+            switch (month) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    numberpicker3.setMaxValue(31);
+                    break;
+                case 2:
+                    if ((year%4==0 && year%100!=0)|| year%400==0)
+                        numberpicker3.setMaxValue(29);
+                    else
+                        numberpicker3.setMaxValue(28);
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    numberpicker3.setMaxValue(30);
+                    break;
+
+                default:
+                    break;
+            }
+            if (year==now_year&& month==now_month)
+                numberpicker3.setMaxValue(now_day);
+        }
+
+    };
+
+    private NumberPicker.OnValueChangeListener dayChangedListener = new NumberPicker.OnValueChangeListener() {
+
+        @Override
+        public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
+            // TODO Auto-generated method stub
+            year = numberpicker0.getValue();
+            month = numberpicker2.getValue();
+            day = numberpicker3.getValue();
+            xingzuo();
+            if (year==now_year&& month==now_month)
+                numberpicker3.setMaxValue(now_day);
+        }
+
+    };
+
+    // 对获得的month 和 day 进行处理
+    void xingzuo() {
+
+        if ((month == 1 && day > 19) || (month == 2 && day < 19)) {
+            text1.setText("水瓶座");
+        } else if ((month == 2 && day > 18) || (month == 3 && day < 21)) {
+            text1.setText("双鱼座");
+        } else if ((month == 3 && day > 20) || (month == 4 && day < 20)) {
+            text1.setText("白羊座");
+        } else if ((month == 4 && day > 19) || (month == 5 && day < 21)) {
+            text1.setText("金牛座");
+        } else if ((month == 5 && day > 20) || (month == 6 && day < 22)) {
+            text1.setText("双子座");
+        } else if ((month == 6 && day > 21) || (month == 7 && day < 23)) {
+            text1.setText("巨蟹座");
+        } else if ((month == 7 && day > 22) || (month == 8 && day < 23)) {
+            text1.setText("狮子座");
+        } else if ((month == 8 && day > 22) || (month == 9 && day < 23)) {
+            text1.setText("处女座");
+        } else if ((month == 9 && day > 22) || (month == 10 && day < 24)) {
+            text1.setText("天秤座");
+        } else if ((month == 10 && day > 23) || (month == 11 && day < 23)) {
+            text1.setText("天蝎座");
+        } else if ((month == 11 && day > 22) || (month == 12 && day < 22)) {
+            text1.setText("射手座");
+        } else if ((month == 12 && day > 21) || (month == 1 && day < 20)) {
+            text1.setText("摩羯座");
+        }
+
     }
 }
