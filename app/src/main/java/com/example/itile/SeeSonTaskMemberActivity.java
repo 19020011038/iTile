@@ -56,13 +56,13 @@ public class SeeSonTaskMemberActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        change_member = findViewById(R.id.change_member);
         if(ifcreator.equals("0"))
         {
             change_member.setVisibility(View.INVISIBLE);
         }
 
-        change_member = findViewById(R.id.change_member);
+
         back = findViewById(R.id.back);
         recyclerView = findViewById(R.id.recyclerView);
 

@@ -2,6 +2,7 @@
 package com.example.itile;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +30,7 @@ import okhttp3.Response;
 
 public class SubTaskActivity extends AppCompatActivity {
 
-    private ImageView back;
+    private RelativeLayout back;
     private String task_id;
     private String project_id;
     private RelativeLayout relativeLayout;
@@ -111,7 +112,7 @@ public class SubTaskActivity extends AppCompatActivity {
 
 //                if(ifcreator.equals("0"))
 //                {
-//                    Toast.makeText(SubTaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
+////                    Toast.makeText(SubTaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
 //                }
 //                else {
                     Intent intent = new Intent(SubTaskActivity.this,SeeSonTaskMemberActivity.class);
@@ -120,24 +121,23 @@ public class SubTaskActivity extends AppCompatActivity {
                     intent.putExtra("ifcreator",ifcreator);
                     startActivity(intent);
 //                }
-
-
-
-
             }
         });
 
         owner.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                if(ifcreator.equals("0"))
+                {
+//                    Toast.makeText(SubTaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
+                }
+                else {
                 Intent intent = new Intent(SubTaskActivity.this,ChangeSonTaskOwnerActivity.class);
                 intent.putExtra("subtask_id",subtask_id);
                 intent.putExtra("task_id",task_id);
                 intent.putExtra("owner_id", manager_id);
                 startActivity(intent);
-
-
+                }
             }
         });
 
@@ -242,13 +242,19 @@ public class SubTaskActivity extends AppCompatActivity {
                             GlideWithPictureUrl("http://118.190.245.170/worktile/media/"+manager_pic,head);
                             if (state.equals("0")){
                                 show_state.setText("未开始");
+
+                                show_state.setTextColor(Color.parseColor("#f1263b"));
                             }
                             else if (state.equals("1"))
                             {
                                 show_state.setText("进行中");
+
+                                show_state.setTextColor(Color.parseColor("#ffdb5c"));
                             }
                             else
-                                show_state.setText("已完成");
+                            { show_state.setText("已完成");
+
+                                show_state.setTextColor(Color.parseColor("#bddc8d"));}
 
                             if(ifcreator.equals("0"))
                             {
@@ -294,6 +300,8 @@ public class SubTaskActivity extends AppCompatActivity {
 
                             if (right.equals("0"))i=0;
                             else i=1;
+
+
                             if (i==0)
                                 Toast.makeText(SubTaskActivity.this, "您没有权限访问该页面！", Toast.LENGTH_SHORT).show();
 

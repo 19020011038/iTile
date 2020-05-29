@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +37,10 @@ public class ListTaskActivity extends AppCompatActivity {
     private TextView new_task;
     private List<Map<String, Object>> list = new ArrayList<>();
     private RecyclerView recyclerView;
-private ImageView back;
+    private RelativeLayout back;
+    private int flag = 1;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_task_in_project);
@@ -99,21 +103,42 @@ private ImageView back;
                     JSONObject jsonObject = new JSONObject(responseData);
                     JSONArray jsonArray = jsonObject.getJSONArray("tasks");
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
+                    if (jsonArray.length()==0)
+                    {
 
-                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        flag = 0;
 
-                        name = jsonObject1.getString("name");
-                        task_id = jsonObject1.getString("id");
-                        state = jsonObject1.getString("state");
-
-                        Map map = new HashMap();
-                        map.put("state", state);
-                        map.put("name", name);
-                        map.put("task_id",task_id);
-                        map.put("project_id",project_id);
-                        list.add(map);
                     }
+                    else flag=1;
+
+                    if (flag!=0)
+                    {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                            name = jsonObject1.getString("name");
+                            task_id = jsonObject1.getString("id");
+                            state = jsonObject1.getString("state");
+
+                            Map map = new HashMap();
+                            map.put("state", state);
+                            map.put("name", name);
+                            map.put("task_id",task_id);
+                            map.put("project_id",project_id);
+                            map.put("flag",1);
+                            list.add(map);
+                        }
+                    }
+
+                    else
+                    {
+                        Map map1 = new HashMap();
+                        map1.put("flag",0);
+                        list.add(map1);
+                    }
+
+
 
 
                     runOnUiThread(new Runnable() {
@@ -121,7 +146,7 @@ private ImageView back;
                             public void run() {
 
                                 recyclerView.setLayoutManager(new LinearLayoutManager(ListTaskActivity.this));//垂直排列 , Ctrl+P
-                                recyclerView.setAdapter(new TaskInProjectAdapter(ListTaskActivity.this, list));//绑定适配器
+                                recyclerView.setAdapter(new TaskInProjectAdapter(ListTaskActivity.this, list,flag));//绑定适配器
 
 
                             }

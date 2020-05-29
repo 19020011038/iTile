@@ -18,7 +18,7 @@ import com.example.itile.TaskActivity;
 import java.util.List;
 import java.util.Map;
 
-public class SubTasklistAdapter extends RecyclerView.Adapter<SubTasklistAdapter.ViewHolder>{
+public class SubTasklistAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private List<Map<String, Object>> list;
     private Context context;
@@ -27,33 +27,58 @@ public class SubTasklistAdapter extends RecyclerView.Adapter<SubTasklistAdapter.
         this.context = context;
         this.list = list;
     }
-
+    @Override
+    public int getItemViewType(int position) {
+        return Integer.valueOf(list.get(position).get("flag").toString());
+    }
     @NonNull
     @Override
-    public SubTasklistAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_project, parent, false);
-        return new SubTasklistAdapter.ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        if (viewType == 0)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_nothing, parent, false);
+
+            return new SubTasklistAdapter.NothingViewHolder(view);
+        }
+        else
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_project, parent, false);
+            return new SubTasklistAdapter.ViewHolder(view);
+        }
+
     }
     @Override
-    public void onBindViewHolder(@NonNull SubTasklistAdapter.ViewHolder holder, final int position) {
-        String name = list.get(position).get("name").toString();
-        String task_id = list.get(position).get("task_id").toString();
-        String project_id = list.get(position).get("project_id").toString();
-        String subtask_id = list.get(position).get("subtask_id").toString();
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+
+        if(holder instanceof SubTasklistAdapter.NothingViewHolder){
+            SubTasklistAdapter.NothingViewHolder viewHolder = (SubTasklistAdapter.NothingViewHolder) holder;
+
+        }
+
+        else {
+
+            SubTasklistAdapter.ViewHolder viewHolder = (SubTasklistAdapter.ViewHolder) holder;
+            String name = list.get(position).get("name").toString();
+            String task_id = list.get(position).get("task_id").toString();
+            String project_id = list.get(position).get("project_id").toString();
+            String subtask_id = list.get(position).get("subtask_id").toString();
 
 
-        holder.mName.setText(name);
+            viewHolder.mName.setText(name);
 
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, SubTaskActivity.class);
-                intent.putExtra("project_id",project_id);
-                intent.putExtra("task_id",task_id);
-                intent.putExtra("subtask_id",subtask_id);
-                context.startActivity(intent);
-            }
-        });
+            viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, SubTaskActivity.class);
+                    intent.putExtra("project_id",project_id);
+                    intent.putExtra("task_id",task_id);
+                    intent.putExtra("subtask_id",subtask_id);
+                    context.startActivity(intent);
+                }
+            });
+        }
+
 
 
     }
@@ -61,6 +86,15 @@ public class SubTasklistAdapter extends RecyclerView.Adapter<SubTasklistAdapter.
     public int getItemCount() {
         return list.size();
     }
+
+    class NothingViewHolder extends RecyclerView.ViewHolder {
+
+        NothingViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+        }
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mName;
         private RelativeLayout relativeLayout;

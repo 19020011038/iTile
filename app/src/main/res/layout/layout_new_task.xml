@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="180px"
         android:background="#ffffff"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:padding="5dp">
 
         <EditText
@@ -67,12 +67,17 @@
 
     </RelativeLayout>
 
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -96,6 +101,17 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="150px"
         android:background="#ffffff">
 
@@ -109,12 +125,7 @@
             android:textColor="#808080"/>
 
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -169,6 +180,19 @@
 
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150px"
@@ -184,12 +208,6 @@
             android:textColor="#808080"/>
 
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

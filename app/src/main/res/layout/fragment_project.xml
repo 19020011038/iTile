@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="170px">
@@ -48,6 +49,16 @@
 
 
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+    </ScrollView>
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -152,7 +163,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f0f0f0"
+        android:background="#f5f5f5"
         android:layout_marginBottom="150px">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

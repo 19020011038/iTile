@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ScheduleHelperActivity extends AppCompatActivity {
-    private ImageView back;
+    private RelativeLayout back;
     private RecyclerView recyclerView;
     List<Map<String, Object>> list = new ArrayList<>();
     private RefreshLayout refreshLayout;
@@ -58,7 +59,7 @@ public class ScheduleHelperActivity extends AppCompatActivity {
         mAdapter = new ScheduleHelperAdapter(ScheduleHelperActivity.this, list);
         recyclerView.setAdapter(mAdapter);
 
-        back = (ImageView) findViewById(R.id.back_from_schedule_helper);
+        back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
