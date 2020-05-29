@@ -25,6 +25,14 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder>{
     private List<Map<String, Object>> list;
     private Context context;
 
+    public List<Map<String, Object>> getData() {
+        return list;
+    }
+
+    public void setData(List<Map<String, Object>> list) {
+        this.list = list;
+    }
+
     public WorkAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
         this.list = list;

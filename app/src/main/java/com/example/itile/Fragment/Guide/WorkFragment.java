@@ -53,6 +53,8 @@ public class WorkFragment extends Fragment {
     private String today;
     private String post_time;
     private ImageView jump_new_schedule;
+    private int num = 0;
+    private int create;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -61,18 +63,19 @@ public class WorkFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_work, container, false);
         Log.d("执行了oncreate", s);
+        create = 0;
         //获取系统时间
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm");
         Date date = new Date(System.currentTimeMillis());
-        Log.d("当前时间",simpleDateFormat.format(date));
+        Log.d("当前时间", simpleDateFormat.format(date));
         today = simpleDateFormat.format(date);
         post_time = today;
-        yyyy = today.substring(0,4);
-        Log.d("yyyy",yyyy);
-        mm = today.substring(5,7);
-        Log.d("mm",mm);
-        dd = today.substring(8,10);
-        Log.d("dd",dd);
+        yyyy = today.substring(0, 4);
+        Log.d("yyyy", yyyy);
+        mm = today.substring(5, 7);
+        Log.d("mm", mm);
+        dd = today.substring(8, 10);
+        Log.d("dd", dd);
         return root;
 
     }
@@ -89,9 +92,9 @@ public class WorkFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), NewScheduleActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("year",yyyy);
-                bundle.putString("month",mm);
-                bundle.putString("day",dd);
+                bundle.putString("year", yyyy);
+                bundle.putString("month", mm);
+                bundle.putString("day", dd);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -118,26 +121,27 @@ public class WorkFragment extends Fragment {
                 list.clear();
                 yyyy = String.valueOf(arg1);
                 String temp1 = String.valueOf(arg2 + 1);
-                if(arg2 + 1 < 10)
+                if (arg2 + 1 < 10)
                     mm = "0" + temp1;
                 else
-                    mm  = temp1;
+                    mm = temp1;
                 String temp2 = String.valueOf(arg3);
-                if(arg3 < 10)
+                if (arg3 < 10)
                     dd = "0" + temp2;
                 else
                     dd = temp2;
                 post_time = yyyy + "-" + mm + "-" + dd + " 00-00";
-                Log.d("post_time",post_time);
-                postCalendar("http://118.190.245.170/worktile/calendar/",post_time);
+                Log.d("post_time", post_time);
+                create = 0;
+                postCalendar("http://118.190.245.170/worktile/calendar/", post_time);
             }
         });
-        postCalendar("http://118.190.245.170/worktile/calendar/",post_time);
+        postCalendar("http://118.190.245.170/worktile/calendar/", post_time);
         Log.d("执行了onresume", s);
     }
 
-    public void postCalendar(String address,String time) {
-        HttpUtil.postCalendar(address,time, new Callback() {
+    public void postCalendar(String address, String time) {
+        HttpUtil.postCalendar(address, time, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 getActivity().runOnUiThread(new Runnable() {
@@ -153,10 +157,11 @@ public class WorkFragment extends Fragment {
             public void onResponse(Call call, Response response) throws IOException {
                 //得到服务器返回的具体内容
                 String responseData = response.body().string();
-                Log.d("postCalendar",responseData);
+                Log.d("postCalendar", responseData);
                 try {
                     JSONObject jsonObject = new JSONObject(responseData);
                     JSONArray jsonArray = jsonObject.getJSONArray("schedule");
+                    num = jsonArray.length();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject schedule = jsonArray.getJSONObject(i);
                         String pk = schedule.getString("pk");
@@ -180,6 +185,11 @@ public class WorkFragment extends Fragment {
                         public void run() {
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
                             recyclerView.setAdapter(new WorkAdapter(getActivity(), list));//绑定适配器
+                            if (create != 0){
+                                recyclerView.smoothScrollToPosition(num - 1);
+                            }else {
+                                create++;
+                            }
                         }
                     });
                 } catch (JSONException e) {

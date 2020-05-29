@@ -2,6 +2,7 @@
 package com.example.itile;
 
         import android.content.Intent;
+        import android.graphics.Color;
         import android.os.Bundle;
         import android.util.Log;
         import android.view.View;
@@ -29,7 +30,7 @@ package com.example.itile;
 
 public class TaskActivity extends AppCompatActivity {
 
-    private ImageView back;
+    private RelativeLayout back;
     private String task_id;
     private String project_id;
     private RelativeLayout relativeLayout;
@@ -118,17 +119,17 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(ifcreator.equals("0"))
-                {
-                    Toast.makeText(TaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
-                }
-                else {
+//                if(ifcreator.equals("0"))
+//                {
+//                    Toast.makeText(TaskActivity.this, "只有任务负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
+//                }
+//                else {
                     Intent intent = new Intent(TaskActivity.this,SeeTaskMemberActivity.class);
                     intent.putExtra("project_id",project_id);
                     intent.putExtra("task_id",task_id);
                     intent.putExtra("ifcreator",ifcreator);
                     startActivity(intent);
-                }
+//                }
             }
         });
 
@@ -136,11 +137,19 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(TaskActivity.this,ChangeTaskOwnerActivity.class);
-                intent.putExtra("project_id",project_id);
-                intent.putExtra("task_id",task_id);
-                intent.putExtra("owner_id", manager_id);
-                startActivity(intent);
+                if (ifcreator.equals("0"))
+                {
+
+                }
+
+                else {
+                    Intent intent = new Intent(TaskActivity.this,ChangeTaskOwnerActivity.class);
+                    intent.putExtra("project_id",project_id);
+                    intent.putExtra("task_id",task_id);
+                    intent.putExtra("owner_id", manager_id);
+                    startActivity(intent);
+                }
+
             }
         });
                 change = findViewById(R.id.change);
@@ -237,8 +246,12 @@ public class TaskActivity extends AppCompatActivity {
                         public void run() {
                             Aname.setText(name);
                             Adescription.setText(description);
-                            Astarttime.setText(time1);
-                            Aendtime.setText(time2);
+
+                            String time11 = time1.substring(0,time1.length()-3);
+                            String time22 = time2.substring(0,time2.length()-3);
+
+                            Astarttime.setText(time11);
+                            Aendtime.setText(time22);
                             Amanager.setText(manager_name);
                             Anumber.setText(subtask_num);
                             Aproject.setText(project_name);
@@ -247,17 +260,24 @@ public class TaskActivity extends AppCompatActivity {
 
                             if (state.equals("0")){
                                 show_state.setText("未开始");
+
+                                show_state.setTextColor(Color.parseColor("#f1263b"));
                             }
                             else if (state.equals("1"))
                             {
                                 show_state.setText("进行中");
+
+                                show_state.setTextColor(Color.parseColor("#ffdb5c"));
                             }
                             else
-                                show_state.setText("已完成");
+                            { show_state.setText("已完成");
+
+                            show_state.setTextColor(Color.parseColor("#bddc8d"));}
 
                             if(ifcreator.equals("0"))
                             {
                                 change.setVisibility(View.INVISIBLE);
+
                             }
 
                         }

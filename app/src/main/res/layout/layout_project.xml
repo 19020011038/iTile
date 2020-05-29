@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,20 +9,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="158px"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:id="@+id/re1">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            >
+            android:id="@+id/back"
+            android:layout_width="170px"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="8dp">
+
             <ImageView
-                android:layout_width="65px"
-                android:layout_height="65px"
-                android:src="@drawable/back"
-                android:id="@+id/back"/>
+                android:layout_centerInParent="true"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/back" />
         </RelativeLayout>
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,8 +55,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:layout_marginTop="25dp"
-        android:paddingVertical="18dp">
+        android:layout_marginTop="10dp"
+        android:paddingVertical="18dp"
+        android:id="@+id/name1"
+        android:layout_below="@+id/re1">
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
@@ -63,23 +69,30 @@
             android:textSize="50px"
             android:textColor="#808080"/>
 
-
-
-
     </RelativeLayout>
 
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        android:layout_below="@+id/name1"
+        android:id="@+id/v1">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:paddingVertical="18dp">
+        android:paddingVertical="18dp"
+        android:layout_below="@+id/v1"
+        android:id="@+id/re2">
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
@@ -92,37 +105,27 @@
 
 
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="150px"-->
-<!--            android:background="#ffffff">-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="项目进度"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:layout_marginLeft="20dp"-->
-<!--                android:textSize="50px"-->
-<!--                android:textColor="#808080"/>-->
-
-<!--        </RelativeLayout>-->
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        android:id="@+id/v2"
+        android:layout_below="@+id/re2">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150px"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:id="@+id/re3"
+        android:layout_below="@+id/v2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,21 +143,30 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text="未完成"
-            android:textSize="20dp"/>
+            android:textSize="17dp"/>
 
 
     </RelativeLayout>
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
-        <RelativeLayout
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        android:id="@+id/v3"
+        android:layout_below="@+id/re3">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
             android:id="@+id/member"
             android:layout_width="match_parent"
             android:layout_height="150px"
-            android:background="#ffffff">
+            android:background="#ffffff"
+        android:layout_below="@+id/v3">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -165,43 +177,54 @@
                 android:textSize="50px"
                 android:textColor="#808080"/>
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/right"/>
 
         </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff"
+        android:id="@+id/v4"
+        android:layout_below="@id/member">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/all_task"
         android:layout_width="match_parent"
         android:layout_height="150px"
         android:background="#ffffff"
-        android:id="@+id/all_task">
+        android:layout_below="@+id/v4">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="所有任务"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:textSize="50px"
-            android:textColor="#808080"/>
+            android:text="所有任务"
+            android:textColor="#808080"
+            android:textSize="50px" />
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/right"/>
+            android:layout_marginRight="20dp"
+            android:src="@drawable/right" />
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

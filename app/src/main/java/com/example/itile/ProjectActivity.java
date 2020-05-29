@@ -1,6 +1,7 @@
 package com.example.itile;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +36,7 @@ public class ProjectActivity extends AppCompatActivity {
     private String description;
     private RelativeLayout relativeLayout;
     private List<Map<String, Object>> list = new ArrayList<>();
-    private ImageView back;
+    private RelativeLayout back;
     private String message;
 
     private TextView show_state;
@@ -90,17 +91,17 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(ifcreator=="0")
-                {
-                    Toast.makeText(ProjectActivity.this, "只有项目负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
-                }
+//                if(ifcreator=="0")
+//                {
+//                    Toast.makeText(ProjectActivity.this, "只有项目负责人可以修改负责人！", Toast.LENGTH_SHORT).show();
+//                }
 
-                else {
+//                else {
                     Intent intent = new Intent(ProjectActivity.this, SeeProjectMemberActivity.class);
                     intent.putExtra("project_id",project_id);
                     intent.putExtra("ifcreator",ifcreator);
                     startActivity(intent);
-                }
+//                }
 
 
 
@@ -170,9 +171,13 @@ public class ProjectActivity extends AppCompatActivity {
                             Adescription.setText(description);
                             if (state.equals("0")){
                                 show_state.setText("进行中");
+                                show_state.setTextColor(Color.parseColor("#ffdb5c"));
                             }
                             else
+                            {
                                 show_state.setText("已完成");
+                                show_state.setTextColor(Color.parseColor("#bddc8d"));
+                            }
 
                             if(ifcreator.equals("0"))
                             {

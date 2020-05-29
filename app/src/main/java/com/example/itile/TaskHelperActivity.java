@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,7 +36,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class TaskHelperActivity extends AppCompatActivity {
-    private ImageView back;
+    private RelativeLayout back;
     private ImageView pic1;
     private ImageView pic2;
     private ImageView all;
@@ -63,7 +64,7 @@ public class TaskHelperActivity extends AppCompatActivity {
         mAdapter = new TaskHelperAdapter(TaskHelperActivity.this, list);
         recyclerView.setAdapter(mAdapter);
 
-        back = (ImageView)findViewById(R.id.back_from_task_helper);
+        back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

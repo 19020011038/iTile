@@ -8,16 +8,17 @@
         android:background="#ffffff">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            >
+            android:id="@+id/back"
+            android:layout_width="170px"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="8dp">
+
             <ImageView
-                android:layout_width="65px"
-                android:layout_height="65px"
-                android:src="@drawable/back"
-                android:id="@+id/back_from_project_helper"/>
+                android:layout_centerInParent="true"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/back" />
         </RelativeLayout>
 
         <TextView
@@ -32,7 +33,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:background="#ffffff"
         android:orientation="horizontal">
         <ImageView
@@ -48,14 +49,18 @@
             android:src="@drawable/yidu0"
             android:id="@+id/yidu"/>
     </LinearLayout>
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="15dp">
+        android:layout_height="match_parent">
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout_project_helper"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"

@@ -44,7 +44,7 @@ public class ProjectFragment extends Fragment {
     private String name;
     private String project_id;
     private RecyclerView recyclerView;
-
+    private int flag = 1;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -111,7 +111,16 @@ public class ProjectFragment extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(responseData);
                     JSONArray jsonArray = jsonObject.getJSONArray("project");
+                    if (jsonArray.length()==0)
+                    {
 
+                        flag = 0;
+
+                    }
+                    else flag=1;
+
+                    if (flag!=0)
+                    {
                     for (int i = 0; i < jsonArray.length(); i++) {
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
@@ -123,7 +132,15 @@ public class ProjectFragment extends Fragment {
 
                         map.put("name", name);
                         map.put("project_id",project_id);
+                        map.put("flag",1);
                         list.add(map);
+                    }}
+
+                    else
+                    {
+                        Map map1 = new HashMap();
+                        map1.put("flag",0);
+                        list.add(map1);
                     }
 
                     if (!getActivity().equals(null))

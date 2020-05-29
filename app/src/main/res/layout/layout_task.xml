@@ -12,16 +12,17 @@
         android:background="#ffffff">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            >
+            android:id="@+id/back"
+            android:layout_width="170px"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="8dp">
+
             <ImageView
-                android:layout_width="65px"
-                android:layout_height="65px"
-                android:src="@drawable/back"
-                android:id="@+id/back"/>
+                android:layout_centerInParent="true"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/back" />
         </RelativeLayout>
 
         <TextView
@@ -60,7 +61,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:paddingVertical="18dp">
+        android:paddingVertical="18dp"
+        android:id="@+id/re1">
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
@@ -76,12 +78,17 @@
 
     </RelativeLayout>
 
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -95,12 +102,23 @@
             android:text="项目描述"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="20dp"
-            android:textSize="50px"
+            android:textSize="16dp"
             android:textColor="#808080"/>
 
 
 
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -123,9 +141,20 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text="时间1"
-            android:textSize="20dp"/>
+            android:textSize="17dp"/>
 
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -142,15 +171,27 @@
             android:textColor="#808080"/>
         <TextView
             android:id="@+id/time2"
+            android:textColor="#ff3d4a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text="时间2"
-            android:textSize="20dp"/>
+            android:textSize="17dp"/>
 
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -173,9 +214,20 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text="未完成"
-            android:textSize="20dp"/>
+            android:textSize="17dp"/>
 
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/owner"
@@ -199,11 +251,11 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text="名"
-            android:textSize="20dp"/>
+            android:textSize="17dp"/>
         <com.example.itile.Util.RoundPicture
             android:id="@+id/manager_pic"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/manager"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
@@ -211,12 +263,7 @@
 
 
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp">
@@ -243,20 +290,25 @@
             android:textSize="50px"
             android:textColor="#808080"/>
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
             android:src="@drawable/right"/>
 
     </RelativeLayout>
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/belong"
         android:layout_width="match_parent"
@@ -274,8 +326,8 @@
             android:textColor="#808080"/>
         <ImageView
             android:id="@+id/iv2"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
@@ -287,16 +339,21 @@
             android:layout_toLeftOf="@+id/iv2"
             android:text="项目名"
             android:layout_centerVertical="true"
-            android:textSize="20dp"
+            android:textSize="17dp"
             android:layout_marginRight="5dp"/>
 
     </RelativeLayout>
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/all_task"
@@ -314,8 +371,8 @@
             android:textColor="#808080"/>
         <ImageView
             android:id="@+id/iv3"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
@@ -327,7 +384,7 @@
             android:layout_toLeftOf="@+id/iv3"
             android:text="3"
             android:layout_centerVertical="true"
-            android:textSize="20dp"
+            android:textSize="17dp"
             android:layout_marginRight="5dp"/>
 
     </RelativeLayout>

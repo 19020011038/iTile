@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:padding="10dp">
+
     <RelativeLayout
         android:id="@+id/re"
         android:layout_width="match_parent"
@@ -10,31 +11,31 @@
         android:background="@drawable/side_dark">
 
 
-
         <RelativeLayout
+            android:id="@+id/re1"
             android:layout_width="70dp"
             android:layout_height="30dp"
-            android:background="@drawable/task_back_doing"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="13dp"
-            android:id="@+id/re1">
+            android:background="@drawable/task_back_doing">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="进行中"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:text="进行中" />
 
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/task_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="任务名称"
-            android:textSize="25dp"
             android:layout_below="@+id/re1"
-            android:layout_marginTop="13dp"
             android:layout_marginLeft="15dp"
-            android:id="@+id/task_name"/>
+            android:layout_marginTop="13dp"
+            android:text="任务名称"
+            android:textSize="25dp" />
 
     </RelativeLayout>
 

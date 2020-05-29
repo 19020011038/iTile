@@ -536,6 +536,28 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
+    //日程助手页删除POST
+    public static void postDeleteSchedule(String address, String delete, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("delete",delete)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //日程详情GET
+    public static void getScheduleHelper(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
 
     //个人中心设置页修改信息
     public static void SettingWithOkHttp(String object, String value, okhttp3.Callback callback){

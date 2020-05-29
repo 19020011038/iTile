@@ -2,6 +2,7 @@ package com.example.itile.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -15,7 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.itile.ProjectActivity;
 import com.example.itile.R;
+import com.example.itile.TaskActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -73,9 +76,18 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             viewHolder.p_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(SearchAdapter.this.context,详情.class);
-//                    intent.putExtra(字段名,list.get(position).get("pk").toString());
-//                    context.startActivity(intent);
+                    if(list.get(position).get("type").toString().equals("1")){
+                        Intent intent = new Intent(SearchAdapter.this.context, ProjectActivity.class);
+                        intent.putExtra("project_id",list.get(position).get("pk").toString());
+                        context.startActivity(intent);
+                    }else if(list.get(position).get("type").toString().equals("2")){
+                        Intent intent = new Intent(SearchAdapter.this.context, TaskActivity.class);
+                        intent.putExtra("task_id",list.get(position).get("pk").toString());
+                        intent.putExtra("project_id",list.get(position).get("project").toString());
+                        context.startActivity(intent);
+                    }else {
+
+                    }
                 }
             });
             if(list.get(position).get("state").toString().equals("0")){
@@ -83,7 +95,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 viewHolder.p_state.setTextColor(RED);
             }else {
                 viewHolder.p_state.setText("已完成");
-                viewHolder.p_state.setTextColor(GREEN);
+                viewHolder.p_state.setTextColor(Color.parseColor("#40dc85"));
             }
         }else if(holder instanceof  SearchTaskViewHolder){
             SearchTaskViewHolder viewHolder = (SearchTaskViewHolder) holder;
@@ -106,7 +118,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 viewHolder.t_state.setTextColor(YELLOW);
             }else {
                 viewHolder.t_state.setText("已完成");
-                viewHolder.t_state.setTextColor(GREEN);
+                viewHolder.t_state.setTextColor(Color.parseColor("#40dc85"));
             }
         }else if(holder instanceof TitleViewHolder){
             TitleViewHolder viewHolder = (TitleViewHolder) holder;

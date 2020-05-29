@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,8 +38,8 @@ public class ListSubTaskActivity extends AppCompatActivity {
     private String subtask_id;
     private List<Map<String, Object>> list = new ArrayList<>();
     private RecyclerView recyclerView;
-    private ImageView back;
-
+    private RelativeLayout back;
+    private int flag = 1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_subtask_in_task);
@@ -99,24 +100,42 @@ public class ListSubTaskActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(responseData);
                     JSONArray jsonArray = jsonObject.getJSONArray("subtasks");
+                    if (jsonArray.length()==0)
+                    {
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
+                        flag = 0;
 
-                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-
-                        name = jsonObject1.getString("name");
-                        subtask_id = jsonObject1.getString("id");
-                        state = jsonObject1.getString("state");
-
-                        Map map = new HashMap();
-                        map.put("state", state);
-                        map.put("name", name);
-                        map.put("task_id",task_id);
-                        map.put("project_id",project_id);
-                        map.put("subtask_id",subtask_id);
-
-                        list.add(map);
                     }
+                    else flag=1;
+
+                    if (flag!=0)
+                    {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                            name = jsonObject1.getString("name");
+                            subtask_id = jsonObject1.getString("id");
+                            state = jsonObject1.getString("state");
+
+                            Map map = new HashMap();
+                            map.put("state", state);
+                            map.put("name", name);
+                            map.put("task_id",task_id);
+                            map.put("project_id",project_id);
+                            map.put("subtask_id",subtask_id);
+                            map.put("flag",1);
+                            list.add(map);
+                        }
+                    }
+
+                    else
+                    {
+                        Map map1 = new HashMap();
+                        map1.put("flag",0);
+                        list.add(map1);
+                    }
+
 
 
                     runOnUiThread(new Runnable() {
