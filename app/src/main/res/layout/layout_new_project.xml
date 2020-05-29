@@ -9,8 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="158px"
-        android:background="#ffffff"
-        android:layout_marginTop="25dp">
+        android:background="#ffffff">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -49,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="180px"
         android:background="#ffffff"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:padding="5dp">
 
         <EditText
@@ -68,12 +67,17 @@
 
     </RelativeLayout>
 
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#aaaaaa"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="15dp"/>
+        android:layout_height="1dp"
+        android:background="#ffffff">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#aaaaaa"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -93,7 +97,6 @@
             android:maxLength="100"
             android:maxLines="4"
             />
-
 
 
     </RelativeLayout>

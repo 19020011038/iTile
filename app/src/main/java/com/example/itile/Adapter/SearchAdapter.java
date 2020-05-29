@@ -2,6 +2,7 @@ package com.example.itile.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -94,7 +95,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 viewHolder.p_state.setTextColor(RED);
             }else {
                 viewHolder.p_state.setText("已完成");
-                viewHolder.p_state.setTextColor(GREEN);
+                viewHolder.p_state.setTextColor(Color.parseColor("#40dc85"));
             }
         }else if(holder instanceof  SearchTaskViewHolder){
             SearchTaskViewHolder viewHolder = (SearchTaskViewHolder) holder;
@@ -117,7 +118,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 viewHolder.t_state.setTextColor(YELLOW);
             }else {
                 viewHolder.t_state.setText("已完成");
-                viewHolder.t_state.setTextColor(GREEN);
+                viewHolder.t_state.setTextColor(Color.parseColor("#40dc85"));
             }
         }else if(holder instanceof TitleViewHolder){
             TitleViewHolder viewHolder = (TitleViewHolder) holder;

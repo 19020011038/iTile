@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ProjectHelperActivity extends AppCompatActivity {
-    private ImageView back;
+    private RelativeLayout back;
     private ImageView pic1;
     private ImageView pic2;
     private ImageView all;
@@ -45,8 +46,6 @@ public class ProjectHelperActivity extends AppCompatActivity {
     private ProjectHelperAdapter mAdapter;
     private RefreshLayout refreshLayout;
     private boolean flag2;
-
-
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -63,7 +62,7 @@ public class ProjectHelperActivity extends AppCompatActivity {
         mAdapter = new ProjectHelperAdapter(ProjectHelperActivity.this, list);
         recyclerView.setAdapter(mAdapter);
 
-        back = (ImageView)findViewById(R.id.back_from_project_helper);
+        back =findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
