@@ -149,7 +149,7 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void run() {
                             if (flag_schedule.equals("0")){
-                                hongdian1.setImageResource(R.drawable.hongdian);
+                                hongdian1.setImageResource(R.drawable.baise);
                                 hongdian1.invalidate();
                             }else {
                                 hongdian1.setImageResource(R.drawable.hongdian);
@@ -157,7 +157,7 @@ public class HomeFragment extends Fragment {
                             }
                             content1.setText(description1);
                             if (flag_project.equals("0")){
-                                hongdian2.setImageResource(R.drawable.hongdian);
+                                hongdian2.setImageResource(R.drawable.baise);
                                 hongdian2.invalidate();
                             }else {
                                 Log.d("hongdian",flag_project);
@@ -168,7 +168,7 @@ public class HomeFragment extends Fragment {
                             }
                             content2.setText(description2);
                             if (flag_task.equals("0")){
-                                hongdian3.setImageResource(R.drawable.hongdian);
+                                hongdian3.setImageResource(R.drawable.baise);
                                 hongdian3.invalidate();
                             }else {
                                 hongdian3.setImageResource(R.drawable.hongdian);

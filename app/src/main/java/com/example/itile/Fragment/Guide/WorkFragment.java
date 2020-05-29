@@ -186,7 +186,7 @@ public class WorkFragment extends Fragment {
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
                             recyclerView.setAdapter(new WorkAdapter(getActivity(), list));//绑定适配器
                             if (create != 0){
-                                recyclerView.smoothScrollToPosition(num - 1);
+                                recyclerView.smoothScrollToPosition(num);
                             }else {
                                 create++;
                             }

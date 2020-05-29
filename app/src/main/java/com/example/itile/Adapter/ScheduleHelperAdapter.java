@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +44,7 @@ public class ScheduleHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private Context context;
     private Handler handler;
     private int delete_position;
+    private Handler handler_img;
 
     public List<Map<String, Object>> getData() {
         return list;
@@ -55,6 +58,7 @@ public class ScheduleHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public ScheduleHelperAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
         this.list = list;
+        this.handler_img = handler_img;
     }
 
     @Override
@@ -84,10 +88,24 @@ public class ScheduleHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             if (list.get(position).get("state").toString().equals("1")) {
                 viewHolder.point.setImageResource(R.drawable.point2);
                 viewHolder.point.invalidate();
+
             } else {
                 viewHolder.point.setImageResource(R.drawable.point1);
                 viewHolder.point.invalidate();
+
             }
+            handler_img = new Handler(context.getMainLooper()) {
+                public void handleMessage(Message message) {
+                    super.handleMessage(message);
+                    if (message.what == 1) {
+                        viewHolder.point.setImageResource(R.drawable.point2);
+                        viewHolder.point.invalidate();
+                    }else {
+                        viewHolder.point.setImageResource(R.drawable.point1);
+                        viewHolder.point.invalidate();
+                    }
+                }
+            };
             viewHolder.time1.setText(list.get(position).get("starttime").toString().substring(11, 16));
             viewHolder.time2.setText(list.get(position).get("endtime").toString().substring(11, 16));
             viewHolder.description.setText(list.get(position).get("description").toString());
@@ -96,6 +114,7 @@ public class ScheduleHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 public void onClick(View v) {
                     Intent intent = new Intent(ScheduleHelperAdapter.this.context, ScheduleDetailActivity.class);
                     intent.putExtra("pk", list.get(position).get("pk").toString());
+                    intent.putExtra("position",String.valueOf(position));
                     context.startActivity(intent);
                 }
             });
@@ -190,6 +209,11 @@ public class ScheduleHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 super.handleMessage(message);
                 if (true) {
                     list.remove(delete_position);
+                    if(list.size() == 0){
+                        Map map = new HashMap();
+                        map.put("type",0);
+                        list.add(map);
+                    }
                     notifyDataSetChanged();
                     Toast.makeText(ScheduleHelperAdapter.this.context, "删除成功！", Toast.LENGTH_SHORT).show();
 
@@ -197,6 +221,7 @@ public class ScheduleHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         };
     }
+
 
 
 }

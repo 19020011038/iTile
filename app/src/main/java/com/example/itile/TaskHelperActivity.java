@@ -92,6 +92,10 @@ public class TaskHelperActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!flag){
+                    all.setVisibility(View.VISIBLE);
+                    all.setClickable(true);
+                    all.setImageResource(R.drawable.all);
+                    all.invalidate();
                     list.clear();
                     flag = true;
                     page = 1;
@@ -107,6 +111,8 @@ public class TaskHelperActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(flag){
+                    all.setClickable(false);
+                    all.setVisibility(View.INVISIBLE);
                     list.clear();
                     flag = false;
                     page = 1;
@@ -122,7 +128,11 @@ public class TaskHelperActivity extends AppCompatActivity {
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postTaskHelper2("http://118.190.245.170/worktile/taskhelper/","1");
+                if ("[{type=2}]".equals(String.valueOf(list))) {
+                    Toast.makeText(TaskHelperActivity.this, "没有已读消息哦~", Toast.LENGTH_SHORT).show();
+                } else {
+                    postTaskHelper2("http://118.190.245.170/worktile/taskhelper/","1");
+                }
             }
         });
 
@@ -205,6 +215,7 @@ public class TaskHelperActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            getTask("http://118.190.245.170/worktile/taskhelper/");
                             if (flag2) {
                                 refreshLayout.finishLoadMore(3000);
                                 refreshLayout.setFooterHeight(200);
@@ -260,6 +271,33 @@ public class TaskHelperActivity extends AppCompatActivity {
                             }else {
                                 Toast.makeText(TaskHelperActivity.this,"操作失败！",Toast.LENGTH_SHORT).show();
                             }
+                        }
+                    });
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                }
+            }
+        });
+    }
+    public void getTask(String address) {
+        HttpUtil.getProjectorTask(address, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //得到服务器返回的具体内容
+                String responseData = response.body().string();
+                Log.d("任务助手GET",responseData);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseData);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
                         }
                     });
                 } catch (JSONException e) {

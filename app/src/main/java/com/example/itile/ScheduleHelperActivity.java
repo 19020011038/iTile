@@ -1,6 +1,8 @@
 package com.example.itile;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,10 +39,11 @@ import okhttp3.Response;
 public class ScheduleHelperActivity extends AppCompatActivity {
     private RelativeLayout back;
     private RecyclerView recyclerView;
-    List<Map<String, Object>> list = new ArrayList<>();
+    static List<Map<String, Object>> list = new ArrayList<>();
     private RefreshLayout refreshLayout;
     private int page = 1;
-    private ScheduleHelperAdapter mAdapter;
+    static private ScheduleHelperAdapter mAdapter;
+    static private Handler handler_img;
 
 
     @Override
@@ -51,7 +54,6 @@ public class ScheduleHelperActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-
         refreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout_schedule_helper);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_schedule_helper);
         LinearLayoutManager manager = new LinearLayoutManager(ScheduleHelperActivity.this, LinearLayoutManager.VERTICAL, false);
@@ -59,10 +61,12 @@ public class ScheduleHelperActivity extends AppCompatActivity {
         mAdapter = new ScheduleHelperAdapter(ScheduleHelperActivity.this, list);
         recyclerView.setAdapter(mAdapter);
 
+
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                list.clear();
                 finish();
             }
         });
@@ -73,6 +77,7 @@ public class ScheduleHelperActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -89,6 +94,13 @@ public class ScheduleHelperActivity extends AppCompatActivity {
                 getScheduleHelper("http://118.190.245.170/worktile/schedulehelper/");
             }
         });
+        Log.d("123456",String.valueOf(list));
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        list.clear();
+        finish();
     }
 
     public void postScheduleHelper(String address, String page) {
@@ -244,5 +256,28 @@ public class ScheduleHelperActivity extends AppCompatActivity {
         });
     }
 
+public static void change_state(int position,int state){
+    String pk = list.get(position).get("pk").toString();
+    String starttime = list.get(position).get("starttime").toString();
+    String endtime = list.get(position).get("endtime").toString();
+    String description = list.get(position).get("description").toString();
+
+    Map map = new HashMap();
+    map.put("pk", pk);
+    map.put("starttime", starttime);
+    map.put("endtime", endtime);
+    map.put("state", state);
+    map.put("description", description);
+    map.put("type",1);
+
+    list.remove(position);
+    list.add(position,map);
+    Log.d("list",String.valueOf(list));
+
+    mAdapter.notifyDataSetChanged();
+}
+static void show1(){
+
+}
 
 }

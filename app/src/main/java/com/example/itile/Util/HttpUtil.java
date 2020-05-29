@@ -549,6 +549,19 @@ public class HttpUtil {
                 .build();
         client.newCall(request).enqueue(callback);
     }
+    //项目助手，任务助手页删除POST
+    public static void postDelete(String address, String delete, okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("delete",delete)
+                .build();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
     //日程详情GET
     public static void getScheduleHelper(String address,okhttp3.Callback callback){
         OkHttpClient client = new OkHttpClient();
@@ -569,6 +582,15 @@ public class HttpUtil {
                 .url("http://118.190.245.170/worktile/userinfo/")
                 .header("Cookie",SharedPreferencesUtil.getCookie())
                 .post(body)
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+    //项目、任务助手GET
+    public static void getProjectorTask(String address,okhttp3.Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .header("Cookie",SharedPreferencesUtil.getCookie())
                 .build();
         client.newCall(request).enqueue(callback);
     }
