@@ -65,6 +65,8 @@ dependencies {
     //gson依赖
     implementation 'com.google.code.gson:gson:2.8.4'
 
+    //新日历依赖
+    implementation 'com.necer.ncalendar:ncalendar:5.0.0'
 
     //圆形头像依赖
 //    implementation 'de.hdodenhof:circleimageview:2.2.0'
