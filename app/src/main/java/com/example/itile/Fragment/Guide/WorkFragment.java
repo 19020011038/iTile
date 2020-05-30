@@ -388,7 +388,7 @@ public class WorkFragment extends Fragment {
 //                            }else {
 //                                create++;
 //                            }
-//                            recyclerView.smoothScrollToPosition(num);
+                            recyclerView.smoothScrollToPosition(list.size());
                         }
                     });
                 } catch (JSONException e) {

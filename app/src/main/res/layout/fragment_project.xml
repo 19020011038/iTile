@@ -51,7 +51,7 @@
     </RelativeLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout_home_helper"
+        android:id="@+id/refreshLayout_project"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

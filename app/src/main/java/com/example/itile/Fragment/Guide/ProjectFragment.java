@@ -3,6 +3,7 @@ package com.example.itile.Fragment.Guide;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import com.example.itile.NewProjectActivity;
 import com.example.itile.R;
 import com.example.itile.AllTaskActivity;
 import com.example.itile.Util.HttpUtil;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +49,7 @@ public class ProjectFragment extends Fragment {
     private String project_id;
     private RecyclerView recyclerView;
     private int flag = 1;
+    private RefreshLayout refreshLayout;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -58,7 +62,7 @@ public class ProjectFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        refreshLayout = getActivity().findViewById(R.id.refreshLayout_project);
         task = getActivity().findViewById(R.id.my_task);
         form = getActivity().findViewById(R.id.my_form);
         imageView = getActivity().findViewById(R.id.add_new);
@@ -92,6 +96,16 @@ public class ProjectFragment extends Fragment {
         list.clear();
 
         ShowAllProjectWithOkHttp("http://118.190.245.170/worktile/work");
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                list.clear();
+                ShowAllProjectWithOkHttp("http://118.190.245.170/worktile/work");
+                Log.d("hahahshuaxin","shuaxin");
+                refreshLayout.finishRefresh(2500);
+            }
+        });
 
     }
 
