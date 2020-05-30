@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.itile.R;
+import com.example.itile.SubTaskActivity;
 import com.example.itile.TaskActivity;
 
 import java.util.List;
@@ -36,19 +37,43 @@ public class UpcomingAllTaskAdapter extends RecyclerView.Adapter<UpcomingAllTask
     @Override
     public void onBindViewHolder(@NonNull UpcomingAllTaskAdapter.ViewHolder holder, final int position) {
         String name = list.get(position).get("name").toString();
-        String id = list.get(position).get("id").toString();
-        String project = list.get(position).get("project").toString();
+        String project_id = list.get(position).get("project").toString();
+        String model = list.get(position).get("model").toString();
+
+        if (model.equals("worktile.sontask"))
+        {
+            String task_id = list.get(position).get("task").toString();
+            String subtask_id = list.get(position).get("id").toString();
+
+            holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, SubTaskActivity.class);
+                    intent.putExtra("task_id",task_id);
+                    intent.putExtra("project_id",project_id);
+                    intent.putExtra("subtask_id",subtask_id);
+                    context.startActivity(intent);
+                }
+            });
+
+        }
+        else {
+            String task_id = list.get(position).get("id").toString();
+            holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, TaskActivity.class);
+                    intent.putExtra("task_id",task_id);
+                    intent.putExtra("project_id",project_id);
+                    context.startActivity(intent);
+                }
+            });
+
+        }
+
         holder.mName.setText(name);
 
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, TaskActivity.class);
-                intent.putExtra("task_id",id);
-                intent.putExtra("project_id",project);
-                context.startActivity(intent);
-            }
-        });
+
 
     }
     @Override

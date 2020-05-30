@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -51,6 +52,7 @@ public class FinishFragment extends Fragment {
     private String endtime;
     private String manager;
     private String user;
+    private String task1;
 
     public static FinishFragment newInstance(int index) {
         FinishFragment fragment = new FinishFragment();
@@ -66,8 +68,7 @@ public class FinishFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_task_finish, container, false);
         recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
-        list3.clear();
-        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
+
         return root;
 
     }
@@ -77,7 +78,8 @@ public class FinishFragment extends Fragment {
         super.onResume();
 
 
-
+        list3.clear();
+        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
 
 
 
@@ -92,8 +94,12 @@ public class FinishFragment extends Fragment {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                //在这里对异常情况进行处理
-                //       Toast.makeText(getActivity(),"获取图书信息失败，请检查您的网络",Toast.LENGTH_LONG).show();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -115,7 +121,10 @@ public class FinishFragment extends Fragment {
                         String model = schedule.getString("model");
                         String id = schedule.getString("pk");
                         JSONObject fields = schedule.getJSONObject("fields");
-
+                        if (model.equals("worktile.sontask"))
+                        {
+                            task1 = fields.getString("task");
+                        }
                         name = fields.getString("name");
                         state = fields.getString("state");
                         ifread = fields.getString("ifread");
@@ -129,7 +138,10 @@ public class FinishFragment extends Fragment {
 
 
                         Map map = new HashMap();
-
+                        if (model.equals("worktile.sontask"))
+                        {
+                            map.put("task",task1);
+                        }
                         map.put("model", model);
                         map.put("id",id);
                         map.put("name",name);
