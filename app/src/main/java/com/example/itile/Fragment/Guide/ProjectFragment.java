@@ -93,7 +93,6 @@ public class ProjectFragment extends Fragment {
 
         ShowAllProjectWithOkHttp("http://118.190.245.170/worktile/work");
 
-
     }
 
     public void ShowAllProjectWithOkHttp(String address) {
