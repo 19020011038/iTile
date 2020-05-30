@@ -147,8 +147,8 @@
     </com.necer.calendar.Miui9Calendar>
 
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:src="@drawable/new_project"
         android:id="@+id/work_new_schedule"
         android:layout_alignParentRight="true"

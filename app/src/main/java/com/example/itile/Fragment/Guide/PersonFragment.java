@@ -57,9 +57,9 @@ public class PersonFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private Map map;
-    private HomeAdapter mAdapter;
+    static private HomeAdapter mAdapter;
 
-    List<Map<String, Object>> list = new ArrayList<>();
+    static List<Map<String, Object>> list = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -231,5 +231,26 @@ public class PersonFragment extends Fragment {
 
             }//标签页
         });
+    }
+    public static void change_state3(int position,int state){
+        Log.d("qshnb6666","qshnb666");
+        String pk = list.get(position).get("task_id").toString();
+        String starttime = list.get(position).get("time1").toString();
+        String endtime = list.get(position).get("time2").toString();
+        String description = list.get(position).get("d").toString();
+
+        Map map = new HashMap();
+        map.put("task_id", pk);
+        map.put("time1", starttime);
+        map.put("time2", endtime);
+        map.put("state", state);
+        map.put("d", description);
+
+
+        list.remove(position);
+        list.add(position,map);
+        Log.d("list",String.valueOf(list));
+
+        mAdapter.notifyDataSetChanged();
     }
 }
