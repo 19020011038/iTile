@@ -6,221 +6,221 @@
     android:orientation="vertical">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout_home_helper"
+        android:id="@+id/refreshLayout_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <com.scwang.smartrefresh.layout.header.ClassicsHeader
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:id="@+id/rel_1"
-        android:layout_width="match_parent"
-        android:layout_height="170px">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="消息"
-                android:textSize="50px"
-                android:textColor="#454545"
-                android:id="@+id/text"/>
-            <View
-                android:layout_width="35dp"
-                android:layout_height="6dp"
-                android:layout_below="@id/text"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/bottom"/>
-        </RelativeLayout>
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/find"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dp"
-            android:id="@+id/home_search"/>
-
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/rel_2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="150px"
-        android:layout_below="@+id/rel_1">
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:id="@+id/re1">
-
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:src="@drawable/logo_schedule"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:id="@+id/pic1"/>
+            android:layout_height="match_parent">
 
             <RelativeLayout
-                android:id="@+id/rl1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/pic1"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp">
+                android:id="@+id/rel_1"
+                android:layout_width="match_parent"
+                android:layout_height="170px">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="日程助手"
-                    android:textSize="45px"
-                    android:id="@+id/text1"/>
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="消息"
+                        android:textSize="50px"
+                        android:textColor="#454545"
+                        android:id="@+id/text"/>
+                    <View
+                        android:layout_width="35dp"
+                        android:layout_height="6dp"
+                        android:layout_below="@id/text"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/bottom"/>
+                </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="一些内容..."
-                    android:textSize="45px"
-                    android:layout_below="@id/text1"
-                    android:layout_marginTop="5dp"
-                    android:maxLength="10"
-                    android:ellipsize="end"
-                    android:id="@+id/schedule_content"/>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/find"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="18dp"
+                    android:id="@+id/home_search"/>
+
 
             </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/hongdian1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_toRightOf="@id/rl1"
-                 />
-
-
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:id="@+id/re2"
-            android:layout_below="@id/re1">
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:src="@drawable/logo_project"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:id="@+id/pic2"/>
 
             <RelativeLayout
-                android:id="@+id/rl2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/pic2"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp">
+                android:id="@+id/rel_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="150px"
+                android:layout_below="@+id/rel_1">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="项目助手"
-                    android:textSize="45px"
-                    android:id="@+id/text2"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:id="@+id/re1">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="一些内容..."
-                    android:textSize="45px"
-                    android:layout_below="@id/text2"
-                    android:layout_marginTop="5dp"
-                    android:maxLength="10"
-                    android:ellipsize="end"
-                    android:id="@+id/project_content"/>
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/logo_schedule"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:id="@+id/pic1"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rl1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/pic1"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="日程助手"
+                            android:textSize="45px"
+                            android:id="@+id/text1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="一些内容..."
+                            android:textSize="45px"
+                            android:layout_below="@id/text1"
+                            android:layout_marginTop="5dp"
+                            android:maxLength="10"
+                            android:ellipsize="end"
+                            android:id="@+id/schedule_content"/>
+
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/hongdian1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_toRightOf="@id/rl1"
+                        />
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:id="@+id/re2"
+                    android:layout_below="@id/re1">
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/logo_project"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:id="@+id/pic2"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rl2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/pic2"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="项目助手"
+                            android:textSize="45px"
+                            android:id="@+id/text2"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="一些内容..."
+                            android:textSize="45px"
+                            android:layout_below="@id/text2"
+                            android:layout_marginTop="5dp"
+                            android:maxLength="10"
+                            android:ellipsize="end"
+                            android:id="@+id/project_content"/>
+
+                    </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_toRightOf="@id/rl2"
+                        android:id="@+id/hongdian2"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:id="@+id/re3"
+                    android:layout_below="@id/re2">
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/logo_task"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:id="@+id/pic3"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rl3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/pic3"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="任务助手"
+                            android:textSize="45px"
+                            android:id="@+id/text3"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="一些内容..."
+                            android:textSize="45px"
+                            android:maxLength="10"
+                            android:ellipsize="end"
+                            android:layout_below="@id/text3"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/task_content"/>
+
+                    </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_toRightOf="@id/rl3"
+                        android:id="@+id/hongdian3"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"/>
+
+                </RelativeLayout>
 
             </RelativeLayout>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_toRightOf="@id/rl2"
-                android:id="@+id/hongdian2"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"/>
 
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:id="@+id/re3"
-            android:layout_below="@id/re2">
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:src="@drawable/logo_task"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:id="@+id/pic3"/>
-
-            <RelativeLayout
-                android:id="@+id/rl3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/pic3"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="任务助手"
-                    android:textSize="45px"
-                    android:id="@+id/text3"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="一些内容..."
-                    android:textSize="45px"
-                    android:maxLength="10"
-                    android:ellipsize="end"
-                    android:layout_below="@id/text3"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/task_content"/>
-
-            </RelativeLayout>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_toRightOf="@id/rl3"
-                android:id="@+id/hongdian3"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"/>
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    </RelativeLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

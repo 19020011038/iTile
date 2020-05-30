@@ -27,6 +27,8 @@ import com.example.itile.SettingActivity;
 import com.example.itile.TaskHelperActivity;
 import com.example.itile.Util.HttpUtil;
 import com.google.android.material.tabs.TabLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,6 +59,7 @@ public class HomeFragment extends Fragment {
     private TextView content1;
     private TextView content2;
     private TextView content3;
+    private RefreshLayout refreshLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d("test","test");
+        refreshLayout = getActivity().findViewById(R.id.refreshLayout_home);
         content1 = getActivity().findViewById(R.id.schedule_content);
         content2 = getActivity().findViewById(R.id.project_content);
         content3 = getActivity().findViewById(R.id.task_content);
@@ -114,6 +118,13 @@ public class HomeFragment extends Fragment {
             }
         });
         getHelper("http://118.190.245.170/worktile/helper/");
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                refreshLayout.finishRefresh(2000);
+                getHelper("http://118.190.245.170/worktile/helper/");
+            }
+        });
     }
 
     public void getHelper(String address) {
