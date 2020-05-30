@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class NewProjectActivity extends AppCompatActivity {
     private String result;
     private String header;
     private SharedPreferencesUtil check;
+    private ImageView back;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,13 @@ public class NewProjectActivity extends AppCompatActivity {
         check = SharedPreferencesUtil.getInstance(getApplicationContext());
         finish = findViewById(R.id.finish);
         name = findViewById(R.id.name);
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         tip = findViewById(R.id.tip);
         //输入框属性
         tip.addTextChangedListener(new TextWatcher() {

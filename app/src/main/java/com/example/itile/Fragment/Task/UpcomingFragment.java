@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,7 @@ public class UpcomingFragment extends Fragment {
     private String ifread;
     private String description;
     private String project;
+    private String task1;
 
     private String starttime;
     private String endtime;
@@ -66,8 +68,7 @@ public class UpcomingFragment extends Fragment {
 
         recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
 
-        list.clear();
-        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
+
         return root;
 
     }
@@ -75,8 +76,8 @@ public class UpcomingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-
+        list.clear();
+        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
 
 
 
@@ -115,6 +116,12 @@ public class UpcomingFragment extends Fragment {
                         String id = schedule.getString("pk");
                         JSONObject fields = schedule.getJSONObject("fields");
 
+                        if (model.equals("worktile.sontask"))
+                        {
+                            task1 = fields.getString("task");
+                        }
+
+
                         name = fields.getString("name");
                         state = fields.getString("state");
                         ifread = fields.getString("ifread");
@@ -128,6 +135,11 @@ public class UpcomingFragment extends Fragment {
 
 
                         Map map = new HashMap();
+
+                        if (model.equals("worktile.sontask"))
+                        {
+                            map.put("task",task1);
+                        }
 
                         map.put("model", model);
                         map.put("id",id);

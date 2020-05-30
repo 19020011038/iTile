@@ -51,6 +51,7 @@ public class DoingFragment extends Fragment {
     private String endtime;
     private String manager;
     private String user;
+    private String task1;
 
     public static DoingFragment newInstance(int index) {
         DoingFragment fragment = new DoingFragment();
@@ -66,8 +67,7 @@ public class DoingFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_task_doing, container, false);
         recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
 
-        list2.clear();
-        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
+
 
 
         return root;
@@ -78,7 +78,8 @@ public class DoingFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-
+        list2.clear();
+        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
 
 
     }
@@ -114,6 +115,11 @@ public class DoingFragment extends Fragment {
                         String id = schedule.getString("pk");
                         JSONObject fields = schedule.getJSONObject("fields");
 
+                        Log.d("model",model);
+                        if (model.equals("worktile.sontask"))
+                        {
+                            task1 = fields.getString("task");
+                        }
                         name = fields.getString("name");
                         state = fields.getString("state");
                         ifread = fields.getString("ifread");
@@ -127,7 +133,10 @@ public class DoingFragment extends Fragment {
 
 
                         Map map = new HashMap();
-
+                        if (model.equals("worktile.sontask"))
+                        {
+                            map.put("task",task1);
+                        }
                         map.put("model", model);
                         map.put("id",id);
                         map.put("name",name);
