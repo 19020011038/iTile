@@ -3,8 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ffffff">
+
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/re1"
         android:layout_width="match_parent"
         android:layout_height="170px">
 
@@ -42,34 +49,110 @@
     </RelativeLayout>
 
 
-    <CalendarView
-        android:id="@+id/calendarview"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:firstDayOfWeek="1"
-        android:focusedMonthDateColor="#f00"
-        android:selectedWeekBackgroundColor="#aff"
-        android:shownWeekCount="6"
-        android:unfocusedMonthDateColor="#f9f"
-        android:weekSeparatorLineColor="#ff0" />
+<!--    <CalendarView-->
+<!--        android:id="@+id/calendarview"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:firstDayOfWeek="1"-->
+<!--        android:focusedMonthDateColor="#f00"-->
+<!--        android:selectedWeekBackgroundColor="#aff"-->
+<!--        android:shownWeekCount="6"-->
+<!--        android:unfocusedMonthDateColor="#f9f"-->
+<!--        android:weekSeparatorLineColor="#ff0" />-->
 
-    <RelativeLayout
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginBottom="150px"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:descendantFocusability="afterDescendants">-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recyclerView_work"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
+<!--        <ImageView-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:src="@drawable/new_project"-->
+<!--            android:id="@+id/work_new_schedule"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginTop="150dp"/>-->
+<!--    </RelativeLayout>-->
+
+        <RelativeLayout
+            android:id="@+id/re2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/re1"
+            android:background="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="12dp">
+            <TextView
+                android:id="@+id/year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2001"
+                android:textSize="17dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/year"
+                android:text="年"
+                android:textSize="17dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/tv1"
+                android:textSize="17dp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/month"
+                android:text="月"
+                android:textSize="17dp">
+            </TextView>
+        </RelativeLayout>
+
+    <com.necer.calendar.Miui9Calendar
+        android:id="@+id/ncalendar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="150px"
-        android:layout_marginTop="15dp"
-        android:descendantFocusability="afterDescendants">
+        android:layout_below="@+id/re2"
+        >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_work"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/new_project"
-            android:id="@+id/work_new_schedule"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="150dp"/>
+
+<!--        <ImageView-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:src="@drawable/new_project"-->
+<!--            android:id="@+id/work_new_schedule"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginTop="150dp"/>-->
+    </com.necer.calendar.Miui9Calendar>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/new_project"
+        android:id="@+id/work_new_schedule"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="175dp"/>
     </RelativeLayout>
 
 </LinearLayout>
