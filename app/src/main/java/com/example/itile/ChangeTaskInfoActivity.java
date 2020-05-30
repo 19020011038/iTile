@@ -271,6 +271,10 @@ public class ChangeTaskInfoActivity extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
+                for(int i=s.length();i>0;i--){
+                    if(s.subSequence(i-1,i).toString().equals("\n"))
+                        s.replace(i-1,i,"");
+                }
             }
         });
     }

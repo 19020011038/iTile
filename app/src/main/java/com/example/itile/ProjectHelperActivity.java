@@ -48,11 +48,11 @@ public class ProjectHelperActivity extends AppCompatActivity {
     private boolean flag2;
 
     @Override
-    protected void onCreate (Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_project_helper);
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null)
+        if (actionBar != null)
             actionBar.hide();
         page = 1;
         refreshLayout = (RefreshLayout) findViewById(R.id.refreshLayout_project_helper);
@@ -62,33 +62,37 @@ public class ProjectHelperActivity extends AppCompatActivity {
         mAdapter = new ProjectHelperAdapter(ProjectHelperActivity.this, list);
         recyclerView.setAdapter(mAdapter);
 
-        back =findViewById(R.id.back);
+        back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        pic1 = (ImageView)findViewById(R.id.weidu);
-        pic2 = (ImageView)findViewById(R.id.yidu);
-        all = (ImageView)findViewById(R.id.project_helper_all);
+        pic1 = (ImageView) findViewById(R.id.weidu);
+        pic2 = (ImageView) findViewById(R.id.yidu);
+        all = (ImageView) findViewById(R.id.project_helper_all);
 
         pic1.setImageResource(R.drawable.weidu1);
         pic1.invalidate();
         pic2.setImageResource(R.drawable.yidu0);
         pic2.invalidate();
         flag = true;
-        postProjectHelper("http://118.190.245.170/worktile/projecthelper/","0",String.valueOf(page));
-
+        postProjectHelper("http://118.190.245.170/worktile/projecthelper/", "0", String.valueOf(page));
     }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
         pic1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!flag){
+                if (!flag) {
+                    all.setVisibility(View.VISIBLE);
+                    all.setClickable(true);
+                    all.setImageResource(R.drawable.all);
+                    all.invalidate();
                     list.clear();
                     flag = true;
                     page = 1;
@@ -96,14 +100,16 @@ public class ProjectHelperActivity extends AppCompatActivity {
                     pic1.invalidate();
                     pic2.setImageResource(R.drawable.yidu0);
                     pic2.invalidate();
-                    postProjectHelper("http://118.190.245.170/worktile/projecthelper/","0",String.valueOf(page));
+                    postProjectHelper("http://118.190.245.170/worktile/projecthelper/", "0", String.valueOf(page));
                 }
             }
         });
         pic2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(flag){
+                if (flag) {
+                    all.setClickable(false);
+                    all.setVisibility(View.INVISIBLE);
                     list.clear();
                     flag = false;
                     page = 1;
@@ -111,7 +117,7 @@ public class ProjectHelperActivity extends AppCompatActivity {
                     pic1.invalidate();
                     pic2.setImageResource(R.drawable.yidu1);
                     pic2.invalidate();
-                    postProjectHelper("http://118.190.245.170/worktile/projecthelper/","1",String.valueOf(page));
+                    postProjectHelper("http://118.190.245.170/worktile/projecthelper/", "1", String.valueOf(page));
                 }
             }
         });
@@ -119,7 +125,11 @@ public class ProjectHelperActivity extends AppCompatActivity {
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postProjectHelper2("http://118.190.245.170/worktile/projecthelper/","1");
+                if ("[{type=2}]".equals(String.valueOf(list))) {
+                    Toast.makeText(ProjectHelperActivity.this, "没有已读消息哦~", Toast.LENGTH_SHORT).show();
+                } else {
+                    postProjectHelper2("http://118.190.245.170/worktile/projecthelper/", "1");
+                }
             }
         });
 
@@ -128,31 +138,32 @@ public class ProjectHelperActivity extends AppCompatActivity {
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 page++;
                 String choice;
-                if(flag)
+                if (flag)
                     choice = "0";
                 else
                     choice = "1";
-                postProjectHelper("http://118.190.245.170/worktile/projecthelper/",choice,String.valueOf(page));
+                postProjectHelper("http://118.190.245.170/worktile/projecthelper/", choice, String.valueOf(page));
             }
         });
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 String choice;
-                if(flag)
+                if (flag)
                     choice = "0";
                 else
                     choice = "1";
                 refreshLayout.finishRefresh(2000);
                 page = 1;
                 list.clear();
-                postProjectHelper("http://118.190.245.170/worktile/projecthelper/",choice,String.valueOf(page));
+                postProjectHelper("http://118.190.245.170/worktile/projecthelper/", choice, String.valueOf(page));
             }
         });
 
     }
-    public void postProjectHelper(String address,String choice,String page) {
-        HttpUtil.postProjectHelper(address, choice,page,new Callback() {
+
+    public void postProjectHelper(String address, String choice, String page) {
+        HttpUtil.postProjectHelper(address, choice, page, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
@@ -172,12 +183,12 @@ public class ProjectHelperActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(responseData);
                     String warning = jsonObject.getString("warning");
-                    if(!warning.equals("1")){
+                    if (!warning.equals("1")) {
                         flag2 = false;
-                    }else {
+                    } else {
                         flag2 = true;
                         JSONArray jsonArray = jsonObject.getJSONArray("project");
-                        if(!String.valueOf(jsonArray).equals("[]")){
+                        if (!String.valueOf(jsonArray).equals("[]")) {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject schedule = jsonArray.getJSONObject(i);
                                 String pk = schedule.getString("pk");
@@ -187,20 +198,21 @@ public class ProjectHelperActivity extends AppCompatActivity {
                                 Map map = new HashMap();
                                 map.put("pk", pk);
                                 map.put("name", name);
-                                map.put("type",1);
+                                map.put("type", 1);
 
                                 list.add(map);
                             }
-                        }else {
+                        } else {
                             Map map1 = new HashMap();
-                            map1.put("type",2);
+                            map1.put("type", 2);
                             list.add(map1);
-                            Log.d("hahahahahhaha",String.valueOf(jsonArray));
+                            Log.d("hahahahahhaha", String.valueOf(jsonArray));
                         }
                     }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            getProject("http://118.190.245.170/worktile/projecthelper/");
                             if (flag2) {
                                 refreshLayout.finishLoadMore(3000);
                                 refreshLayout.setFooterHeight(200);
@@ -220,8 +232,9 @@ public class ProjectHelperActivity extends AppCompatActivity {
             }
         });
     }
-    public void postProjectHelper2(String address,String read) {
-        HttpUtil.postProjectHelper2(address, read,new Callback() {
+
+    public void postProjectHelper2(String address, String read) {
+        HttpUtil.postProjectHelper2(address, read, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
@@ -244,17 +257,17 @@ public class ProjectHelperActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if(warning.equals("1")){
-                               if(flag){
-                                   list.clear();
-                                   page = 1;
-                                   Toast.makeText(ProjectHelperActivity.this,"操作成功！",Toast.LENGTH_SHORT).show();
-                                   postProjectHelper("http://118.190.245.170/worktile/projecthelper/","0",String.valueOf(page));
-                               }else {
-                                   Toast.makeText(ProjectHelperActivity.this,"操作成功，请刷新后查看！",Toast.LENGTH_SHORT).show();
-                               }
-                            }else {
-                                Toast.makeText(ProjectHelperActivity.this,"操作失败！",Toast.LENGTH_SHORT).show();
+                            if (warning.equals("1")) {
+                                if (flag) {
+                                    list.clear();
+                                    page = 1;
+                                    Toast.makeText(ProjectHelperActivity.this, "操作成功！", Toast.LENGTH_SHORT).show();
+                                    postProjectHelper("http://118.190.245.170/worktile/projecthelper/", "0", String.valueOf(page));
+                                } else {
+                                    Toast.makeText(ProjectHelperActivity.this, "操作成功，请刷新后查看！", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(ProjectHelperActivity.this, "操作失败！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -266,4 +279,33 @@ public class ProjectHelperActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void getProject(String address) {
+        HttpUtil.getProjectorTask(address, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //得到服务器返回的具体内容
+                String responseData = response.body().string();
+                Log.d("项目助手GET",responseData);
+                try {
+                    JSONObject jsonObject = new JSONObject(responseData);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                        }
+                    });
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                }
+            }
+        });
+    }
+
 }

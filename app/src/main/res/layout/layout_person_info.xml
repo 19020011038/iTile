@@ -326,11 +326,11 @@
                 android:layout_marginTop="18dp"
                 android:layout_marginBottom="18dp"
                 android:text="简介"
-                android:textSize="48px"
+                android:textSize="46px"
                 android:layout_marginLeft="12dip"
                 android:textColor="#808080"
                 android:layout_marginRight="15dip"
-                android:maxLines="3"
+                android:maxLines="4"
                 android:ellipsize="end">
             </TextView>
         </RelativeLayout>

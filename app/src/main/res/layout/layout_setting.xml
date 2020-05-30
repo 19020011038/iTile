@@ -116,7 +116,7 @@
                         android:id="@+id/tv1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dip"
+                        android:layout_marginLeft="18dip"
                         android:text="头像"
                         android:textSize="46px"
                         android:textColor="#434343"
@@ -145,12 +145,12 @@
                     </TextView>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/right"
-                        android:layout_marginRight="12dp">
+                        android:layout_marginRight="15dp">
                     </ImageView>
                 </RelativeLayout>
 
@@ -172,7 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dip"
-                        android:layout_marginLeft="15dip"
+                        android:layout_marginLeft="18dip"
                         android:text="昵称"
                         android:textColor="#434343"
                         android:textSize="46px"
@@ -190,12 +190,12 @@
                     </TextView>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/right"
-                        android:layout_marginRight="12dp">
+                        android:layout_marginRight="15dp">
                     </ImageView>
 
                     <TextView
@@ -224,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dip"
-                        android:layout_marginLeft="15dip"
+                        android:layout_marginLeft="18dip"
                         android:text="性别"
                         android:textColor="#434343"
                         android:textSize="46px"
@@ -242,12 +242,12 @@
                     </TextView>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/right"
-                        android:layout_marginRight="12dp">
+                        android:layout_marginRight="15dp">
                     </ImageView>
 
                     <TextView
@@ -276,7 +276,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dip"
-                        android:layout_marginLeft="15dip"
+                        android:layout_marginLeft="18dip"
                         android:text="职业"
                         android:textColor="#434343"
                         android:textSize="46px"
@@ -294,12 +294,12 @@
                     </TextView>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/right"
-                        android:layout_marginRight="12dp">
+                        android:layout_marginRight="15dp">
                     </ImageView>
 
                     <TextView
@@ -328,7 +328,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dip"
-                        android:layout_marginLeft="15dip"
+                        android:layout_marginLeft="18dip"
                         android:text="生日"
                         android:textColor="#434343"
                         android:textSize="46px"
@@ -346,12 +346,12 @@
                     </TextView>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/right"
-                        android:layout_marginRight="12dp">
+                        android:layout_marginRight="15dp">
                     </ImageView>
 
                     <TextView
@@ -369,10 +369,63 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/setting_change_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:layout_below="@+id/setting_change_birthday">
+
+                    <TextView
+                        android:id="@+id/tv_change_intro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dip"
+                        android:layout_marginLeft="18dip"
+                        android:text="个人简介"
+                        android:textColor="#434343"
+                        android:textSize="46px"
+                        >
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="3px"
+                        android:background="#c7c7c7"
+                        android:layout_below="@+id/intro"
+                        android:layout_marginTop="18dip"
+                        android:layout_marginLeft="13dip"
+                        android:layout_marginRight="13dip">
+                    </TextView>
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_alignParentRight="true"
+                        android:src="#ffffff"
+                        android:layout_marginRight="15dp">
+                    </ImageView>
+
+                    <TextView
+                        android:id="@+id/intro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="简介傲娇覅哦恶杰佛i恶杰佛i啊就哦打飞机啊覅时间封建士大夫房价放假覅健身房i就覅哦对就是佛阿飞joe系佛教发个"
+                        android:textSize="42px"
+                        android:maxLines="4"
+                        android:ellipsize="end"
+                        android:layout_below="@+id/tv_change_intro"
+                        android:layout_marginLeft="18dip"
+                        android:layout_marginRight="18dip"
+                        android:layout_marginTop="12dp">
+                    </TextView>
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/setting_change_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/setting_change_birthday"
+                    android:layout_below="@+id/setting_change_intro"
                     android:onClick="onClick">
 
                     <TextView
@@ -380,7 +433,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dip"
-                        android:layout_marginLeft="15dip"
+                        android:layout_marginLeft="18dip"
                         android:text="修改密码"
                         android:textSize="46px"
                         android:textColor="#434343">
@@ -436,6 +489,12 @@
                     android:textStyle="bold">
                 </Button>
             </RelativeLayout>
+
+            <TextView
+                android:layout_below="@+id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+            </TextView>
 
         </RelativeLayout>
         </ScrollView>

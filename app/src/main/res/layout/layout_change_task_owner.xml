@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="确定"
-                android:textSize="20dip"
+                android:textSize="17dp"
                 android:textColor="#ffdb5c"
                 android:textStyle="bold">
             </TextView>

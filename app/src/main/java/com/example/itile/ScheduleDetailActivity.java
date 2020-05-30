@@ -43,6 +43,11 @@ public class ScheduleDetailActivity extends AppCompatActivity {
     private String starttime;
     private String endtime;
 
+    private ScheduleHelperActivity context1;
+    private String position;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,12 @@ public class ScheduleDetailActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+        Intent intent = getIntent();
+        pk = intent.getStringExtra("pk");
+        position = intent.getStringExtra("position");
+        Log.d("这是详情页得到的pk",pk);
+        getScheduleDetail("http://118.190.245.170/worktile/schedule/"+pk+"/");
+
         back = (ImageView)findViewById(R.id.back_from_schedule_detail);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +92,7 @@ public class ScheduleDetailActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             postScheduleDetail("http://118.190.245.170/worktile/schedule/"+pk+"/","1");
+                            context1.change_state(Integer.valueOf(position),1);
                         }
                     });
                     dialog.show();
@@ -99,16 +111,13 @@ public class ScheduleDetailActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             postScheduleDetail("http://118.190.245.170/worktile/schedule/"+pk+"/","0");
+                            context1.change_state(Integer.valueOf(position),0);
                         }
                     });
                     dialog.show();
                 }
             }
         });
-        Intent intent = getIntent();
-        pk = intent.getStringExtra("pk");
-        Log.d("这是详情页得到的pk",pk);
-        getScheduleDetail("http://118.190.245.170/worktile/schedule/"+pk+"/");
 
     }
     public void getScheduleDetail(String address) {

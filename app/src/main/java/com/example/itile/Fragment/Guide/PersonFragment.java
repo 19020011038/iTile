@@ -185,6 +185,8 @@ public class PersonFragment extends Fragment {
                             String birthday_all = year_s+"-"+month_s+"-"+day_s;
                             if (sex_s.equals("女"))
                                 sex.setBackgroundResource(R.drawable.womanpicture);
+                            else
+                                sex.setBackgroundResource(R.drawable.manpicture);
                             if (!work_s.equals("null"))
                                 home_work.setText(work_s);
                             else
