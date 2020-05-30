@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -45,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String header;
     private String result;
     private ProgressDialog progressDialog;
+    private TimeCount time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        time = new TimeCount(60000, 1000);
         register_get_emailnum.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -138,6 +141,10 @@ public class RegisterActivity extends AppCompatActivity {
                             progressDialog.setMessage("正在加载中......");
                             progressDialog.setCancelable(true);
                             progressDialog.show();
+//                            @Override
+//                            public void onClick(View v) {
+
+//                            }
                         }}
                 }
             }
@@ -225,6 +232,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 check.setCookie(true);//设置已获得cookie
                                 check.saveCookie(JSESSIONID);//保存获得的cookie
                                 progressDialog.dismiss();
+                                time.start();
                                 Toast.makeText(RegisterActivity.this, "验证码发送成功", Toast.LENGTH_SHORT).show();
 //                            }else if (result.equals("邮箱格式不正确")) {
 //                                progressDialog.dismiss();
@@ -373,5 +381,28 @@ public class RegisterActivity extends AppCompatActivity {
         Pattern p = Pattern.compile(str);
         Matcher m = p.matcher(email);
         return m.matches();
+    }
+
+    class TimeCount extends CountDownTimer {
+
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+//            btnGetcode.setBackgroundColor(Color.parseColor("#B6B6D8"));
+            register_get_emailnum.setBackgroundDrawable(getResources().getDrawable(R.drawable.edittext_shape2));
+            register_get_emailnum.setClickable(false);
+            register_get_emailnum.setText("("+millisUntilFinished / 1000 +") 秒后可重新发送");
+        }
+
+        @Override
+        public void onFinish() {
+            register_get_emailnum.setText("重新获取验证码");
+            register_get_emailnum.setClickable(true);
+            register_get_emailnum.setBackgroundDrawable(getResources().getDrawable(R.drawable.edittext_shape));
+
+        }
     }
 }

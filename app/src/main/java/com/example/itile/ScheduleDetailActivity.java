@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.itile.Adapter.WorkAdapter;
+import com.example.itile.Fragment.Guide.PersonFragment;
+import com.example.itile.Fragment.Guide.WorkFragment;
 import com.example.itile.Util.HttpUtil;
 
 import org.json.JSONArray;
@@ -44,7 +46,11 @@ public class ScheduleDetailActivity extends AppCompatActivity {
     private String endtime;
 
     private ScheduleHelperActivity context1;
+    private WorkFragment context2;
     private String position;
+
+    private String from;
+    private String change_to;
 
 
 
@@ -59,9 +65,10 @@ public class ScheduleDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         pk = intent.getStringExtra("pk");
         position = intent.getStringExtra("position");
+        from = intent.getStringExtra("from");
+
         Log.d("这是详情页得到的pk",pk);
         getScheduleDetail("http://118.190.245.170/worktile/schedule/"+pk+"/");
-
         back = (ImageView)findViewById(R.id.back_from_schedule_detail);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,8 +98,8 @@ public class ScheduleDetailActivity extends AppCompatActivity {
                     dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            change_to = "1";
                             postScheduleDetail("http://118.190.245.170/worktile/schedule/"+pk+"/","1");
-                            context1.change_state(Integer.valueOf(position),1);
                         }
                     });
                     dialog.show();
@@ -110,8 +117,8 @@ public class ScheduleDetailActivity extends AppCompatActivity {
                     dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            change_to = "0";
                             postScheduleDetail("http://118.190.245.170/worktile/schedule/"+pk+"/","0");
-                            context1.change_state(Integer.valueOf(position),0);
                         }
                     });
                     dialog.show();
@@ -159,8 +166,8 @@ public class ScheduleDetailActivity extends AppCompatActivity {
         });
     }
 
-    public void postScheduleDetail(String address,String s) {
-        HttpUtil.postScheduleDetail(address,s,new Callback() {
+    public void postScheduleDetail(String address,String state1) {
+        HttpUtil.postScheduleDetail(address,state1,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
@@ -183,6 +190,16 @@ public class ScheduleDetailActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            if(from.equals("helper")){
+                                context1.change_state(Integer.valueOf(position),Integer.valueOf(change_to));
+                            }else if(from.equals("work")){
+                                WorkFragment workFragment = new WorkFragment();
+                                workFragment.change_state2(Integer.valueOf(position),Integer.valueOf(change_to));
+                                workFragment.show1();
+                            }else {
+                                PersonFragment personFragment = new PersonFragment();
+                                personFragment.change_state3(Integer.valueOf(position),Integer.valueOf(change_to));
+                            }
                             if(state.equals("0"))
                                 show_status.setText("未完成");
                             else

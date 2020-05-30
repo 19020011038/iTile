@@ -130,6 +130,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/re2"
+        android:layout_marginBottom="150px"
         >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_work"
@@ -146,13 +147,13 @@
     </com.necer.calendar.Miui9Calendar>
 
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:src="@drawable/new_project"
         android:id="@+id/work_new_schedule"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="175dp"/>
+        android:layout_marginBottom="205dp"/>
     </RelativeLayout>
 
 </LinearLayout>

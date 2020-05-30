@@ -88,6 +88,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ScheduleDetailActivity.class);
                     intent.putExtra("pk", id);
+                    intent.putExtra("position",String.valueOf(position));
+                    intent.putExtra("from","home");
                     context.startActivity(intent);
 //                    Toast.makeText(context,"task_id:"+id, Toast.LENGTH_SHORT).show();
                 }

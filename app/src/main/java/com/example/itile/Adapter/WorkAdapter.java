@@ -62,6 +62,8 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder>{
             public void onClick(View v) {
                 Intent intent = new Intent(WorkAdapter.this.context, ScheduleDetailActivity.class);
                 intent.putExtra("pk",list.get(position).get("pk").toString());
+                intent.putExtra("position",String.valueOf(position));
+                intent.putExtra("from","work");
                 context.startActivity(intent);
             }
         });

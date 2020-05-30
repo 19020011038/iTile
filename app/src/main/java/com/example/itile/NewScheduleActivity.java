@@ -3,6 +3,8 @@ package com.example.itile;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -93,6 +95,25 @@ public class NewScheduleActivity extends AppCompatActivity {
             }
         });
         editText = (EditText)findViewById(R.id.new_schedule_description);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                for(int i=s.length();i>0;i--){
+                    if(s.subSequence(i-1,i).toString().equals("\n"))
+                        s.replace(i-1,i,"");
+                }
+            }
+        });
         sure = (TextView)findViewById(R.id.new_schedule_sure);
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,12 +122,17 @@ public class NewScheduleActivity extends AppCompatActivity {
                 if("".equals(description))
                     Toast.makeText(NewScheduleActivity.this,"请您输入日程详情",Toast.LENGTH_SHORT).show();
                 else {
-                    if(!flag1 || !flag2)
-                        Toast.makeText(NewScheduleActivity.this,"请选择开始时间",Toast.LENGTH_SHORT).show();
-                    else if(!flag3 || !flag4)
-                        Toast.makeText(NewScheduleActivity.this,"请选择结束时间",Toast.LENGTH_SHORT).show();
-                    else
-                    postNewSchedule("http://118.190.245.170/worktile/newschedule/",starttime,endtime,description);
+                    if (description.trim().isEmpty())
+                    {
+                        Toast.makeText(NewScheduleActivity.this, "日程详情不能全为空格！", Toast.LENGTH_SHORT).show();
+                    }else {
+                        if(!flag1 || !flag2)
+                            Toast.makeText(NewScheduleActivity.this,"请选择开始时间",Toast.LENGTH_SHORT).show();
+                        else if(!flag3 || !flag4)
+                            Toast.makeText(NewScheduleActivity.this,"请选择结束时间",Toast.LENGTH_SHORT).show();
+                        else
+                            postNewSchedule("http://118.190.245.170/worktile/newschedule/",starttime,endtime,description);
+                    }
                 }
             }
         });

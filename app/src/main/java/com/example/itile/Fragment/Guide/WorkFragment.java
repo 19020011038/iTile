@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.itile.Adapter.ScheduleHelperAdapter;
 import com.example.itile.Adapter.WorkAdapter;
 import com.example.itile.AddressActivity;
 import com.example.itile.FormActivity;
@@ -24,8 +25,10 @@ import com.example.itile.LoginActivity;
 import com.example.itile.NewScheduleActivity;
 import com.example.itile.Painter.InnerPainter2;
 import com.example.itile.R;
+import com.example.itile.ScheduleHelperActivity;
 import com.example.itile.TaskActivity;
 import com.example.itile.Util.HttpUtil;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.necer.calendar.BaseCalendar;
 import com.necer.calendar.NCalendar;
 import com.necer.enumeration.DateChangeBehavior;
@@ -49,9 +52,9 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class WorkFragment extends Fragment {
-    List<Map<String, Object>> list = new ArrayList<>();
+    static List<Map<String, Object>> list = new ArrayList<>();
     List<String> pointList = new ArrayList<>();
-
+    static private WorkAdapter mAdapter;
     private RecyclerView recyclerView;
     private ImageView imageView;
     private String s = "hahahaha";
@@ -61,7 +64,7 @@ public class WorkFragment extends Fragment {
     private String today;
     private String post_time;
     private ImageView jump_new_schedule;
-    private int num = 0;
+    private int num;
     private int create;
     private NCalendar nCalendar;
     private TextView tv_year;
@@ -87,6 +90,11 @@ public class WorkFragment extends Fragment {
         Log.d("mm", mm);
         dd = today.substring(8, 10);
         Log.d("dd", dd);
+        recyclerView = root.findViewById(R.id.recyclerView_work);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(manager);
+        mAdapter = new WorkAdapter(getActivity(), list);
+        recyclerView.setAdapter(mAdapter);
         return root;
 
     }
@@ -96,6 +104,7 @@ public class WorkFragment extends Fragment {
         super.onResume();
 //        CalendarView calendarView = getActivity().findViewById(R.id.calendarview);
 //        list.clear();
+
         nCalendar = getActivity().findViewById(R.id.ncalendar);
         tv_year = getActivity().findViewById(R.id.year);
         tv_month = getActivity().findViewById(R.id.month);
@@ -115,7 +124,6 @@ public class WorkFragment extends Fragment {
             }
         });
         imageView = getActivity().findViewById(R.id.tongxunlu);
-        recyclerView = getActivity().findViewById(R.id.recyclerView_work);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +171,7 @@ public class WorkFragment extends Fragment {
 //                Toast.makeText(getActivity(), "年："+calendar_year+"month:"+calendar_month+localDate.toString()+dateChangeBehavior.toString(), Toast.LENGTH_SHORT).show();
 //                localDate.getDayOfYear();
                 list.clear();
-                create = 0;
+
                 post_time = localDate.toString();
                 yyyy = post_time.substring(0,4);
                 mm = post_time.substring(5,7);
@@ -229,8 +237,10 @@ public class WorkFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
-                            recyclerView.setAdapter(new WorkAdapter(getActivity(), list));//绑定适配器
+//                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
+//                            recyclerView.setAdapter(new WorkAdapter(getActivity(), list));//绑定适配器
+                            mAdapter.setData(list);
+                            mAdapter.notifyDataSetChanged();
                             if (create != 0){
                                 recyclerView.smoothScrollToPosition(num);
                             }else {
@@ -298,13 +308,15 @@ public class WorkFragment extends Fragment {
                         public void run() {
                             InnerPainter2 innerPainter = (InnerPainter2) nCalendar.getCalendarPainter();
                             innerPainter.setPointList(pointList);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
-                            recyclerView.setAdapter(new WorkAdapter(getActivity(), list));//绑定适配器
-                            if (create != 0){
-                                recyclerView.smoothScrollToPosition(num);
-                            }else {
-                                create++;
-                            }
+//                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
+//                            recyclerView.setAdapter(new WorkAdapter(getActivity(), list));//绑定适配器
+                            mAdapter.setData(list);
+                            mAdapter.notifyDataSetChanged();
+//                            if (create != 0){
+//                                recyclerView.smoothScrollToPosition(num);
+//                            }else {
+//                                create++;
+//                            }
                         }
                     });
                 } catch (JSONException e) {
@@ -367,13 +379,16 @@ public class WorkFragment extends Fragment {
                         public void run() {
 //                            InnerPainter innerPainter2 = (InnerPainter) nCalendar.getCalendarPainter();
 //                            innerPainter2.setPointList(pointList);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
-                            recyclerView.setAdapter(new WorkAdapter(getActivity(), list));//绑定适配器
-                            if (create != 0){
-                                recyclerView.smoothScrollToPosition(num);
-                            }else {
-                                create++;
-                            }
+//                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
+//                            recyclerView.setAdapter(new WorkAdapter(getActivity(), list));//绑定适配器
+                            mAdapter.setData(list);
+                            mAdapter.notifyDataSetChanged();
+//                            if (create != 0){
+//                                recyclerView.smoothScrollToPosition(num);
+//                            }else {
+//                                create++;
+//                            }
+//                            recyclerView.smoothScrollToPosition(num);
                         }
                     });
                 } catch (JSONException e) {
@@ -383,5 +398,30 @@ public class WorkFragment extends Fragment {
                 }
             }
         });
+    }
+    public static void change_state2(int position,int state){
+        Log.d("qshnb6666","qshnb666");
+        String pk = list.get(position).get("pk").toString();
+        String starttime = list.get(position).get("starttime").toString();
+        String endtime = list.get(position).get("endtime").toString();
+        String description = list.get(position).get("description").toString();
+
+        Map map = new HashMap();
+        map.put("pk", pk);
+        map.put("starttime", starttime);
+        map.put("endtime", endtime);
+        map.put("state", state);
+        map.put("description", description);
+        map.put("type",1);
+
+        list.remove(position);
+        list.add(position,map);
+        Log.d("list",String.valueOf(list));
+
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public static void show1(){
+        Log.d("hahahah","hadsjaodi");
     }
 }
