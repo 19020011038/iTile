@@ -115,6 +115,7 @@ public class ScheduleHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     Intent intent = new Intent(ScheduleHelperAdapter.this.context, ScheduleDetailActivity.class);
                     intent.putExtra("pk", list.get(position).get("pk").toString());
                     intent.putExtra("position",String.valueOf(position));
+                    intent.putExtra("from","helper");
                     context.startActivity(intent);
                 }
             });

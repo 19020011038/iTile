@@ -3,6 +3,8 @@ package com.example.itile;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -93,6 +95,25 @@ public class NewScheduleActivity extends AppCompatActivity {
             }
         });
         editText = (EditText)findViewById(R.id.new_schedule_description);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                for(int i=s.length();i>0;i--){
+                    if(s.subSequence(i-1,i).toString().equals("\n"))
+                        s.replace(i-1,i,"");
+                }
+            }
+        });
         sure = (TextView)findViewById(R.id.new_schedule_sure);
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
