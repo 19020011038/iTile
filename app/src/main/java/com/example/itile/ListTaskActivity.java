@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -91,8 +92,12 @@ public class ListTaskActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                //在这里对异常情况进行处理
-                //       Toast.makeText(getActivity(),"获取图书信息失败，请检查您的网络",Toast.LENGTH_LONG).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ListTaskActivity.this, "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override

@@ -103,13 +103,6 @@ public class ScheduleHelperActivity extends AppCompatActivity {
         finish();
     }
 
-    //写在这试一下
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        list.clear();
-        finish();
-    }
 
     public void postScheduleHelper(String address, String page) {
         HttpUtil.postScheduleHelper(address, page, new Callback() {

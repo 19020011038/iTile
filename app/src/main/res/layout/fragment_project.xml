@@ -30,8 +30,8 @@
                 android:background="@drawable/bottom"/>
         </RelativeLayout>
         <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/new_project"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

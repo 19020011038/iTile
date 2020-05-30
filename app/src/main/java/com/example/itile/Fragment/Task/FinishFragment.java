@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -93,8 +94,12 @@ public class FinishFragment extends Fragment {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                //在这里对异常情况进行处理
-                //       Toast.makeText(getActivity(),"获取图书信息失败，请检查您的网络",Toast.LENGTH_LONG).show();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
