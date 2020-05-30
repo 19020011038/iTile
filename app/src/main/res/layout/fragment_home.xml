@@ -4,7 +4,22 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout_home_helper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rel_1"
         android:layout_width="match_parent"
         android:layout_height="170px">
 
@@ -43,9 +58,11 @@
 
 
     <RelativeLayout
+        android:id="@+id/rel_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="150px">
+        android:layout_marginBottom="150px"
+        android:layout_below="@+id/rel_1">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -203,4 +220,7 @@
 
     </RelativeLayout>
 
+    </RelativeLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

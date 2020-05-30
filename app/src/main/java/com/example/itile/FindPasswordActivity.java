@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -43,6 +44,8 @@ public class FindPasswordActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String result;
     private String header;
+    private TimeCount time;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,7 @@ public class FindPasswordActivity extends AppCompatActivity {
             }
         });
 
+        time = new TimeCount(60000, 1000);
         find_get_emailnum.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -188,6 +192,7 @@ public class FindPasswordActivity extends AppCompatActivity {
                             Log.i("zyr", "register_jsessionid:" + JSESSIONID);
                             check.setCookie(true);//设置已获得cookie
                             check.saveCookie(JSESSIONID);//保存获得的cookie
+                            time.start();
                             Toast.makeText(FindPasswordActivity.this, "验证码发送成功", Toast.LENGTH_SHORT).show();
                         }else if (result!=null){
                             Toast.makeText(FindPasswordActivity.this, result, Toast.LENGTH_SHORT).show();
@@ -287,5 +292,28 @@ public class FindPasswordActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+    }
+
+    class TimeCount extends CountDownTimer {
+
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+//            btnGetcode.setBackgroundColor(Color.parseColor("#B6B6D8"));
+            find_get_emailnum.setBackgroundDrawable(getResources().getDrawable(R.drawable.edittext_shape2));
+            find_get_emailnum.setClickable(false);
+            find_get_emailnum.setText("("+millisUntilFinished / 1000 +") 秒后可重新发送");
+        }
+
+        @Override
+        public void onFinish() {
+            find_get_emailnum.setText("重新获取验证码");
+            find_get_emailnum.setClickable(true);
+            find_get_emailnum.setBackgroundDrawable(getResources().getDrawable(R.drawable.edittext_shape));
+
+        }
     }
 }
