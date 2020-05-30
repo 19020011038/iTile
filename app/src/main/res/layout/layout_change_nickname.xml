@@ -67,7 +67,6 @@
                 android:hint="请输入新昵称（1~10位）"
                 android:textSize="18sp"
                 android:singleLine="true"
-                android:textStyle="bold"
                 android:paddingBottom="17dip"
                 android:paddingLeft="8dip">
             </EditText>

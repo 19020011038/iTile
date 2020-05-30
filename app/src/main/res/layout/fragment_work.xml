@@ -130,6 +130,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/re2"
+        android:layout_marginBottom="150px"
         >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_work"
@@ -152,7 +153,7 @@
         android:id="@+id/work_new_schedule"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="175dp"/>
+        android:layout_marginBottom="205dp"/>
     </RelativeLayout>
 
 </LinearLayout>

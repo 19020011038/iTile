@@ -97,6 +97,7 @@ public class SettingActivity extends AppCompatActivity {
     private TextView tv2;
     private View inputServer2;
     private EditText edit;
+    private Bitmap bitmap;
 
     //修改性别相关
     private String[] areas_sex = new String[]{"男","女"};
@@ -423,13 +424,13 @@ public class SettingActivity extends AppCompatActivity {
                     // 通过图片URI拿到剪切图片
                     //bitmap = BitmapFactory.decodeStream( getContentResolver().openInputStream( imageUri ) );
                     //通过FileName拿到图片
-                    Bitmap bitmap = BitmapFactory.decodeFile(filePath.toString());
+                    Bitmap bitmap1 = BitmapFactory.decodeFile(filePath.toString());
 
 
                     //把裁剪后的图片展示出来
-                    setting_icon.setImageBitmap(bitmap);
-                    Bitmap bitmap1 = compressImage(bitmap);
-                    File file = getFile(bitmap1);
+//                    setting_icon.setImageBitmap(bitmap);
+                    bitmap = compressImage(bitmap1);
+                    File file = getFile(bitmap);
                     Log.i("zyr", file.toString());
                     iconWithOkHttp("http://118.190.245.170/worktile/userinfo/", filePath);
 //                    iconWithOkHttp("http://175.24.47.150:8088/worktile/userinfo/", filePath);
@@ -560,6 +561,7 @@ public class SettingActivity extends AppCompatActivity {
                         public void run() {
                             if (result.equals("1")) {
                                 Toast.makeText(SettingActivity.this, "头像修改成功", Toast.LENGTH_SHORT).show();
+                                setting_icon.setImageBitmap(bitmap);
                             } else if (result != null) {
                                 Toast.makeText(SettingActivity.this, result, Toast.LENGTH_SHORT).show();
                             } else {
