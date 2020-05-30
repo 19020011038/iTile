@@ -122,12 +122,17 @@ public class NewScheduleActivity extends AppCompatActivity {
                 if("".equals(description))
                     Toast.makeText(NewScheduleActivity.this,"请您输入日程详情",Toast.LENGTH_SHORT).show();
                 else {
-                    if(!flag1 || !flag2)
-                        Toast.makeText(NewScheduleActivity.this,"请选择开始时间",Toast.LENGTH_SHORT).show();
-                    else if(!flag3 || !flag4)
-                        Toast.makeText(NewScheduleActivity.this,"请选择结束时间",Toast.LENGTH_SHORT).show();
-                    else
-                    postNewSchedule("http://118.190.245.170/worktile/newschedule/",starttime,endtime,description);
+                    if (description.trim().isEmpty())
+                    {
+                        Toast.makeText(NewScheduleActivity.this, "日程详情不能全为空格！", Toast.LENGTH_SHORT).show();
+                    }else {
+                        if(!flag1 || !flag2)
+                            Toast.makeText(NewScheduleActivity.this,"请选择开始时间",Toast.LENGTH_SHORT).show();
+                        else if(!flag3 || !flag4)
+                            Toast.makeText(NewScheduleActivity.this,"请选择结束时间",Toast.LENGTH_SHORT).show();
+                        else
+                            postNewSchedule("http://118.190.245.170/worktile/newschedule/",starttime,endtime,description);
+                    }
                 }
             }
         });
