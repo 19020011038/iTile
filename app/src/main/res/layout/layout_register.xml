@@ -64,7 +64,6 @@
             android:hint="请输入昵称（1~10位）"
             android:textSize="18sp"
             android:singleLine="true"
-            android:textStyle="bold"
             android:paddingBottom="17dip"
             android:paddingLeft="8dip">
         </EditText>
@@ -80,7 +79,6 @@
             android:hint="请输入手机号"
             android:textSize="18sp"
             android:singleLine="true"
-            android:textStyle="bold"
             android:paddingBottom="17dip"
             android:paddingLeft="8dip"
             android:inputType="phone">
@@ -97,7 +95,6 @@
             android:hint="请输入邮箱"
             android:textSize="18sp"
             android:singleLine="true"
-            android:textStyle="bold"
             android:paddingBottom="17dip"
             android:paddingLeft="8dip"
             android:inputType="textEmailAddress">
@@ -114,7 +111,6 @@
             android:hint="请输入密码（6~15位）"
             android:textSize="18sp"
             android:singleLine="true"
-            android:textStyle="bold"
             android:paddingBottom="17dip"
             android:paddingLeft="8dip"
             android:inputType="textPassword"
@@ -132,7 +128,6 @@
             android:hint="请确认密码（6~15位）"
             android:textSize="18sp"
             android:singleLine="true"
-            android:textStyle="bold"
             android:paddingBottom="17dip"
             android:paddingLeft="8dip"
             android:inputType="textPassword"
@@ -150,7 +145,6 @@
             android:hint="请输入验证码"
             android:textSize="18sp"
             android:singleLine="true"
-            android:textStyle="bold"
             android:paddingBottom="17dip"
             android:paddingLeft="8dip"
             android:inputType="text"
