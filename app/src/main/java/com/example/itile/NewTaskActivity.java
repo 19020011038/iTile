@@ -157,8 +157,8 @@ public class NewTaskActivity extends AppCompatActivity {
         textView1 = findViewById(R.id.tvstart);
         textView2 = findViewById(R.id.tvend);
 
-        textView1.setText(year + "年" + month + "月" + day + "日" + fen + "分" + miao + "秒");
-        textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "分" + miao + "秒");
+        textView1.setText(year + "年" + month + "月" + day + "日" + fen + "时" + miao + "分");
+        textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "时" + miao + "分");
         yyyy1 = year + "";
         MM1 = month + "";
         dd1 = day + "";
@@ -240,6 +240,8 @@ public class NewTaskActivity extends AppCompatActivity {
 
                 starttime = yyyy1 + "-" + MM1 + "-" + dd1 + " " + HH1 + ":" + mm1;
                 endtime = yyyy2 + "-" + MM2 + "-" + dd2 + " " + HH2 + ":" + mm2;
+                Date a = new Date(Integer.valueOf(yyyy1),Integer.valueOf(MM1),Integer.valueOf(dd1),Integer.valueOf(HH1),Integer.valueOf(mm1));
+                Date b = new Date(Integer.valueOf(yyyy2),Integer.valueOf(MM2),Integer.valueOf(dd2),Integer.valueOf(HH2),Integer.valueOf(mm2));
 
 
                 Log.d("showstr", starttime);
@@ -273,12 +275,12 @@ public class NewTaskActivity extends AppCompatActivity {
 //                else if (flag2==0)
 //                    Toast.makeText(NewTaskActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
                 else {
+                    if(a.after(b)){
+                        Toast.makeText(NewTaskActivity.this,"结束时间应晚于开始时间",Toast.LENGTH_SHORT).show();
+                    }else {
+                        newTaskWithOkHttp("http://118.190.245.170/worktile/project/" + project_id + "/new-task", name1, tip1, starttime, endtime);
 
-                    newTaskWithOkHttp("http://118.190.245.170/worktile/project/" + project_id + "/new-task", name1, tip1, starttime, endtime);
-
-                    Toast.makeText(NewTaskActivity.this, "开始" + starttime + "\n" + "结束" + endtime, Toast.LENGTH_SHORT).show();
-                    finish();
-
+                    }
                 }
             }
         });
@@ -375,7 +377,7 @@ public class NewTaskActivity extends AppCompatActivity {
                             dd1 = day+"";
                             HH1 = fen+"";
                             mm1 = miao+"";
-                            textView1.setText(year+ "年" +month + "月" + day + "日" + fen + "分" + miao + "秒");
+                            textView1.setText(year+ "年" +month + "月" + day + "日" + fen + "时" + miao + "分");
                         }
                         else
                         {
@@ -384,7 +386,7 @@ public class NewTaskActivity extends AppCompatActivity {
                             dd2 = day1+"";
                             HH2 = fen+"";
                             mm2 = miao+"";
-                            textView2.setText(year1+ "年" +month1 + "月" + day1 + "日" + fen + "分" + miao + "秒");
+                            textView2.setText(year1+ "年" +month1 + "月" + day1 + "日" + fen + "时" + miao + "分");
                         }
 
                     }
@@ -408,6 +410,12 @@ public class NewTaskActivity extends AppCompatActivity {
                 //在这里对异常情况进行处理
 
                 Log.d("hhh", "111");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(NewTaskActivity.this, "无法连接到网络", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -425,11 +433,20 @@ public class NewTaskActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(NewTaskActivity.this, result, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewTaskActivity.this, "新建任务成功", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(NewTaskActivity.this, "服务器连接失败", Toast.LENGTH_SHORT).show();
+                            Log.i("zyr", starttime+endtime);
+                            finish();
+                        }
+                    });
                 }
             }
         });
@@ -471,6 +488,9 @@ public class NewTaskActivity extends AppCompatActivity {
                     default:
                         break;
                 }
+                year = numberpicker0.getValue();
+                month = numberpicker2.getValue();
+                day = numberpicker3.getValue();
             }
             else
             {
@@ -503,7 +523,11 @@ public class NewTaskActivity extends AppCompatActivity {
                     default:
                         break;
                 }
+                year1 = numberpicker0.getValue();
+                month1 = numberpicker2.getValue();
+                day1 = numberpicker3.getValue();
             }
+
 
 
         }
@@ -547,6 +571,9 @@ public class NewTaskActivity extends AppCompatActivity {
                     default:
                         break;
                 }
+                year = numberpicker0.getValue();
+                month = numberpicker2.getValue();
+                day = numberpicker3.getValue();
             }
             else
             {
@@ -579,6 +606,9 @@ public class NewTaskActivity extends AppCompatActivity {
                     default:
                         break;
                 }
+                year1 = numberpicker0.getValue();
+                month1 = numberpicker2.getValue();
+                day1 = numberpicker3.getValue();
             }
 
         }

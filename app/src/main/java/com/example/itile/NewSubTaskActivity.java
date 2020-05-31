@@ -165,8 +165,8 @@ public class NewSubTaskActivity extends AppCompatActivity {
 
         textView1 = findViewById(R.id.tvstart);
         textView2 = findViewById(R.id.tvend);
-        textView1.setText(year + "年" + month + "月" + day + "日" + fen + "分" + miao + "秒");
-        textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "分" + miao + "秒");
+        textView1.setText(year + "年" + month + "月" + day + "日" + fen + "时" + miao + "分");
+        textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "时" + miao + "分");
         Intent intent = getIntent();
         task_id = intent.getStringExtra("task_id");
         project_id = intent.getStringExtra("project_id");
@@ -233,7 +233,8 @@ public class NewSubTaskActivity extends AppCompatActivity {
 
                 starttime = yyyy1 + "-" + MM1 + "-" + dd1 + " " + HH1 + ":" + mm1;
                 endtime = yyyy2 + "-" + MM2 + "-" + dd2 + " " + HH2 + ":" + mm2;
-
+                Date a = new Date(Integer.valueOf(yyyy1), Integer.valueOf(MM1), Integer.valueOf(dd1), Integer.valueOf(HH1), Integer.valueOf(mm1));
+                Date b = new Date(Integer.valueOf(yyyy2), Integer.valueOf(MM2), Integer.valueOf(dd2), Integer.valueOf(HH2), Integer.valueOf(mm2));
 
                 Log.d("showstr", starttime);
                 Log.d("showstr", endtime);
@@ -242,14 +243,12 @@ public class NewSubTaskActivity extends AppCompatActivity {
                 String name1 = name.getText().toString();
                 String tip1 = tip.getText().toString();
 
-                if (name1.trim().isEmpty())
-                {
+                if (name1.trim().isEmpty()) {
                     Toast.makeText(NewSubTaskActivity.this, "任务名称不能全为空格！", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (tip1.trim().isEmpty())
-                {
+                if (tip1.trim().isEmpty()) {
                     Toast.makeText(NewSubTaskActivity.this, "任务描述不能全为空格！", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -266,24 +265,33 @@ public class NewSubTaskActivity extends AppCompatActivity {
 //                else if (flag2==0)
 //                    Toast.makeText(NewSubTaskActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
                 else {
+                    if (a.after(b)) {
+                        Toast.makeText(NewSubTaskActivity.this, "结束时间应晚于开始时间", Toast.LENGTH_SHORT).show();
+                    } else {
+                        newSubTaskWithOkHttp("http://118.190.245.170/worktile/project/" + project_id + "/task/" + task_id + "/new-subtask", name1, tip1, starttime, endtime);
 
-                    newSubTaskWithOkHttp("http://118.190.245.170/worktile/project/" + project_id + "/task/" + task_id + "/new-subtask", name1, tip1, starttime, endtime);
-//                    Toast.makeText(NewTaskActivity.this, "开始"+starttime+"\n"+"结束"+endtime, Toast.LENGTH_SHORT).show();
-                    finish();
+                    }
 
                 }
             }
         });
 
     }
-    public void newSubTaskWithOkHttp(String address, String name, String description,String starttime,String endtime){
-        HttpUtil.newTaskWithOkHttp(address, name,description, starttime,endtime,new Callback() {
+
+    public void newSubTaskWithOkHttp(String address, String name, String description, String starttime, String endtime) {
+        HttpUtil.newTaskWithOkHttp(address, name, description, starttime, endtime, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {
                 //在这里对异常情况进行处理
 
-                Log.d("hhh","111");
+                Log.d("hhh", "111");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(NewSubTaskActivity.this, "无法连接到网络", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -292,7 +300,7 @@ public class NewSubTaskActivity extends AppCompatActivity {
 
                 //得到服务器返回的具体内容
                 final String responseData = response.body().string();
-                Log.d("qqqq",responseData);
+                Log.d("qqqq", responseData);
 
                 try {
                     JSONObject jsonObject = new JSONObject(responseData);
@@ -301,11 +309,19 @@ public class NewSubTaskActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(NewSubTaskActivity.this, result, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewSubTaskActivity.this, "新建子任务成功", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(NewSubTaskActivity.this, "连接服务器失败", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
                 }
             }
         });
@@ -400,65 +416,65 @@ public class NewSubTaskActivity extends AppCompatActivity {
                                 dd1 = day + "";
                                 HH1 = fen + "";
                                 mm1 = miao + "";
-                                textView1.setText(year + "年" + month + "月" + day + "日" + fen + "分" + miao + "秒");
+                                textView1.setText(year + "年" + month + "月" + day + "日" + fen + "时" + miao + "分");
                             } else {
                                 yyyy2 = year1 + "";
                                 MM2 = month1 + "";
                                 dd2 = day1 + "";
                                 HH2 = fen + "";
                                 mm2 = miao + "";
-                                textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "分" + miao + "秒");
+                                textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "时" + miao + "分");
                             }
 
-                        }
-                    });
-            loadingDialog.setNegativeButton("取消",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                        }
-                    });
-            return loadingDialog;
-
-        }
-
-
-        public void newTaskWithOkHttp (String address, String name, String description, String
-        starttime, String endtime){
-            HttpUtil.newTaskWithOkHttp(address, name, description, starttime, endtime, new Callback() {
-
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    //在这里对异常情况进行处理
-
-                    Log.d("hhh", "111");
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    Log.d("hhh", "222");
-
-                    //得到服务器返回的具体内容
-                    final String responseData = response.body().string();
-                    Log.d("qqqq", responseData);
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(responseData);
-                        String result = jsonObject.getString("warning");
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(NewSubTaskActivity.this, result, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }
-            });
-        }
+                });
+        loadingDialog.setNegativeButton("取消",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+        return loadingDialog;
 
-        private NumberPicker.OnValueChangeListener yearChangedListener = new NumberPicker.OnValueChangeListener() {
+    }
+
+
+    public void newTaskWithOkHttp(String address, String name, String description, String
+            starttime, String endtime) {
+        HttpUtil.newTaskWithOkHttp(address, name, description, starttime, endtime, new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //在这里对异常情况进行处理
+
+                Log.d("hhh", "111");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d("hhh", "222");
+
+                //得到服务器返回的具体内容
+                final String responseData = response.body().string();
+                Log.d("qqqq", responseData);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(responseData);
+                    String result = jsonObject.getString("warning");
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(NewSubTaskActivity.this, result, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private NumberPicker.OnValueChangeListener yearChangedListener = new NumberPicker.OnValueChangeListener() {
 
             @Override
             public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
@@ -494,6 +510,9 @@ public class NewSubTaskActivity extends AppCompatActivity {
                         default:
                             break;
                     }
+                    year = numberpicker0.getValue();
+                    month = numberpicker2.getValue();
+                    day = numberpicker3.getValue();
                 }
                 else
                 {
@@ -526,6 +545,9 @@ public class NewSubTaskActivity extends AppCompatActivity {
                         default:
                             break;
                     }
+                    year1 = numberpicker0.getValue();
+                    month1 = numberpicker2.getValue();
+                    day1 = numberpicker3.getValue();
                 }
             }
 
@@ -537,8 +559,7 @@ public class NewSubTaskActivity extends AppCompatActivity {
             @Override
             public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
                 // TODO Auto-generated method stub
-                if (a==1)
-                {
+                if (a == 1) {
                     year = numberpicker0.getValue();
                     month = numberpicker2.getValue();
                     day = numberpicker3.getValue();
@@ -553,7 +574,7 @@ public class NewSubTaskActivity extends AppCompatActivity {
                             numberpicker3.setMaxValue(31);
                             break;
                         case 2:
-                            if ((year%4==0&&year%100!=0)|| year%400==0)
+                            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
                                 numberpicker3.setMaxValue(29);
                             else
                                 numberpicker3.setMaxValue(28);
@@ -568,9 +589,10 @@ public class NewSubTaskActivity extends AppCompatActivity {
                         default:
                             break;
                     }
-                }
-                else
-                {
+                    year = numberpicker0.getValue();
+                    month = numberpicker2.getValue();
+                    day = numberpicker3.getValue();
+                } else {
                     year1 = numberpicker0.getValue();
                     month1 = numberpicker2.getValue();
                     day1 = numberpicker3.getValue();
@@ -585,7 +607,7 @@ public class NewSubTaskActivity extends AppCompatActivity {
                             numberpicker3.setMaxValue(31);
                             break;
                         case 2:
-                            if ((year1%4==0&&year1%100!=0)|| year1%400==0)
+                            if ((year1 % 4 == 0 && year1 % 100 != 0) || year1 % 400 == 0)
                                 numberpicker3.setMaxValue(29);
                             else
                                 numberpicker3.setMaxValue(28);
@@ -600,9 +622,11 @@ public class NewSubTaskActivity extends AppCompatActivity {
                         default:
                             break;
                     }
+                    year1 = numberpicker0.getValue();
+                    month1 = numberpicker2.getValue();
+                    day1 = numberpicker3.getValue();
                 }
             }
-
         };
 
         private NumberPicker.OnValueChangeListener dayChangedListener = new NumberPicker.OnValueChangeListener() {
