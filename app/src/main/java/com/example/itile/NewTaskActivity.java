@@ -193,6 +193,8 @@ public class NewTaskActivity extends AppCompatActivity {
 
                 starttime = yyyy1 + "-" + MM1 + "-" + dd1 + " " + HH1 + ":" + mm1;
                 endtime = yyyy2 + "-" + MM2 + "-" + dd2 + " " + HH2 + ":" + mm2;
+                Date a = new Date(Integer.valueOf(yyyy1),Integer.valueOf(MM1),Integer.valueOf(dd1),Integer.valueOf(HH1),Integer.valueOf(mm1));
+                Date b = new Date(Integer.valueOf(yyyy2),Integer.valueOf(MM2),Integer.valueOf(dd2),Integer.valueOf(HH2),Integer.valueOf(mm2));
 
 
                 Log.d("showstr", starttime);
@@ -225,12 +227,13 @@ public class NewTaskActivity extends AppCompatActivity {
                 else if (flag2==0)
                     Toast.makeText(NewTaskActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
                 else {
-
-                    newTaskWithOkHttp("http://118.190.245.170/worktile/project/" + project_id + "/new-task", name1, tip1, starttime, endtime);
-
-                    Toast.makeText(NewTaskActivity.this, "开始" + starttime + "\n" + "结束" + endtime, Toast.LENGTH_SHORT).show();
-                    finish();
-
+                    if(a.after(b)){
+                        Toast.makeText(NewTaskActivity.this,"结束时间应晚于开始时间",Toast.LENGTH_SHORT).show();
+                    }else {
+                        newTaskWithOkHttp("http://118.190.245.170/worktile/project/" + project_id + "/new-task", name1, tip1, starttime, endtime);
+                        Toast.makeText(NewTaskActivity.this, "新建任务成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
             }
         });
