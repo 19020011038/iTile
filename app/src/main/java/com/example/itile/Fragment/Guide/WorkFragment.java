@@ -33,6 +33,8 @@ import com.necer.calendar.BaseCalendar;
 import com.necer.calendar.NCalendar;
 import com.necer.enumeration.DateChangeBehavior;
 import com.necer.listener.OnCalendarChangedListener;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.joda.time.LocalDate;
 import org.json.JSONArray;
@@ -69,6 +71,7 @@ public class WorkFragment extends Fragment {
     private NCalendar nCalendar;
     private TextView tv_year;
     private TextView tv_month;
+    private RefreshLayout refreshLayout;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -108,6 +111,7 @@ public class WorkFragment extends Fragment {
         nCalendar = getActivity().findViewById(R.id.ncalendar);
         tv_year = getActivity().findViewById(R.id.year);
         tv_month = getActivity().findViewById(R.id.month);
+        refreshLayout = getActivity().findViewById(R.id.refreshLayout_work);
         list.clear();
         //新建日程
         jump_new_schedule = getActivity().findViewById(R.id.work_new_schedule);
@@ -134,6 +138,13 @@ public class WorkFragment extends Fragment {
             }
         });
 
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+
+                NCalendarChangeMonthWithOkHttp("http://118.190.245.170/worktile/calendar/", post_time);
+            }
+        });
 //        //日历的点击操作
 //        Log.d("getDate", String.valueOf(calendarView.getDate()));
 //        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -265,6 +276,7 @@ public class WorkFragment extends Fragment {
                     @Override
                     public void run() {
                         Toast.makeText(getActivity(), "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                        refreshLayout.finishRefresh(false);
                     }
                 });
 
@@ -306,6 +318,7 @@ public class WorkFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            refreshLayout.finishRefresh();
                             InnerPainter2 innerPainter = (InnerPainter2) nCalendar.getCalendarPainter();
                             innerPainter.setPointList(pointList);
 //                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//垂直排列 , Ctrl+P
@@ -322,7 +335,13 @@ public class WorkFragment extends Fragment {
                 } catch (JSONException e) {
 
                     e.printStackTrace();
-
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            refreshLayout.finishRefresh(false);
+                            Toast.makeText(getActivity(), "服务器连接失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
