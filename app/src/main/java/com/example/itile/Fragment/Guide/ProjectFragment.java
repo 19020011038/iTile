@@ -3,11 +3,13 @@ package com.example.itile.Fragment.Guide;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,8 @@ import com.example.itile.NewProjectActivity;
 import com.example.itile.R;
 import com.example.itile.AllTaskActivity;
 import com.example.itile.Util.HttpUtil;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +49,7 @@ public class ProjectFragment extends Fragment {
     private String project_id;
     private RecyclerView recyclerView;
     private int flag = 1;
+    private RefreshLayout refreshLayout;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -57,7 +62,7 @@ public class ProjectFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        refreshLayout = getActivity().findViewById(R.id.refreshLayout_project);
         task = getActivity().findViewById(R.id.my_task);
         form = getActivity().findViewById(R.id.my_form);
         imageView = getActivity().findViewById(R.id.add_new);
@@ -92,6 +97,15 @@ public class ProjectFragment extends Fragment {
 
         ShowAllProjectWithOkHttp("http://118.190.245.170/worktile/work");
 
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                list.clear();
+                ShowAllProjectWithOkHttp("http://118.190.245.170/worktile/work");
+                Log.d("hahahshuaxin","shuaxin");
+                refreshLayout.finishRefresh(2500);
+            }
+        });
 
     }
 
@@ -100,8 +114,12 @@ public class ProjectFragment extends Fragment {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                //在这里对异常情况进行处理
-                //       Toast.makeText(getActivity(),"获取图书信息失败，请检查您的网络",Toast.LENGTH_LONG).show();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override

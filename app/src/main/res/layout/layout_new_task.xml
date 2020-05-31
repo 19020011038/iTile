@@ -113,69 +113,39 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150px"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:id="@+id/start">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开始时间"
+            android:text="选择开始时间"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:textSize="50px"
             android:textColor="#808080"/>
-
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right"/>
     </RelativeLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300px"
+        android:layout_height="180px"
         android:background="#ffffff">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="150px"
-            android:id="@+id/re1">
-            <Spinner
-                android:layout_toRightOf="@+id/xzrq"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:id="@+id/spinner_nian1"
-                android:layout_centerVertical="true"
-                tools:ignore="MissingConstraints"></Spinner>
-            <Spinner
-                android:layout_toRightOf="@+id/spinner_nian1"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:id="@+id/spinner_yue1"
-                android:layout_centerVertical="true"
-                tools:ignore="MissingConstraints"></Spinner>
-            <Spinner
-                android:layout_toRightOf="@+id/spinner_yue1"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:id="@+id/spinner_ri1"
-                android:layout_centerVertical="true"
-                tools:ignore="MissingConstraints"></Spinner>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="150px"
-            android:layout_below="@+id/re1">
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:id="@+id/spinner_HH1"
-                android:layout_centerVertical="true"
-                tools:ignore="MissingConstraints"></Spinner>
-            <Spinner
-                android:layout_toRightOf="@+id/spinner_HH1"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:id="@+id/spinner_mm1"
-                android:layout_centerVertical="true"
-                tools:ignore="MissingConstraints"></Spinner>
-        </RelativeLayout>
 
+        <TextView
+            android:id="@+id/tvstart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:text="2020年5月30日 21时04分" />
 
 
 
@@ -196,103 +166,43 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150px"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:id="@+id/end">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="结束时间"
+            android:text="选择结束时间"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:textSize="50px"
             android:textColor="#808080"/>
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right"/>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300px"
+        android:layout_height="180px"
         android:background="#ffffff">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:id="@+id/re2">
-        <Spinner
-            android:layout_toRightOf="@+id/xzrq"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:id="@+id/spinner_nian2"
-            android:layout_centerVertical="true"
-            tools:ignore="MissingConstraints"></Spinner>
-        <Spinner
-            android:layout_toRightOf="@+id/spinner_nian2"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:id="@+id/spinner_yue2"
-            android:layout_centerVertical="true"
-            tools:ignore="MissingConstraints"></Spinner>
-        <Spinner
-            android:layout_toRightOf="@+id/spinner_yue2"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:id="@+id/spinner_ri2"
-            android:layout_centerVertical="true"
-            tools:ignore="MissingConstraints"></Spinner>
-    </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="150px"
-            android:layout_below="@id/re2">
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:id="@+id/spinner_HH2"
-                android:layout_centerVertical="true"
-                tools:ignore="MissingConstraints"></Spinner>
-            <Spinner
-                android:layout_toRightOf="@+id/spinner_HH2"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:id="@+id/spinner_mm2"
-                android:layout_centerVertical="true"
-                tools:ignore="MissingConstraints"></Spinner>
-        </RelativeLayout>
 
 
+        <TextView
+            android:id="@+id/tvend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2020年5月30日 21时04分"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"/>
 
 
 
     </RelativeLayout>
-    <!--    <RelativeLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="150px"-->
-    <!--        android:background="#ffffff">-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="项目状态"-->
-    <!--            android:layout_centerVertical="true"-->
-    <!--            android:layout_marginLeft="20dp"-->
-    <!--            android:textSize="50px"-->
-    <!--            android:textColor="#808080"/>-->
-
-    <!--    </RelativeLayout>-->
-    <!--    <RelativeLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="150px"-->
-    <!--        android:background="#ffffff">-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="参与成员"-->
-    <!--            android:layout_centerVertical="true"-->
-    <!--            android:layout_marginLeft="20dp"-->
-    <!--            android:textSize="50px"-->
-    <!--            android:textColor="#808080"/>-->
-
-    <!--    </RelativeLayout>-->
 
 </LinearLayout>

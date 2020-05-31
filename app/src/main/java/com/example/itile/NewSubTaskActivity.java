@@ -1,16 +1,21 @@
 package com.example.itile;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,6 +32,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -39,9 +46,6 @@ public class NewSubTaskActivity extends AppCompatActivity {
     private SharedPreferencesUtil check;
 
     private String id;
-    private Spinner mspinner_nian1;
-    private Spinner mspinner_nian2;
-    private ArrayAdapter<String> adapter_nian;
     private String yyyy1="a";
     private String MM1="a";
     private String dd1="a";
@@ -56,36 +60,56 @@ public class NewSubTaskActivity extends AppCompatActivity {
     private String description;
     private String starttime;
     private String endtime;
-
+    private RelativeLayout start;
+    private RelativeLayout end;
+    private ImageView back;
     private TextView finish;
+    private AlertDialog.Builder dialog;
+    private NumberPicker numberpicker0;
+    private NumberPicker numberpicker2;
+    private NumberPicker numberpicker3;
+    private NumberPicker numberpicker4;
+    private NumberPicker numberpicker5;
 
+    private TextView textView1;
+    private TextView textView2;
+
+    int year;
+    int month;
+    int day;
+    int a;
+    int flag1=0;
+    int flag2=0;
+    int year1;
+    int month1;
+    int day1;
+    int now_year ;
+    int now_month ;
+    int now_day ;
+    int fen = 0;
+    int miao = 0;
+    private String today;
+    private String post_time;
     private String task_id;
     private String project_id;
-
-    private Spinner mspinner_yue1;
-    private ArrayAdapter<String> adapter_yue1;
-    private Spinner mspinner_ri1;
-    private ArrayAdapter<String> adapter_ri1;
-    private Spinner mspinner_shi1;
-    private ArrayAdapter<String> adapter_shi1;
-    private Spinner mspinner_fen1;
-    private ArrayAdapter<String> adapter_fen1;
-
-    private Spinner mspinner_yue2;
-    private ArrayAdapter<String> adapter_yue2;
-    private Spinner mspinner_ri2;
-    private ArrayAdapter<String> adapter_ri2;
-    private Spinner mspinner_shi2;
-    private ArrayAdapter<String> adapter_shi2;
-    private Spinner mspinner_fen2;
-    private ArrayAdapter<String> adapter_fen2;
-    String[] nian = new String[]{"年", "2018", "2019", "2020", "2021","2022","2023"};
-
-    private ImageView back;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_new_subtask);
+
+        //获取系统时间
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm");
+        Date date = new Date(System.currentTimeMillis());
+        Log.d("当前时间", simpleDateFormat.format(date));
+        today = simpleDateFormat.format(date);
+        post_time = today;
+        now_year = Integer.parseInt(today.substring(0, 4));
+        now_month = Integer.parseInt(today.substring(5, 7));
+        now_day = Integer.parseInt(today.substring(8, 10));
+
+        year = now_year;
+        month = now_month;
+        day = now_day;
 
         Intent intent = getIntent();
         task_id = intent.getStringExtra("task_id");
@@ -94,7 +118,11 @@ public class NewSubTaskActivity extends AppCompatActivity {
         check = SharedPreferencesUtil.getInstance(getApplicationContext());
         finish = findViewById(R.id.finish);
         name = findViewById(R.id.name);
+        start = findViewById(R.id.start);
+        end = findViewById(R.id.end);
 
+        textView1 = findViewById(R.id.tvstart);
+        textView2 = findViewById(R.id.tvend);
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,52 +136,82 @@ public class NewSubTaskActivity extends AppCompatActivity {
         tip.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
 
             public void afterTextChanged(Editable s) {
-                for(int i = s.length(); i > 0; i--){
+                for (int i = s.length(); i > 0; i--) {
 
-                    if(s.subSequence(i-1, i).toString().equals("\n"))
-                        s.replace(i-1, i, "");
+                    if (s.subSequence(i - 1, i).toString().equals("\n"))
+                        s.replace(i - 1, i, "");
                 }
             }
         });
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                a=1;
+                flag1=1;
+                dialog = createLoadingDialog(NewSubTaskActivity.this, "1");
+                dialog.create().show();
 
+
+            }
+        });
+
+        end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                a=2;
+                flag2=1;
+                dialog = createLoadingDialog(NewSubTaskActivity.this, "2");
+                dialog.create().show();
+
+            }
+        });
         finish = (TextView) findViewById(R.id.finish);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                starttime = yyyy1 + "-" + MM1 + "-" + dd1 + " " + HH1 + ":" + mm1 ;
-                endtime = yyyy2 + "-" + MM2 + "-" + dd2 + " " + HH2 + ":" + mm2 ;
+                starttime = yyyy1 + "-" + MM1 + "-" + dd1 + " " + HH1 + ":" + mm1;
+                endtime = yyyy2 + "-" + MM2 + "-" + dd2 + " " + HH2 + ":" + mm2;
 
 
-                Log.d("showstr",starttime);
-                Log.d("showstr",endtime);
-
+                Log.d("showstr", starttime);
+                Log.d("showstr", endtime);
 
 
                 String name1 = name.getText().toString();
                 String tip1 = tip.getText().toString();
-                if (TextUtils.isEmpty(name1))
+
+                if (name1.trim().isEmpty())
                 {
+                    Toast.makeText(NewSubTaskActivity.this, "任务名称不能全为空格！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (tip1.trim().isEmpty())
+                {
+                    Toast.makeText(NewSubTaskActivity.this, "任务描述不能全为空格！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(name1)) {
                     Toast.makeText(NewSubTaskActivity.this, "任务名称不能为空！", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (TextUtils.isEmpty(tip1))
-                {
+                } else if (TextUtils.isEmpty(tip1)) {
                     Toast.makeText(NewSubTaskActivity.this, "任务描述不能为空！", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(yyyy1=="a" || MM1=="a" ||dd1=="a" ||HH1=="a" ||mm1=="a" )
-                    Toast.makeText(NewSubTaskActivity.this,"请选择开始时间",Toast.LENGTH_SHORT).show();
-                else if(yyyy2=="a" ||MM2=="a" ||dd2=="a" ||HH2=="a" ||mm2=="a" )
-                    Toast.makeText(NewSubTaskActivity.this,"请选择结束时间",Toast.LENGTH_SHORT).show();
+                } else if (flag1==0)
+                    Toast.makeText(NewSubTaskActivity.this, "请选择开始时间", Toast.LENGTH_SHORT).show();
+                else if (flag2==1)
+                    Toast.makeText(NewSubTaskActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
                 else {
 
-                    newSubTaskWithOkHttp("http://118.190.245.170/worktile/project/"+project_id+"/task/"+task_id+"/new-subtask", name1, tip1,starttime,endtime);
+                    newSubTaskWithOkHttp("http://118.190.245.170/worktile/project/" + project_id + "/task/" + task_id + "/new-subtask", name1, tip1, starttime, endtime);
 //                    Toast.makeText(NewTaskActivity.this, "开始"+starttime+"\n"+"结束"+endtime, Toast.LENGTH_SHORT).show();
                     finish();
 
@@ -161,320 +219,6 @@ public class NewSubTaskActivity extends AppCompatActivity {
             }
         });
 
-
-
-        //创建一个数组适配器
-        adapter_nian = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nian);
-        adapter_nian.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_nian1 = findViewById(R.id.spinner_nian1);
-        mspinner_nian1.setAdapter(adapter_nian);
-        //点击事件
-        mspinner_nian1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_nian.getItem(position);
-                if (positions.equals("年")){
-                    //
-                }else{
-                    yyyy1 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,yyyy1,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-        mspinner_nian2 = findViewById(R.id.spinner_nian2);
-        mspinner_nian2.setAdapter(adapter_nian);
-        //点击事件
-        mspinner_nian2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_nian.getItem(position);
-                if (positions.equals("年")){
-                }else{
-                    yyyy2 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,yyyy2,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-
-        //选择月
-        String[] yue = new String[]{"月", "01", "02", "03", "04","05","06","07","08","09","10","11","12"};
-        //创建一个数组适配器
-        adapter_yue1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yue);
-        adapter_yue1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_yue1 = findViewById(R.id.spinner_yue1);
-        mspinner_yue1.setAdapter(adapter_yue1);
-        //点击事件
-        mspinner_yue1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_yue1.getItem(position);
-                if (positions.equals("月")){
-                    //
-                }else{
-                    MM1 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,MM1,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-        adapter_yue2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yue);
-        adapter_yue2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_yue2 = findViewById(R.id.spinner_yue2);
-        mspinner_yue2.setAdapter(adapter_yue2);
-        //点击事件
-        mspinner_yue2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_yue2.getItem(position);
-                if (positions.equals("月")){
-                    //
-                }else{
-                    MM2 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,MM2,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //选择开始日
-        String[] ri = new String[]{"日", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-        //创建一个数组适配器
-        adapter_ri1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ri);
-        adapter_ri1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_ri1 = findViewById(R.id.spinner_ri1);
-        mspinner_ri1.setAdapter(adapter_ri1);
-        //点击事件
-        mspinner_ri1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_ri1.getItem(position);
-                if (positions.equals("日")){
-                    //
-                }else{
-                    dd1 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,dd1,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //结束日
-        adapter_ri2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ri);
-        adapter_ri2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_ri2 = findViewById(R.id.spinner_ri2);
-        mspinner_ri2.setAdapter(adapter_ri2);
-        //点击事件
-        mspinner_ri2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_ri2.getItem(position);
-                if (positions.equals("日")){
-                    //
-                }else{
-                    dd2 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,dd2,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-        //选择开始时
-        String[] shi1 = new String[]{"时", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
-        //创建一个数组适配器
-        adapter_shi1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, shi1);
-        adapter_shi1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_shi1 = findViewById(R.id.spinner_HH1);
-        mspinner_shi1.setAdapter(adapter_shi1);
-        //点击事件
-        mspinner_shi1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_shi1.getItem(position);
-                if (positions.equals("时")){
-                    //
-                }else{
-                    HH1 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,HH1,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-
-
-        //选择结束时
-        String[] shi2 = new String[]{"时", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
-        //创建一个数组适配器
-        adapter_shi2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, shi2);
-        adapter_shi2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_shi2 = findViewById(R.id.spinner_HH2);
-        mspinner_shi2.setAdapter(adapter_shi2);
-        //点击事件
-        mspinner_shi2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_shi2.getItem(position);
-                if (positions.equals("时")){
-                    //
-                }else{
-                    HH2 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,HH2,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-        //选择开始分
-        String[] fen1 = new String[]{"分", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"};
-        //创建一个数组适配器
-        adapter_fen1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, fen1);
-        adapter_fen1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_fen1 = findViewById(R.id.spinner_mm1);
-        mspinner_fen1.setAdapter(adapter_fen1);
-        //点击事件
-        mspinner_fen1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_fen1.getItem(position);
-                if (positions.equals("分")){
-                    //
-                }else{
-                    mm1 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,mm1,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-        //选择结束分
-        String[] fen2 = new String[]{"分", "01", "02", "03", "04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60"};
-        //创建一个数组适配器
-        adapter_fen2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, fen2);
-        adapter_fen2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
-
-        mspinner_fen2 = findViewById(R.id.spinner_mm2);
-        mspinner_fen2.setAdapter(adapter_fen2);
-        //点击事件
-        mspinner_fen2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            private String positions;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                positions = adapter_fen2.getItem(position);
-                if (positions.equals("分")){
-                    //
-                }else{
-                    mm2 = positions;
-
-                    Toast.makeText(NewSubTaskActivity.this,mm2,Toast.LENGTH_SHORT).show();
-                }
-                parent.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                parent.setVisibility(View.VISIBLE);
-            }
-        });
     }
     public void newSubTaskWithOkHttp(String address, String name, String description,String starttime,String endtime){
         HttpUtil.newTaskWithOkHttp(address, name,description, starttime,endtime,new Callback() {
@@ -510,6 +254,231 @@ public class NewSubTaskActivity extends AppCompatActivity {
             }
         });
     }
+        public AlertDialog.Builder createLoadingDialog (Context context, String a){
 
-}
+            LayoutInflater inflater = LayoutInflater.from(context);
+            View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
+
+            numberpicker0 = (NumberPicker) v.findViewById(R.id.numberpicker1);
+            numberpicker0.setMaxValue(2025);
+            numberpicker0.setMinValue(now_year);
+            numberpicker0.setValue(now_year);
+            numberpicker0.setFocusable(true);
+            numberpicker0.setFocusableInTouchMode(true);
+            numberpicker0.setOnValueChangedListener(yearChangedListener);
+
+            numberpicker2 = (NumberPicker) v.findViewById(R.id.numberpicker2);
+            numberpicker2.setMaxValue(12);
+            numberpicker2.setMinValue(1);
+            numberpicker2.setValue(now_month);
+            numberpicker2.setFocusable(true);
+            numberpicker2.setFocusableInTouchMode(true);
+            numberpicker2.setOnValueChangedListener(monthChangedListener);
+
+            /*
+             * / setMaxValue根据每月的天数不一样，使用switch()进行分别判断
+             */
+            numberpicker3 = (NumberPicker) v.findViewById(R.id.numberpicker3);
+            numberpicker3.setMinValue(1);
+            numberpicker3.setMaxValue(31);
+            numberpicker3.setValue(now_day);
+            numberpicker3.setFocusable(true);
+            numberpicker3.setFocusableInTouchMode(true);
+            numberpicker3.setOnValueChangedListener(dayChangedListener);
+
+            numberpicker4 = (NumberPicker) v.findViewById(R.id.numberpicker4);
+            numberpicker4.setMaxValue(23);
+            numberpicker4.setMinValue(0);
+            numberpicker4.setValue(0);
+            numberpicker4.setFocusable(true);
+            numberpicker4.setFocusableInTouchMode(true);
+//        numberpicker4.setOnValueChangedListener(yearChangedListener);
+
+            numberpicker5 = (NumberPicker) v.findViewById(R.id.numberpicker5);
+            numberpicker5.setMaxValue(59);
+            numberpicker5.setMinValue(0);
+            numberpicker5.setValue(0);
+            numberpicker5.setFocusable(true);
+            numberpicker5.setFocusableInTouchMode(true);
+//        numberpicker5.setOnValueChangedListener(yearChangedListener);
+
+            AlertDialog.Builder loadingDialog = new AlertDialog.Builder(context);
+            loadingDialog.setMessage("选择开始时间");
+            loadingDialog.setView(v);
+            loadingDialog.setCancelable(false);// 不可以用“返回键”取消
+            loadingDialog.setPositiveButton("确定",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+
+                            fen = numberpicker4.getValue();
+                            miao = numberpicker5.getValue();
+
+                            fen = numberpicker4.getValue();
+                            miao = numberpicker5.getValue();
+
+                            if (a.equals("1")) {
+
+                                yyyy1 = year + "";
+                                MM1 = month + "";
+                                dd1 = day + "";
+                                HH1 = fen + "";
+                                mm1 = miao + "";
+                                textView1.setText(year + "年" + month + "月" + day + "日" + fen + "分" + miao + "秒");
+                            } else {
+                                yyyy2 = year + "";
+                                MM2 = month + "";
+                                dd2 = day + "";
+                                HH2 = fen + "";
+                                mm2 = miao + "";
+                                textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "分" + miao + "秒");
+                            }
+
+                        }
+                    });
+            loadingDialog.setNegativeButton("取消",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                        }
+                    });
+            return loadingDialog;
+
+        }
+
+
+        public void newTaskWithOkHttp (String address, String name, String description, String
+        starttime, String endtime){
+            HttpUtil.newTaskWithOkHttp(address, name, description, starttime, endtime, new Callback() {
+
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    //在这里对异常情况进行处理
+
+                    Log.d("hhh", "111");
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    Log.d("hhh", "222");
+
+                    //得到服务器返回的具体内容
+                    final String responseData = response.body().string();
+                    Log.d("qqqq", responseData);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(responseData);
+                        String result = jsonObject.getString("warning");
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(NewSubTaskActivity.this, result, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+        private NumberPicker.OnValueChangeListener yearChangedListener = new NumberPicker.OnValueChangeListener() {
+
+            @Override
+            public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
+
+                year = numberpicker0.getValue();
+                month = numberpicker2.getValue();
+
+                switch (month) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        numberpicker3.setMaxValue(31);
+                        break;
+                    case 2:
+                        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+                            numberpicker3.setMaxValue(29);
+                        else
+                            numberpicker3.setMaxValue(28);
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        numberpicker3.setMaxValue(30);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+        };
+
+
+        private NumberPicker.OnValueChangeListener monthChangedListener = new NumberPicker.OnValueChangeListener() {
+
+            @Override
+            public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
+                // TODO Auto-generated method stub
+                year = numberpicker0.getValue();
+                month = numberpicker2.getValue();
+
+                switch (month) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        numberpicker3.setMaxValue(31);
+                        break;
+                    case 2:
+                        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+                            numberpicker3.setMaxValue(29);
+                        else
+                            numberpicker3.setMaxValue(28);
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        numberpicker3.setMaxValue(30);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+        };
+
+        private NumberPicker.OnValueChangeListener dayChangedListener = new NumberPicker.OnValueChangeListener() {
+
+            @Override
+            public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
+                // TODO Auto-generated method stub
+                if (a==1)
+                {
+                    year = numberpicker0.getValue();
+                    month = numberpicker2.getValue();
+                    day = numberpicker3.getValue();
+                }
+                else
+                {
+                    year1 = numberpicker0.getValue();
+                    month1 = numberpicker2.getValue();
+                    day1 = numberpicker3.getValue();
+                }
+
+            }
+
+        };
+    }
+
 

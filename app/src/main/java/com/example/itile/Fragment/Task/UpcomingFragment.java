@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +47,7 @@ public class UpcomingFragment extends Fragment {
     private String ifread;
     private String description;
     private String project;
+    private String task1;
 
     private String starttime;
     private String endtime;
@@ -66,8 +69,7 @@ public class UpcomingFragment extends Fragment {
 
         recyclerView = (RecyclerView)root.findViewById(R.id.recyclerView);
 
-        list.clear();
-        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
+
         return root;
 
     }
@@ -75,8 +77,8 @@ public class UpcomingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-
+        list.clear();
+        ShowAllTaskWithOkHttp("http://118.190.245.170/worktile/all-tasks");
 
 
 
@@ -89,8 +91,12 @@ public class UpcomingFragment extends Fragment {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                //在这里对异常情况进行处理
-                //       Toast.makeText(getActivity(),"获取图书信息失败，请检查您的网络",Toast.LENGTH_LONG).show();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "网络出现了问题...", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -115,6 +121,12 @@ public class UpcomingFragment extends Fragment {
                         String id = schedule.getString("pk");
                         JSONObject fields = schedule.getJSONObject("fields");
 
+                        if (model.equals("worktile.sontask"))
+                        {
+                            task1 = fields.getString("task");
+                        }
+
+
                         name = fields.getString("name");
                         state = fields.getString("state");
                         ifread = fields.getString("ifread");
@@ -128,6 +140,11 @@ public class UpcomingFragment extends Fragment {
 
 
                         Map map = new HashMap();
+
+                        if (model.equals("worktile.sontask"))
+                        {
+                            map.put("task",task1);
+                        }
 
                         map.put("model", model);
                         map.put("id",id);
