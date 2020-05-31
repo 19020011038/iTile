@@ -33,7 +33,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -96,9 +98,24 @@ public class NewTaskActivity extends AppCompatActivity {
 
     private String today;
     private String post_time;
+
+    private List<Integer> month_list =new ArrayList<>(); //用法：favorList.add(123);
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_new_task);
+
+        month_list.add(31);
+        month_list.add(28);
+        month_list.add(31);
+        month_list.add(30);
+        month_list.add(31);
+        month_list.add(30);
+        month_list.add(31);
+        month_list.add(31);
+        month_list.add(30);
+        month_list.add(31);
+        month_list.add(30);
+        month_list.add(31);
 
         //获取系统时间
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm");
@@ -110,16 +127,48 @@ public class NewTaskActivity extends AppCompatActivity {
         now_month = Integer.parseInt(today.substring(5, 7));
         now_day = Integer.parseInt(today.substring(8, 10));
 
-        year1=now_year;
-        month1=now_month;
-        day1=now_day;
-
         year=now_year;
         month=now_month;
         day=now_day;
 
+        year1=now_year;
+        month1=now_month;
+        day1=day+1;
+        for (int i = 0;i<12;i++) {
+            if (month != 2) {
+                if (i + 1 == month && day == month_list.get(i)) {
+                    day1 = 1;
+                    month1 = month + 1;
+                }
+            } else {
+                if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                    if (day == 29) {
+                        day1 = 1;
+                        month1 = month + 1;
+                    }
+                } else {
+                    if (day == 28) {
+                        day1 = 1;
+                        month1 = month + 1;
+                    }
+                }
+            }
+        }
+        textView1 = findViewById(R.id.tvstart);
+        textView2 = findViewById(R.id.tvend);
 
-
+        textView1.setText(year + "年" + month + "月" + day + "日" + fen + "时" + miao + "分");
+        textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "时" + miao + "分");
+        yyyy1 = year + "";
+        MM1 = month + "";
+        dd1 = day + "";
+        HH1 = fen + "";
+        mm1 = miao + "";
+        yyyy2 = year1 + "";
+        MM2 = month1 + "";
+        dd2 = day1 + "";
+        HH2 = fen + "";
+        mm2 = miao + "";
 
         Intent intent = getIntent();
         project_id = intent.getStringExtra("project_id");
@@ -131,8 +180,6 @@ public class NewTaskActivity extends AppCompatActivity {
         start = findViewById(R.id.start);
         end = findViewById(R.id.end);
 
-        textView1 = findViewById(R.id.tvstart);
-        textView2 = findViewById(R.id.tvend);
 
 
         tip.addTextChangedListener(new TextWatcher() {
@@ -222,17 +269,17 @@ public class NewTaskActivity extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(tip1)) {
                     Toast.makeText(NewTaskActivity.this, "任务描述不能为空！", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (flag1==0)
-                    Toast.makeText(NewTaskActivity.this, "请选择开始时间", Toast.LENGTH_SHORT).show();
-                else if (flag2==0)
-                    Toast.makeText(NewTaskActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
+                }
+//                else if (flag1==0)
+//                    Toast.makeText(NewTaskActivity.this, "请选择开始时间", Toast.LENGTH_SHORT).show();
+//                else if (flag2==0)
+//                    Toast.makeText(NewTaskActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
                 else {
                     if(a.after(b)){
                         Toast.makeText(NewTaskActivity.this,"结束时间应晚于开始时间",Toast.LENGTH_SHORT).show();
                     }else {
                         newTaskWithOkHttp("http://118.190.245.170/worktile/project/" + project_id + "/new-task", name1, tip1, starttime, endtime);
-                        Toast.makeText(NewTaskActivity.this, "新建任务成功", Toast.LENGTH_SHORT).show();
-                        finish();
+
                     }
                 }
             }
@@ -247,7 +294,7 @@ public class NewTaskActivity extends AppCompatActivity {
         numberpicker0 = (NumberPicker) v.findViewById(R.id.numberpicker1);
         numberpicker0.setMaxValue(2025);
         numberpicker0.setMinValue(now_year);
-        numberpicker0.setValue(now_year);
+//        numberpicker0.setValue(now_year);
         numberpicker0.setFocusable(true);
         numberpicker0.setFocusableInTouchMode(true);
         numberpicker0.setOnValueChangedListener(yearChangedListener);
@@ -255,7 +302,7 @@ public class NewTaskActivity extends AppCompatActivity {
         numberpicker2 = (NumberPicker) v.findViewById(R.id.numberpicker2);
         numberpicker2.setMaxValue(12);
         numberpicker2.setMinValue(1);
-        numberpicker2.setValue(now_month);
+//        numberpicker2.setValue(now_month);
         numberpicker2.setFocusable(true);
         numberpicker2.setFocusableInTouchMode(true);
         numberpicker2.setOnValueChangedListener(monthChangedListener);
@@ -266,7 +313,7 @@ public class NewTaskActivity extends AppCompatActivity {
         numberpicker3 = (NumberPicker) v.findViewById(R.id.numberpicker3);
         numberpicker3.setMinValue(1);
         numberpicker3.setMaxValue(31);
-        numberpicker3.setValue(now_day);
+//        numberpicker3.setValue(now_day);
         numberpicker3.setFocusable(true);
         numberpicker3.setFocusableInTouchMode(true);
         numberpicker3.setOnValueChangedListener(dayChangedListener);
@@ -285,10 +332,30 @@ public class NewTaskActivity extends AppCompatActivity {
         numberpicker5.setValue(0);
         numberpicker5.setFocusable(true);
         numberpicker5.setFocusableInTouchMode(true);
+
+        if (a.equals("1"))
+        {
+            numberpicker0.setValue(year);
+            numberpicker2.setValue(month);
+            numberpicker3.setValue(day);
+        }
+        else
+        {
+            numberpicker0.setValue(year1);
+            numberpicker2.setValue(month1);
+            numberpicker3.setValue(day1);
+        }
 //        numberpicker5.setOnValueChangedListener(yearChangedListener);
 
         AlertDialog.Builder loadingDialog = new AlertDialog.Builder(context);
-        loadingDialog.setMessage("选择开始时间");
+        if (a.equals("1"))
+        {
+            loadingDialog.setMessage("选择开始时间");
+        }
+        else
+        {
+            loadingDialog.setMessage("选择结束时间");
+        }
         loadingDialog.setView(v);
         loadingDialog.setCancelable(false);// 不可以用“返回键”取消
         loadingDialog.setPositiveButton("确定",
@@ -310,7 +377,7 @@ public class NewTaskActivity extends AppCompatActivity {
                             dd1 = day+"";
                             HH1 = fen+"";
                             mm1 = miao+"";
-                            textView1.setText(year+ "年" +month + "月" + day + "日" + fen + "分" + miao + "秒");
+                            textView1.setText(year+ "年" +month + "月" + day + "日" + fen + "时" + miao + "分");
                         }
                         else
                         {
@@ -319,7 +386,7 @@ public class NewTaskActivity extends AppCompatActivity {
                             dd2 = day1+"";
                             HH2 = fen+"";
                             mm2 = miao+"";
-                            textView2.setText(year1+ "年" +month1 + "月" + day1 + "日" + fen + "分" + miao + "秒");
+                            textView2.setText(year1+ "年" +month1 + "月" + day1 + "日" + fen + "时" + miao + "分");
                         }
 
                     }
@@ -343,6 +410,12 @@ public class NewTaskActivity extends AppCompatActivity {
                 //在这里对异常情况进行处理
 
                 Log.d("hhh", "111");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(NewTaskActivity.this, "无法连接到网络", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -360,11 +433,20 @@ public class NewTaskActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(NewTaskActivity.this, result, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewTaskActivity.this, "新建任务成功", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(NewTaskActivity.this, "服务器连接失败", Toast.LENGTH_SHORT).show();
+                            Log.i("zyr", starttime+endtime);
+                            finish();
+                        }
+                    });
                 }
             }
         });
@@ -375,35 +457,79 @@ public class NewTaskActivity extends AppCompatActivity {
         @Override
         public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
 
-            year = numberpicker0.getValue();
-            month = numberpicker2.getValue();
+            if (a==1)
+            {
+                year = numberpicker0.getValue();
+                month = numberpicker2.getValue();
+                day = numberpicker3.getValue();
+                switch (month) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        numberpicker3.setMaxValue(31);
+                        break;
+                    case 2:
+                        if ((year%4==0&&year%100!=0)|| year%400==0)
+                            numberpicker3.setMaxValue(29);
+                        else
+                            numberpicker3.setMaxValue(28);
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        numberpicker3.setMaxValue(30);
+                        break;
 
-            switch (month) {
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
-                    numberpicker3.setMaxValue(31);
-                    break;
-                case 2:
-                    if ((year%4==0&&year%100!=0)|| year%400==0)
-                        numberpicker3.setMaxValue(29);
-                    else
-                        numberpicker3.setMaxValue(28);
-                    break;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    numberpicker3.setMaxValue(30);
-                    break;
-
-                default:
-                    break;
+                    default:
+                        break;
+                }
+                year = numberpicker0.getValue();
+                month = numberpicker2.getValue();
+                day = numberpicker3.getValue();
             }
+            else
+            {
+                year1 = numberpicker0.getValue();
+                month1 = numberpicker2.getValue();
+                day1 = numberpicker3.getValue();
+                switch (month1) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        numberpicker3.setMaxValue(31);
+                        break;
+                    case 2:
+                        if ((year1%4==0&&year1%100!=0)|| year1%400==0)
+                            numberpicker3.setMaxValue(29);
+                        else
+                            numberpicker3.setMaxValue(28);
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        numberpicker3.setMaxValue(30);
+                        break;
+
+                    default:
+                        break;
+                }
+                year1 = numberpicker0.getValue();
+                month1 = numberpicker2.getValue();
+                day1 = numberpicker3.getValue();
+            }
+
+
+
         }
 
     };
@@ -414,35 +540,77 @@ public class NewTaskActivity extends AppCompatActivity {
         @Override
         public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
             // TODO Auto-generated method stub
-            year = numberpicker0.getValue();
-            month = numberpicker2.getValue();
+            if (a==1)
+            {
+                year = numberpicker0.getValue();
+                month = numberpicker2.getValue();
+                day = numberpicker3.getValue();
+                switch (month) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        numberpicker3.setMaxValue(31);
+                        break;
+                    case 2:
+                        if ((year%4==0 && year%100!=0)|| year%400==0)
+                            numberpicker3.setMaxValue(29);
+                        else
+                            numberpicker3.setMaxValue(28);
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        numberpicker3.setMaxValue(30);
+                        break;
 
-            switch (month) {
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
-                    numberpicker3.setMaxValue(31);
-                    break;
-                case 2:
-                    if ((year%4==0 && year%100!=0)|| year%400==0)
-                        numberpicker3.setMaxValue(29);
-                    else
-                        numberpicker3.setMaxValue(28);
-                    break;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    numberpicker3.setMaxValue(30);
-                    break;
-
-                default:
-                    break;
+                    default:
+                        break;
+                }
+                year = numberpicker0.getValue();
+                month = numberpicker2.getValue();
+                day = numberpicker3.getValue();
             }
+            else
+            {
+                year1 = numberpicker0.getValue();
+                month1 = numberpicker2.getValue();
+                day1 = numberpicker3.getValue();
+                switch (month1) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        numberpicker3.setMaxValue(31);
+                        break;
+                    case 2:
+                        if ((year1%4==0 && year1%100!=0)|| year1%400==0)
+                            numberpicker3.setMaxValue(29);
+                        else
+                            numberpicker3.setMaxValue(28);
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        numberpicker3.setMaxValue(30);
+                        break;
+
+                    default:
+                        break;
+                }
+                year1 = numberpicker0.getValue();
+                month1 = numberpicker2.getValue();
+                day1 = numberpicker3.getValue();
+            }
+
         }
 
     };

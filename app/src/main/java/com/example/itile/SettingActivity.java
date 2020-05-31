@@ -934,6 +934,7 @@ public class SettingActivity extends AppCompatActivity {
 
             year = numberpicker0.getValue();
             month = numberpicker2.getValue();
+            day = numberpicker3.getValue();
             xingzuo();
             if (year==now_year)
                 numberpicker2.setMaxValue(now_month);
@@ -967,6 +968,9 @@ public class SettingActivity extends AppCompatActivity {
             }
             if (year==now_year&& month==now_month)
                 numberpicker3.setMaxValue(now_day);
+            year = numberpicker0.getValue();
+            month = numberpicker2.getValue();
+            day = numberpicker3.getValue();
             // TODO Auto-generated method stub
 //            year = numberpicker0.getValue();
 //            if (year%)
@@ -1006,6 +1010,7 @@ public class SettingActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
             year = numberpicker0.getValue();
             month = numberpicker2.getValue();
+            day = numberpicker3.getValue();
             xingzuo();
 
             switch (month) {
@@ -1036,6 +1041,9 @@ public class SettingActivity extends AppCompatActivity {
             }
             if (year==now_year&& month==now_month)
                 numberpicker3.setMaxValue(now_day);
+            year = numberpicker0.getValue();
+            month = numberpicker2.getValue();
+            day = numberpicker3.getValue();
         }
 
     };
@@ -1051,6 +1059,9 @@ public class SettingActivity extends AppCompatActivity {
             xingzuo();
             if (year==now_year&& month==now_month)
                 numberpicker3.setMaxValue(now_day);
+            year = numberpicker0.getValue();
+            month = numberpicker2.getValue();
+            day = numberpicker3.getValue();
         }
 
     };

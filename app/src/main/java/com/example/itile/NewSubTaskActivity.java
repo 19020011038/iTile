@@ -33,7 +33,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -46,17 +48,17 @@ public class NewSubTaskActivity extends AppCompatActivity {
     private SharedPreferencesUtil check;
 
     private String id;
-    private String yyyy1 = "a";
-    private String MM1 = "a";
-    private String dd1 = "a";
-    private String HH1 = "a";
-    private String mm1 = "a";
+    private String yyyy1="a";
+    private String MM1="a";
+    private String dd1="a";
+    private String HH1="a";
+    private String mm1="a";
 
-    private String yyyy2 = "a";
-    private String MM2 = "a";
-    private String dd2 = "a";
-    private String HH2 = "a";
-    private String mm2 = "a";
+    private String yyyy2="a";
+    private String MM2="a";
+    private String dd2="a";
+    private String HH2="a";
+    private String mm2="a";
     private String description;
     private String starttime;
     private String endtime;
@@ -78,24 +80,39 @@ public class NewSubTaskActivity extends AppCompatActivity {
     int month;
     int day;
     int a;
-    int flag1 = 0;
-    int flag2 = 0;
+    int flag1=0;
+    int flag2=0;
     int year1;
     int month1;
     int day1;
-    int now_year;
-    int now_month;
-    int now_day;
+    int now_year ;
+    int now_month ;
+    int now_day ;
     int fen = 0;
     int miao = 0;
     private String today;
     private String post_time;
     private String task_id;
     private String project_id;
+    private List<Integer> month_list =new ArrayList<>(); //用法：favorList.add(123);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_new_subtask);
+
+        month_list.add(31);
+        month_list.add(28);
+        month_list.add(31);
+        month_list.add(30);
+        month_list.add(31);
+        month_list.add(30);
+        month_list.add(31);
+        month_list.add(31);
+        month_list.add(30);
+        month_list.add(31);
+        month_list.add(30);
+        month_list.add(31);
+//        Log.i("zyr", month_list.get(1).toString());
 
         //获取系统时间
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm");
@@ -111,6 +128,45 @@ public class NewSubTaskActivity extends AppCompatActivity {
         month = now_month;
         day = now_day;
 
+        year1=now_year;
+        month1=now_month;
+        day1=day+1;
+        for (int i = 0;i<12;i++){
+            if (month!=2){
+                if (i+1==month&&day==month_list.get(i)){
+                    day1=1;
+                    month1 = month+1;
+                }
+            }else {
+                if ((year%4==0&&year%100!=0)||year%400==0){
+                    if (day==29){
+                        day1=1;
+                        month1=month+1;
+                    }
+                }else{
+                    if (day==28){
+                        day1=1;
+                        month1=month+1;
+                    }
+                }
+            }
+
+        }
+        yyyy1 = year + "";
+        MM1 = month + "";
+        dd1 = day + "";
+        HH1 = fen + "";
+        mm1 = miao + "";
+        yyyy2 = year1 + "";
+        MM2 = month1 + "";
+        dd2 = day1 + "";
+        HH2 = fen + "";
+        mm2 = miao + "";
+
+        textView1 = findViewById(R.id.tvstart);
+        textView2 = findViewById(R.id.tvend);
+        textView1.setText(year + "年" + month + "月" + day + "日" + fen + "时" + miao + "分");
+        textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "时" + miao + "分");
         Intent intent = getIntent();
         task_id = intent.getStringExtra("task_id");
         project_id = intent.getStringExtra("project_id");
@@ -121,8 +177,7 @@ public class NewSubTaskActivity extends AppCompatActivity {
         start = findViewById(R.id.start);
         end = findViewById(R.id.end);
 
-        textView1 = findViewById(R.id.tvstart);
-        textView2 = findViewById(R.id.tvend);
+
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,8 +207,8 @@ public class NewSubTaskActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                a = 1;
-                flag1 = 1;
+                a=1;
+                flag1=1;
                 dialog = createLoadingDialog(NewSubTaskActivity.this, "1");
                 dialog.create().show();
 
@@ -164,8 +219,8 @@ public class NewSubTaskActivity extends AppCompatActivity {
         end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                a = 2;
-                flag2 = 1;
+                a=2;
+                flag2=1;
                 dialog = createLoadingDialog(NewSubTaskActivity.this, "2");
                 dialog.create().show();
 
@@ -204,17 +259,17 @@ public class NewSubTaskActivity extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(tip1)) {
                     Toast.makeText(NewSubTaskActivity.this, "任务描述不能为空！", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (flag1 == 0)
-                    Toast.makeText(NewSubTaskActivity.this, "请选择开始时间", Toast.LENGTH_SHORT).show();
-                else if (flag2 == 0)
-                    Toast.makeText(NewSubTaskActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
+                }
+//                else if (flag1==0)
+//                    Toast.makeText(NewSubTaskActivity.this, "请选择开始时间", Toast.LENGTH_SHORT).show();
+//                else if (flag2==0)
+//                    Toast.makeText(NewSubTaskActivity.this, "请选择结束时间", Toast.LENGTH_SHORT).show();
                 else {
                     if (a.after(b)) {
                         Toast.makeText(NewSubTaskActivity.this, "结束时间应晚于开始时间", Toast.LENGTH_SHORT).show();
                     } else {
                         newSubTaskWithOkHttp("http://118.190.245.170/worktile/project/" + project_id + "/task/" + task_id + "/new-subtask", name1, tip1, starttime, endtime);
-                        Toast.makeText(NewSubTaskActivity.this, "新建子任务成功", Toast.LENGTH_SHORT).show();
-                        finish();
+
                     }
 
                 }
@@ -231,11 +286,17 @@ public class NewSubTaskActivity extends AppCompatActivity {
                 //在这里对异常情况进行处理
 
                 Log.d("hhh", "111");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(NewSubTaskActivity.this, "无法连接到网络", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.d("hhh", "222");
+                Log.d("hhh","222");
 
                 //得到服务器返回的具体内容
                 final String responseData = response.body().string();
@@ -248,94 +309,122 @@ public class NewSubTaskActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(NewSubTaskActivity.this, result, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewSubTaskActivity.this, "新建子任务成功", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(NewSubTaskActivity.this, "连接服务器失败", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
                 }
             }
         });
     }
+        public AlertDialog.Builder createLoadingDialog (Context context, String a){
 
-    public AlertDialog.Builder createLoadingDialog(Context context, String a) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
 
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.loading_dialog, null);// 得到加载view
+            numberpicker0 = (NumberPicker) v.findViewById(R.id.numberpicker1);
+            numberpicker0.setMaxValue(2025);
+            numberpicker0.setMinValue(now_year);
 
-        numberpicker0 = (NumberPicker) v.findViewById(R.id.numberpicker1);
-        numberpicker0.setMaxValue(2025);
-        numberpicker0.setMinValue(now_year);
-        numberpicker0.setValue(now_year);
-        numberpicker0.setFocusable(true);
-        numberpicker0.setFocusableInTouchMode(true);
-        numberpicker0.setOnValueChangedListener(yearChangedListener);
+            numberpicker0.setFocusable(true);
+            numberpicker0.setFocusableInTouchMode(true);
+            numberpicker0.setOnValueChangedListener(yearChangedListener);
 
-        numberpicker2 = (NumberPicker) v.findViewById(R.id.numberpicker2);
-        numberpicker2.setMaxValue(12);
-        numberpicker2.setMinValue(1);
-        numberpicker2.setValue(now_month);
-        numberpicker2.setFocusable(true);
-        numberpicker2.setFocusableInTouchMode(true);
-        numberpicker2.setOnValueChangedListener(monthChangedListener);
+            numberpicker2 = (NumberPicker) v.findViewById(R.id.numberpicker2);
+            numberpicker2.setMaxValue(12);
+            numberpicker2.setMinValue(1);
 
-        /*
-         * / setMaxValue根据每月的天数不一样，使用switch()进行分别判断
-         */
-        numberpicker3 = (NumberPicker) v.findViewById(R.id.numberpicker3);
-        numberpicker3.setMinValue(1);
-        numberpicker3.setMaxValue(31);
-        numberpicker3.setValue(now_day);
-        numberpicker3.setFocusable(true);
-        numberpicker3.setFocusableInTouchMode(true);
-        numberpicker3.setOnValueChangedListener(dayChangedListener);
+            numberpicker2.setFocusable(true);
+            numberpicker2.setFocusableInTouchMode(true);
+            numberpicker2.setOnValueChangedListener(monthChangedListener);
 
-        numberpicker4 = (NumberPicker) v.findViewById(R.id.numberpicker4);
-        numberpicker4.setMaxValue(23);
-        numberpicker4.setMinValue(0);
-        numberpicker4.setValue(0);
-        numberpicker4.setFocusable(true);
-        numberpicker4.setFocusableInTouchMode(true);
+            /*
+             * / setMaxValue根据每月的天数不一样，使用switch()进行分别判断
+             */
+            numberpicker3 = (NumberPicker) v.findViewById(R.id.numberpicker3);
+            numberpicker3.setMinValue(1);
+            numberpicker3.setMaxValue(31);
+
+            numberpicker3.setFocusable(true);
+            numberpicker3.setFocusableInTouchMode(true);
+            numberpicker3.setOnValueChangedListener(dayChangedListener);
+
+            numberpicker4 = (NumberPicker) v.findViewById(R.id.numberpicker4);
+            numberpicker4.setMaxValue(23);
+            numberpicker4.setMinValue(0);
+            numberpicker4.setValue(0);
+            numberpicker4.setFocusable(true);
+            numberpicker4.setFocusableInTouchMode(true);
 //        numberpicker4.setOnValueChangedListener(yearChangedListener);
 
-        numberpicker5 = (NumberPicker) v.findViewById(R.id.numberpicker5);
-        numberpicker5.setMaxValue(59);
-        numberpicker5.setMinValue(0);
-        numberpicker5.setValue(0);
-        numberpicker5.setFocusable(true);
-        numberpicker5.setFocusableInTouchMode(true);
+            numberpicker5 = (NumberPicker) v.findViewById(R.id.numberpicker5);
+            numberpicker5.setMaxValue(59);
+            numberpicker5.setMinValue(0);
+            numberpicker5.setValue(0);
+            numberpicker5.setFocusable(true);
+            numberpicker5.setFocusableInTouchMode(true);
 //        numberpicker5.setOnValueChangedListener(yearChangedListener);
 
-        AlertDialog.Builder loadingDialog = new AlertDialog.Builder(context);
-        loadingDialog.setMessage("选择开始时间");
-        loadingDialog.setView(v);
-        loadingDialog.setCancelable(false);// 不可以用“返回键”取消
-        loadingDialog.setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
+            if (a.equals("1"))
+            {
+                numberpicker0.setValue(year);
+                numberpicker2.setValue(month);
+                numberpicker3.setValue(day);
+            }
+            else
+            {
+                numberpicker0.setValue(year1);
+                numberpicker2.setValue(month1);
+                numberpicker3.setValue(day1);
+            }
 
-                        fen = numberpicker4.getValue();
-                        miao = numberpicker5.getValue();
+            AlertDialog.Builder loadingDialog = new AlertDialog.Builder(context);
+            if (a.equals("1"))
+            {
+                loadingDialog.setMessage("选择开始时间");
+            }
+            else
+            {
+                loadingDialog.setMessage("选择结束时间");
+            }
 
-                        fen = numberpicker4.getValue();
-                        miao = numberpicker5.getValue();
+            loadingDialog.setView(v);
+            loadingDialog.setCancelable(false);// 不可以用“返回键”取消
+            loadingDialog.setPositiveButton("确定",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
 
-                        if (a.equals("1")) {
+                            fen = numberpicker4.getValue();
+                            miao = numberpicker5.getValue();
 
-                            yyyy1 = year + "";
-                            MM1 = month + "";
-                            dd1 = day + "";
-                            HH1 = fen + "";
-                            mm1 = miao + "";
-                            textView1.setText(year + "年" + month + "月" + day + "日" + fen + "分" + miao + "秒");
-                        } else {
-                            yyyy2 = year + "";
-                            MM2 = month + "";
-                            dd2 = day + "";
-                            HH2 = fen + "";
-                            mm2 = miao + "";
-                            textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "分" + miao + "秒");
-                        }
+                            fen = numberpicker4.getValue();
+                            miao = numberpicker5.getValue();
+
+                            if (a.equals("1")) {
+
+                                yyyy1 = year + "";
+                                MM1 = month + "";
+                                dd1 = day + "";
+                                HH1 = fen + "";
+                                mm1 = miao + "";
+                                textView1.setText(year + "年" + month + "月" + day + "日" + fen + "时" + miao + "分");
+                            } else {
+                                yyyy2 = year1 + "";
+                                MM2 = month1 + "";
+                                dd2 = day1 + "";
+                                HH2 = fen + "";
+                                mm2 = miao + "";
+                                textView2.setText(year1 + "年" + month1 + "月" + day1 + "日" + fen + "时" + miao + "分");
+                            }
 
                     }
                 });
@@ -387,99 +476,180 @@ public class NewSubTaskActivity extends AppCompatActivity {
 
     private NumberPicker.OnValueChangeListener yearChangedListener = new NumberPicker.OnValueChangeListener() {
 
-        @Override
-        public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
+            @Override
+            public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
 
-            year = numberpicker0.getValue();
-            month = numberpicker2.getValue();
+                if (a==1)
+                {
+                    year = numberpicker0.getValue();
+                    month = numberpicker2.getValue();
+                    day = numberpicker3.getValue();
+                    switch (month) {
+                        case 1:
+                        case 3:
+                        case 5:
+                        case 7:
+                        case 8:
+                        case 10:
+                        case 12:
+                            numberpicker3.setMaxValue(31);
+                            break;
+                        case 2:
+                            if ((year%4==0&&year%100!=0)|| year%400==0)
+                                numberpicker3.setMaxValue(29);
+                            else
+                                numberpicker3.setMaxValue(28);
+                            break;
+                        case 4:
+                        case 6:
+                        case 9:
+                        case 11:
+                            numberpicker3.setMaxValue(30);
+                            break;
 
-            switch (month) {
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
-                    numberpicker3.setMaxValue(31);
-                    break;
-                case 2:
-                    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-                        numberpicker3.setMaxValue(29);
-                    else
-                        numberpicker3.setMaxValue(28);
-                    break;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    numberpicker3.setMaxValue(30);
-                    break;
+                        default:
+                            break;
+                    }
+                    year = numberpicker0.getValue();
+                    month = numberpicker2.getValue();
+                    day = numberpicker3.getValue();
+                }
+                else
+                {
+                    year1 = numberpicker0.getValue();
+                    month1 = numberpicker2.getValue();
+                    day1 = numberpicker3.getValue();
+                    switch (month1) {
+                        case 1:
+                        case 3:
+                        case 5:
+                        case 7:
+                        case 8:
+                        case 10:
+                        case 12:
+                            numberpicker3.setMaxValue(31);
+                            break;
+                        case 2:
+                            if ((year1%4==0&&year1%100!=0)|| year1%400==0)
+                                numberpicker3.setMaxValue(29);
+                            else
+                                numberpicker3.setMaxValue(28);
+                            break;
+                        case 4:
+                        case 6:
+                        case 9:
+                        case 11:
+                            numberpicker3.setMaxValue(30);
+                            break;
 
-                default:
-                    break;
-            }
-        }
-
-    };
-
-
-    private NumberPicker.OnValueChangeListener monthChangedListener = new NumberPicker.OnValueChangeListener() {
-
-        @Override
-        public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
-            // TODO Auto-generated method stub
-            year = numberpicker0.getValue();
-            month = numberpicker2.getValue();
-
-            switch (month) {
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
-                    numberpicker3.setMaxValue(31);
-                    break;
-                case 2:
-                    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-                        numberpicker3.setMaxValue(29);
-                    else
-                        numberpicker3.setMaxValue(28);
-                    break;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    numberpicker3.setMaxValue(30);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-    };
-
-    private NumberPicker.OnValueChangeListener dayChangedListener = new NumberPicker.OnValueChangeListener() {
-
-        @Override
-        public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
-            // TODO Auto-generated method stub
-            if (a == 1) {
-                year = numberpicker0.getValue();
-                month = numberpicker2.getValue();
-                day = numberpicker3.getValue();
-            } else {
-                year1 = numberpicker0.getValue();
-                month1 = numberpicker2.getValue();
-                day1 = numberpicker3.getValue();
+                        default:
+                            break;
+                    }
+                    year1 = numberpicker0.getValue();
+                    month1 = numberpicker2.getValue();
+                    day1 = numberpicker3.getValue();
+                }
             }
 
-        }
+        };
 
-    };
-}
+
+        private NumberPicker.OnValueChangeListener monthChangedListener = new NumberPicker.OnValueChangeListener() {
+
+            @Override
+            public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
+                // TODO Auto-generated method stub
+                if (a == 1) {
+                    year = numberpicker0.getValue();
+                    month = numberpicker2.getValue();
+                    day = numberpicker3.getValue();
+                    switch (month) {
+                        case 1:
+                        case 3:
+                        case 5:
+                        case 7:
+                        case 8:
+                        case 10:
+                        case 12:
+                            numberpicker3.setMaxValue(31);
+                            break;
+                        case 2:
+                            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+                                numberpicker3.setMaxValue(29);
+                            else
+                                numberpicker3.setMaxValue(28);
+                            break;
+                        case 4:
+                        case 6:
+                        case 9:
+                        case 11:
+                            numberpicker3.setMaxValue(30);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    year = numberpicker0.getValue();
+                    month = numberpicker2.getValue();
+                    day = numberpicker3.getValue();
+                } else {
+                    year1 = numberpicker0.getValue();
+                    month1 = numberpicker2.getValue();
+                    day1 = numberpicker3.getValue();
+                    switch (month1) {
+                        case 1:
+                        case 3:
+                        case 5:
+                        case 7:
+                        case 8:
+                        case 10:
+                        case 12:
+                            numberpicker3.setMaxValue(31);
+                            break;
+                        case 2:
+                            if ((year1 % 4 == 0 && year1 % 100 != 0) || year1 % 400 == 0)
+                                numberpicker3.setMaxValue(29);
+                            else
+                                numberpicker3.setMaxValue(28);
+                            break;
+                        case 4:
+                        case 6:
+                        case 9:
+                        case 11:
+                            numberpicker3.setMaxValue(30);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    year1 = numberpicker0.getValue();
+                    month1 = numberpicker2.getValue();
+                    day1 = numberpicker3.getValue();
+                }
+            }
+        };
+
+        private NumberPicker.OnValueChangeListener dayChangedListener = new NumberPicker.OnValueChangeListener() {
+
+            @Override
+            public void onValueChange(NumberPicker arg0, int arg1, int arg2) {
+                // TODO Auto-generated method stub
+                if (a==1)
+                {
+                    year = numberpicker0.getValue();
+                    month = numberpicker2.getValue();
+                    day = numberpicker3.getValue();
+                }
+                else
+                {
+                    year1 = numberpicker0.getValue();
+                    month1 = numberpicker2.getValue();
+                    day1 = numberpicker3.getValue();
+                }
+
+            }
+
+        };
+    }
 
 
